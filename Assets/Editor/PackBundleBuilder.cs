@@ -6,8 +6,11 @@ namespace ChromaJigsaw.Editor
 {
     public static class PackBundleBuilder
     {
-        private const string PackSourceRoot = "Assets/Art/Packs";
+        private const string PackSourceRoot   = "Assets/Art/Packs";
         private const string BundleOutputRoot = "Bundles"; // project-root/Bundles/, not tracked by git
+
+        // The onboarding pack ships inside the APK via StreamingAssets.
+        public const string OnboardingPackId  = "pack_001";
 
         [MenuItem("ChromaJigsaw/Build Pack Bundles (Android)")]
         public static void BuildAndroid()
@@ -26,6 +29,16 @@ namespace ChromaJigsaw.Editor
                 outputDir,
                 BuildAssetBundleOptions.ChunkBasedCompression,
                 target);
+
+            // Copy onboarding bundle into StreamingAssets so it ships with the APK.
+            string onboardingBundle = Path.Combine(outputDir, $"{OnboardingPackId}.bundle");
+            if (File.Exists(onboardingBundle))
+            {
+                string dest = Path.Combine(Application.dataPath, $"StreamingAssets/bundles/{OnboardingPackId}.bundle");
+                Directory.CreateDirectory(Path.GetDirectoryName(dest));
+                File.Copy(onboardingBundle, dest, overwrite: true);
+                Debug.Log("[PackBundleBuilder] Onboarding bundle copied to StreamingAssets.");
+            }
 
             AssetDatabase.Refresh();
             Debug.Log($"[PackBundleBuilder] Bundles built to: {outputDir}");

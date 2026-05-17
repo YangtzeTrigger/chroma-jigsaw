@@ -26,10 +26,13 @@ namespace ChromaJigsaw.Core
             DontDestroyOnLoad(gameObject);
         }
 
-        private static string CacheDir => Path.Combine(Application.persistentDataPath, "bundles");
+        private static string CacheDir        => Path.Combine(Application.persistentDataPath, "bundles");
+        private static string StreamingDir    => Path.Combine(Application.streamingAssetsPath, "bundles");
 
-        // Downloads (or loads from cache) a pack AssetBundle.
-        // onComplete is called with the loaded bundle, or null on failure.
+        // Loads a pack AssetBundle.
+        // Priority: 1) StreamingAssets (onboarding pack, ships with APK)
+        //           2) Local cache (previously downloaded)
+        //           3) Remote download from Elysium
         public void LoadPackBundle(string packId, Action<AssetBundle> onComplete)
         {
             StartCoroutine(LoadRoutine(packId, onComplete));
@@ -37,8 +40,21 @@ namespace ChromaJigsaw.Core
 
         private IEnumerator LoadRoutine(string packId, Action<AssetBundle> onComplete)
         {
-            string cachedPath = Path.Combine(CacheDir, $"{packId}.bundle");
+            // 1. StreamingAssets — onboarding pack ships with the APK
+            string streamingPath = Path.Combine(StreamingDir, $"{packId}.bundle");
+            string streamingUrl  = $"{Application.streamingAssetsPath}/bundles/{packId}.bundle";
+            using (var streamReq = UnityWebRequestAssetBundle.GetAssetBundle(streamingUrl))
+            {
+                yield return streamReq.SendWebRequest();
+                if (streamReq.result == UnityWebRequest.Result.Success)
+                {
+                    onComplete?.Invoke(DownloadHandlerAssetBundle.GetContent(streamReq));
+                    yield break;
+                }
+            }
 
+            // 2. Local cache
+            string cachedPath = Path.Combine(CacheDir, $"{packId}.bundle");
             if (File.Exists(cachedPath))
             {
                 var loadOp = AssetBundle.LoadFromFileAsync(cachedPath);
@@ -47,6 +63,7 @@ namespace ChromaJigsaw.Core
                 yield break;
             }
 
+            // 3. Remote download from Elysium
             string url = BundleConfig.PackBundleUrl(packId);
             using var req = UnityWebRequestAssetBundle.GetAssetBundle(url);
             yield return req.SendWebRequest();
