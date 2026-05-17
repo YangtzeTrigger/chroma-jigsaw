@@ -1,13 +1,8 @@
 {
-    "name": "HootyBird.JigsawPuzzleEngine",
-    "rootNamespace": "HootyBird.JigsawPuzzleEngine",
+    "name": "HootyBird.JigsawInput",
+    "rootNamespace": "",
     "references": [
-        "Unity.InputSystem",
-        "Unity.Collections",
-        "Unity.TextMeshPro",
-        "Unity.Mathematics",
-        "Unity.Burst",
-        "HootyBird.JigsawInput"
+        "Unity.InputSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

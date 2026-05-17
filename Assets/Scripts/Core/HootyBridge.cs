@@ -65,14 +65,15 @@ namespace ChromaJigsaw.Core
             _activePuzzleId = puzzleId;
             _piecesOnBoard  = 0;
 
-            var settings = ScriptableObject.CreateInstance<PuzzleSettings>();
-            settings.id      = puzzleId;
-            settings.rows    = grid.rows;
-            settings.columns = grid.cols;
+            var settings = new PuzzleSettings
+            {
+                id      = puzzleId,
+                rows    = grid.rows,
+                columns = grid.cols,
+            };
 
             int seed = Math.Abs(puzzleId.GetHashCode());
             PuzzleData puzzleData = PuzzleFactory.FromPuzzleSettings(settings, seed, puzzleId);
-            Destroy(settings);
 
             SavedGameData savedGame = SaveGameService.HaveSaveFile(puzzleId)
                 ? SaveGameService.LoadSavedGameData(puzzleId)
