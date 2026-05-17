@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -18,6 +19,9 @@ namespace ChromaJigsaw.Core
         public float sfxVolume           = 1f;
         public float musicVolume         = 0.8f;
         public AccessibilityPrefs accessibilityPrefs = new AccessibilityPrefs();
+
+        // B-02: pack ownership and completion state
+        public List<PackProgress> packs = new List<PackProgress>();
     }
 
     public class SaveManager : MonoBehaviour

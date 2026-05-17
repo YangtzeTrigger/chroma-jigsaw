@@ -39,3 +39,6 @@ crashlytics-build.properties
 
 # Unity setup logs
 unity_create.log
+
+# Built AssetBundles (uploaded to Elysium, not committed)
+Bundles/

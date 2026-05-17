@@ -1,7 +1,9 @@
 {
     "name": "ChromaJigsaw.Data",
     "rootNamespace": "ChromaJigsaw.Data",
-    "references": [],
+    "references": [
+        "ChromaJigsaw.Core"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
