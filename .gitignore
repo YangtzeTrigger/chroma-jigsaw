@@ -33,3 +33,9 @@ Thumbs.db
 
 # Crashlytics
 crashlytics-build.properties
+
+# Claude Code
+.claude/
+
+# Unity setup logs
+unity_create.log
