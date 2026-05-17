@@ -1,0 +1,35 @@
+# Unity generated
+Library/
+Temp/
+Obj/
+Build/
+Builds/
+Logs/
+UserSettings/
+MemoryCaptures/
+RecordingCaptures/
+
+# Unity asset meta files for ignored assets
+*.pidb.meta
+*.pdb.meta
+
+# Visual Studio / Rider
+.vs/
+.idea/
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.unityproj
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Android
+*.apk
+*.aab
+
+# Crashlytics
+crashlytics-build.properties
