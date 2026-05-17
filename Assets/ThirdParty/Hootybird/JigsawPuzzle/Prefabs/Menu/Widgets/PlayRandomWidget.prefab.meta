@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 41eadf4badfb6ab44b46c35fb711735c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Prefabs/Menu/Widgets/PlayRandomWidget.prefab
+  uploadId: 820370

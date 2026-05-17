@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:ListView focusable="true" header-title="Options Easy" virtualization-method="DynamicHeight" show-border="true" show-add-remove-footer="true" name="easy" show-bound-collection-size="true" show-foldout-header="true" />
+    <ui:ListView focusable="true" header-title="Options Medium" virtualization-method="DynamicHeight" show-border="true" show-add-remove-footer="true" name="medium" show-bound-collection-size="true" show-foldout-header="true" />
+    <ui:ListView focusable="true" header-title="Options Hard" virtualization-method="DynamicHeight" show-border="true" show-add-remove-footer="true" name="hard" show-bound-collection-size="true" show-foldout-header="true" />
+    <ui:VisualElement style="flex-grow: 0; background-color: rgb(41, 41, 41); margin-top: 10px; margin-bottom: 10px; height: 2px; margin-left: 5px; margin-right: 5px;" />
+    <ui:ListView focusable="true" header-title="Textures" virtualization-method="DynamicHeight" show-border="true" show-add-remove-footer="true" name="textures" show-bound-collection-size="true" show-foldout-header="true" />
+    <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; margin-top: 5px; margin-bottom: 5px;">
+        <ui:TextField picking-mode="Ignore" label="Destination Path" name="destination" style="flex-grow: 1; flex-shrink: 1;" />
+        <ui:Button text="Pick" display-tooltip-when-elided="true" name="pick-to" style="width: 40px;" />
+    </ui:VisualElement>
+    <ui:Button text="Create Puzzle Info Objects" display-tooltip-when-elided="true" name="build" />
+</ui:UXML>

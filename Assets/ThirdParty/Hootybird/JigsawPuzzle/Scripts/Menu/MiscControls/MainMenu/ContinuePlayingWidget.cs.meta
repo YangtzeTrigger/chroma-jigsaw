@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 39a4cb3ccc21ab444a28d80bb3cf254d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Scripts/Menu/MiscControls/MainMenu/ContinuePlayingWidget.cs
+  uploadId: 820370

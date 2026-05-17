@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2a007858871f69f48a126273986c2e35
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Prefabs/Menu/Widgets/ContinuePlayingWidget.prefab
+  uploadId: 820370

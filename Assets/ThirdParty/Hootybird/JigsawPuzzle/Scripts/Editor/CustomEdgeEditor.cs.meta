@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 1e56755b3b59de44d912006b7732c961
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - editorAsset: {fileID: 9197481963319205126, guid: 668667eaf80b3a248a68510699878128,
+      type: 3}
+  - itemAsset: {fileID: 9197481963319205126, guid: f690615495ead63418ff6253bbe1fd6d,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Scripts/Editor/CustomEdgeEditor.cs
+  uploadId: 820370

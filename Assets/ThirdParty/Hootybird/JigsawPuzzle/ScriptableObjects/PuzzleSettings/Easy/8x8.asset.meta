@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 82469c912d341754894fdbc67df6bbb9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/ScriptableObjects/PuzzleSettings/Easy/8x8.asset
+  uploadId: 820370

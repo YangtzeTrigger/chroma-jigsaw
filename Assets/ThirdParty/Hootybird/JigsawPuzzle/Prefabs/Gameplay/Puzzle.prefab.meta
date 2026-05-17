@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 64c58cd22fcd975428142b2803d5f3f8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Prefabs/Gameplay/Puzzle.prefab
+  uploadId: 820370

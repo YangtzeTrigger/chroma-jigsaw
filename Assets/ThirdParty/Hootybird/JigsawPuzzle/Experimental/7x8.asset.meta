@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: acee1815431b66d4a9047891a4eb24bf
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Experimental/7x8.asset
+  uploadId: 820370

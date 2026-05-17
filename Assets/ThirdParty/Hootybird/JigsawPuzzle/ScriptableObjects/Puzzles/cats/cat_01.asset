@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1724d7ff51b60f469f26dbe74fd843e, type: 3}
+  m_Name: cat_01
+  m_EditorClassIdentifier: 
+  id: c6b629f1-a311-462b-9d43-5cb16c8d6213
+  puzzleTexture: {fileID: 2800000, guid: 76788c542c85eed46a25cc900abe2055, type: 3}
+  options:
+  - {fileID: 11400000, guid: 82469c912d341754894fdbc67df6bbb9, type: 2}
+  - {fileID: 11400000, guid: ec3f87bc38615074fbbe4897342233cb, type: 2}
+  - {fileID: 11400000, guid: 50ad952d2d66acd4c88031c3f073b462, type: 2}
+  seed: 5

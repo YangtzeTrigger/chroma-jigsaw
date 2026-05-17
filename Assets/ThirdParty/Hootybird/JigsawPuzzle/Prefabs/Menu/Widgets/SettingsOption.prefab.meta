@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1d94b0ed11ec732478845bb138ecd047
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Prefabs/Menu/Widgets/SettingsOption.prefab
+  uploadId: 820370

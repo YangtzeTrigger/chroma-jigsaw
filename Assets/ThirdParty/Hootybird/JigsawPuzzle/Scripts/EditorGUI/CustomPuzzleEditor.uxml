@@ -1,0 +1,18 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:TextField label="Id" binding-path="puzzleSettings.id" readonly="true" />
+    <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row;">
+        <ui:IntegerField value="42" mask-character="-" binding-path="puzzleSettings.rows" label="Rows" style="flex-grow: 1;" />
+    </ui:VisualElement>
+    <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row;">
+        <ui:IntegerField value="42" mask-character="-" binding-path="puzzleSettings.columns" label="Columns" style="flex-grow: 1;" />
+    </ui:VisualElement>
+    <ui:VisualElement name="VisualElement" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row;">
+        <ui:Label text="Seed" style="-unity-text-align: middle-left; min-width: 70px; flex-grow: 0;" />
+        <ui:TextField readonly="true" name="seed" binding-path="puzzleSettings.seed" style="flex-grow: 1;" />
+        <ui:Button text="Reset" name="reset-seed" style="flex-grow: 0;" />
+    </ui:VisualElement>
+    <ui:ListView show-add-remove-footer="true" binding-path="edgeOptions" show-foldout-header="true" header-title="Edge Options" virtualization-method="DynamicHeight" name="edges" />
+    <ui:Button text="Update Puzzle Settings" name="reset-puzzle" style="max-width: 200px;" />
+    <ui:VisualElement name="puzzle-view" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; flex-wrap: wrap-reverse; justify-content: center; align-items: flex-end; overflow: hidden; margin-top: 10px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-color: rgb(30, 30, 30); border-right-color: rgb(30, 30, 30); border-bottom-color: rgb(30, 30, 30); border-left-color: rgb(30, 30, 30);" />
+    <ui:DropdownField label="Save Raw Data" choices="As asset file,As json file" name="save-options" />
+</ui:UXML>

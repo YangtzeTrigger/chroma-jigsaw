@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: fac42a0593945b24dbc46c98517cb121
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Scripts/Menu/MiscControls/GameplayMenu/PuzzlePiecesPanel.cs
+  uploadId: 820370

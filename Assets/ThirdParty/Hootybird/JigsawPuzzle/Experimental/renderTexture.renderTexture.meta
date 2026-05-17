@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 78ed9d79b8883b844959b510b868dab3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 8400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Experimental/renderTexture.renderTexture
+  uploadId: 820370

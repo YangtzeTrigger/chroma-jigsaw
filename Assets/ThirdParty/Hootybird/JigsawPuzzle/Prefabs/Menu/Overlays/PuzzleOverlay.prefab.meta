@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: fe40db31a0a812d42a6aaaa40110f5ee
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Prefabs/Menu/Overlays/PuzzleOverlay.prefab
+  uploadId: 820370

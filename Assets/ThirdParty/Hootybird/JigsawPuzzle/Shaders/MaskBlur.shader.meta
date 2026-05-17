@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ef48f1171d66ebf4eb2f4b062031631c
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Shaders/MaskBlur.shader
+  uploadId: 820370

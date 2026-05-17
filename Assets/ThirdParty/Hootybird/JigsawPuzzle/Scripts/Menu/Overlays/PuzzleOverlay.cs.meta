@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 46251d7bfda622b4099e7351c8e6aa4a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Scripts/Menu/Overlays/PuzzleOverlay.cs
+  uploadId: 820370

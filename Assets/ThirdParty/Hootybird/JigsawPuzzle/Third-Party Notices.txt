@@ -1,0 +1,3 @@
+Image files under Assets/JigsawPuzzle/Textures
+	-All puzzle images aquired from Pexels.com. License info: https://www.pexels.com/license/
+	

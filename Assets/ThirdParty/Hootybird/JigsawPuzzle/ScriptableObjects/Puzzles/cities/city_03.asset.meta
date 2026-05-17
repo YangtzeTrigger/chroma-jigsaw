@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b3fb168f54836394a900f7c060094a88
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/ScriptableObjects/Puzzles/cities/city_03.asset
+  uploadId: 820370

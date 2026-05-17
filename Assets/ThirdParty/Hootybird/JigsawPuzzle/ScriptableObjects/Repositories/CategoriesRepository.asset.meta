@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d94778e586630944fbc16d4fedb87beb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/ScriptableObjects/Repositories/CategoriesRepository.asset
+  uploadId: 820370

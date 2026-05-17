@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 4edccd44710bde643a81f2bec06acc59
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Scripts/Gameplay/PuzzleEffects/PuzzlePiece/PuzzlePieceAnimation.cs
+  uploadId: 820370

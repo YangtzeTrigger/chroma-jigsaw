@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 8cdb908b3a64a6a4e86a41c0626692c4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Scripts/Menu/MiscControls/MainMenu/TabButtonBg.cs
+  uploadId: 820370

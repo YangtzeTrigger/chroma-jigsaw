@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1724d7ff51b60f469f26dbe74fd843e, type: 3}
+  m_Name: castle_03
+  m_EditorClassIdentifier: 
+  id: b602cadc-b459-4a31-b974-8c202b52dfdf
+  puzzleTexture: {fileID: 2800000, guid: 629e8d5813df26c49b3aac81555031ce, type: 3}
+  options:
+  - {fileID: 11400000, guid: daaa1a70215d84747ab69db7ee672332, type: 2}
+  - {fileID: 11400000, guid: 55cd5c9276049e644a063c33248c7a66, type: 2}
+  - {fileID: 11400000, guid: 69c6646a84fd2a84e82796a978e2b172, type: 2}
+  seed: 3

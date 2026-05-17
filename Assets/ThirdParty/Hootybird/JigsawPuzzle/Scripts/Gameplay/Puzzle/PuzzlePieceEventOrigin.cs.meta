@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: bb6ec0a115d0d484eaa3e735062b7074
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Scripts/Gameplay/Puzzle/PuzzlePieceEventOrigin.cs
+  uploadId: 820370

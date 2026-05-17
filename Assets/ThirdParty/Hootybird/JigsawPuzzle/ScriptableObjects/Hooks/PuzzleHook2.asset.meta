@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7a9c61f32b72d3b468a2a253b5c31b32
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/ScriptableObjects/Hooks/PuzzleHook2.asset
+  uploadId: 820370

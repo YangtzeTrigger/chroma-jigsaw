@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 643d37a20cc75b845a48154f36c5a0c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ChromaJigsaw.Audio::ChromaJigsaw.Audio.AudioManager
-  mixer: {fileID: 0}
+  mixer: {fileID: 24100000, guid: c05a2ad832c7af14c819f9ce43be8221, type: 2}
   sfxClips: []
   musicClips: []
   sfxPoolSize: 8

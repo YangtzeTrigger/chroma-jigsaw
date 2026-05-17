@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:ListView binding-path="edge.points" virtualization-method="DynamicHeight" show-add-remove-footer="true" show-border="true" show-foldout-header="true" header-title="Points" reorderable="true" name="points" />
+    <ui:VisualElement name="edge-view" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-color: rgba(30, 30, 30, 0.39); border-right-color: rgba(30, 30, 30, 0.39); border-bottom-color: rgba(30, 30, 30, 0.39); border-left-color: rgba(30, 30, 30, 0.39); margin-top: 10px; max-height: 400px; min-height: 400px;" />
+</ui:UXML>

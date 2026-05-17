@@ -9,6 +9,28 @@ namespace ChromaJigsaw.Editor
 {
     public static class B01Setup
     {
+        [MenuItem("ChromaJigsaw/Move Hootybird to ThirdParty")]
+        public static void MoveHootybird()
+        {
+            string src  = "Assets/JigsawPuzzle";
+            string dest = "Assets/ThirdParty/Hootybird";
+            if (!AssetDatabase.IsValidFolder(src))
+            {
+                Debug.LogWarning("[B01Setup] Assets/JigsawPuzzle not found — already moved?");
+                return;
+            }
+            string result = AssetDatabase.MoveAsset(src, dest);
+            if (string.IsNullOrEmpty(result))
+            {
+                AssetDatabase.Refresh();
+                Debug.Log("[B01Setup] Hootybird moved to Assets/ThirdParty/Hootybird");
+            }
+            else
+            {
+                Debug.LogError($"[B01Setup] Move failed: {result}");
+            }
+        }
+
         [MenuItem("ChromaJigsaw/Run B-01 Setup")]
         public static void RunAll()
         {

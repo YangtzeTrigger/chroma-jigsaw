@@ -14,7 +14,7 @@
 | **Track** | B — Standalone jigsaw game (built first) |
 | **Engine** | Unity 6 (6000.0.x LTS) |
 | **Platform** | Android primary |
-| **Local root** | `C:\Users\jason\projects\Chroma Logic\Jigsaw` |
+| **Local root** | `C:\Users\jason\projects\ChromaLogic\Jigsaw` |
 | **Notion hub** | https://www.notion.so/363cac35b9b681dcbeb1cb47194204fa |
 | **B-01 Handoff** | https://www.notion.so/363cac35b9b68137aab7eb24c7197291 |
 
@@ -22,12 +22,15 @@
 
 ## Current Stage
 
-**B-01 — Project Setup** 🟡 In progress
+**B-03 — Jigsaw piece system** 🟡 In progress
 
-Singletons and setup guide written in Claude.ai. Claude Code to create the Unity
-project, place files, wire the AudioMixer, import Hootybird.
+Hootybird imported to `Assets/ThirdParty/Hootybird/`. `HootyBird.JigsawPuzzleEngine.asmdef`
+created. `ChromaJigsaw.Core` references it. `HootyBridge.cs` fully implemented
+with LoadPuzzle, piece snap events, XP awards, save/load via Hootybird's SaveGameService.
 
-Next stage: **B-02 — Image asset pipeline**
+Next stage: **B-04 — Touch controls**
+
+B-01 ✅ | B-02 ✅ | B-03 🟡
 
 ---
 
@@ -242,9 +245,9 @@ Jason will paste this into the Notion Handoff Log.
 
 | Stage | Area | Status |
 |---|---|---|
-| B-01 | Project setup | 🟡 In progress |
-| B-02 | Image asset pipeline | 🔲 |
-| B-03 | Jigsaw piece system | 🔲 |
+| B-01 | Project setup | ✅ Done |
+| B-02 | Image asset pipeline | ✅ Done |
+| B-03 | Jigsaw piece system | 🟡 In progress |
 | B-04 | Touch controls | 🔲 |
 | B-05 | Gallery UI | 🔲 |
 | B-06 | Pack browser & unlock system | 🔲 |
@@ -259,4 +262,4 @@ Jason will paste this into the Notion Handoff Log.
 ---
 
 *Keep this file current. It is read at the start of every Claude Code session.*
-*Last updated: 2026-05-17 — B-01 singletons written, project not yet created on disk.*
+*Last updated: 2026-05-18 — B-03 HootyBridge complete, asmdef wired. B-04 next.*

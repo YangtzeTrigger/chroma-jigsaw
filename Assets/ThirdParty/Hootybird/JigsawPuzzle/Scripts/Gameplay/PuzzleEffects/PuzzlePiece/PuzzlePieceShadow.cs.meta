@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d6ccfea80b4a4b647a386ce155afeeff
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Scripts/Gameplay/PuzzleEffects/PuzzlePiece/PuzzlePieceShadow.cs
+  uploadId: 820370

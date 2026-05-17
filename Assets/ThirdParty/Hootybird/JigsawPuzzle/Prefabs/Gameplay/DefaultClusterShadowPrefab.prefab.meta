@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4c22ed38753550644a72252979fc73cb
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Prefabs/Gameplay/DefaultClusterShadowPrefab.prefab
+  uploadId: 820370

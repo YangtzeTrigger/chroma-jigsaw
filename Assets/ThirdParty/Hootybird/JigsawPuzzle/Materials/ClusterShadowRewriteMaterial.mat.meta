@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6896485968f57c44ab4c3be28f3ad03e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Materials/ClusterShadowRewriteMaterial.mat
+  uploadId: 820370

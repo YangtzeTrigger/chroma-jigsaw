@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1724d7ff51b60f469f26dbe74fd843e, type: 3}
+  m_Name: city_03
+  m_EditorClassIdentifier: 
+  id: 3032c3d4-4d40-4ae2-90aa-bd5c2913709b
+  puzzleTexture: {fileID: 2800000, guid: d097170e00072e14e98f775621a43b1c, type: 3}
+  options:
+  - {fileID: 11400000, guid: 82469c912d341754894fdbc67df6bbb9, type: 2}
+  - {fileID: 11400000, guid: ec3f87bc38615074fbbe4897342233cb, type: 2}
+  - {fileID: 11400000, guid: ac19833d41edadc499d0172efe2b7c11, type: 2}
+  seed: 12

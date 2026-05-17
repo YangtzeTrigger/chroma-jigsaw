@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 3827f2c81ff008942b880263b8d7684d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - puzzlePiecePrefab: {fileID: 2458101576347689486, guid: 1f8af191f6794144b851917785d301c6,
+      type: 3}
+  - puzzlePieceMaterial: {fileID: 2100000, guid: 994e36952f65ab24a855c832e2c2adf5,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Scripts/Gameplay/Puzzle/Puzzle.cs
+  uploadId: 820370

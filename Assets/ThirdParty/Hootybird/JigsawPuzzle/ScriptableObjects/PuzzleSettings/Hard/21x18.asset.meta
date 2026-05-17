@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 693d4743eb36df0499ec57aeba17fc00
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/ScriptableObjects/PuzzleSettings/Hard/21x18.asset
+  uploadId: 820370

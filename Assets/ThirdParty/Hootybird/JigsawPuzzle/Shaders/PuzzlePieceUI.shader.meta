@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 626f4049bc113fc4889cef58fd7bbcf6
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Shaders/PuzzlePieceUI.shader
+  uploadId: 820370

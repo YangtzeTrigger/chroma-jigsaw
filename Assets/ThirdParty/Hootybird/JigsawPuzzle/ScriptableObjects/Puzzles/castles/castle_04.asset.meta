@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cf04321f333f38b47a4a18b44dca7eb6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/ScriptableObjects/Puzzles/castles/castle_04.asset
+  uploadId: 820370

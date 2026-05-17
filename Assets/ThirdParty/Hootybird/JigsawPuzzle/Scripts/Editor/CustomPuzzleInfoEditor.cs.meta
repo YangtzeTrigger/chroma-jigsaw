@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d1a552d5da4a5f24aaa4a6224e5e5a57
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/Scripts/Editor/CustomPuzzleInfoEditor.cs
+  uploadId: 820370

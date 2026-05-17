@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 530288691c4a9e04f94f68020be94c9c, type: 3}
+  m_Name: PuzzleHook2
+  m_EditorClassIdentifier: 
+  edge:
+    points:
+    - position: {x: 0, y: 0}
+      leftControlPoint: {x: 0, y: 0}
+      rightControlPoint: {x: 0.19, y: 0.07}
+      mode: 0
+    - position: {x: 0.41, y: 0.013}
+      leftControlPoint: {x: -0.152, y: -0.052}
+      rightControlPoint: {x: 0.067, y: 0.071}
+      mode: 0
+    - position: {x: 0.44, y: 0.281}
+      leftControlPoint: {x: -0.179, y: -0.044}
+      rightControlPoint: {x: 0.043, y: 0.005}
+      mode: 0
+    - position: {x: 0.61, y: 0.281}
+      leftControlPoint: {x: -0.073, y: 0.008}
+      rightControlPoint: {x: 0.206, y: -0.038}
+      mode: 0
+    - position: {x: 0.618, y: 0.01}
+      leftControlPoint: {x: -0.038, y: 0.054}
+      rightControlPoint: {x: -0.006, y: -0.051}
+      mode: 0
+    - position: {x: 1, y: 0}
+      leftControlPoint: {x: -0.167, y: -0.053}
+      rightControlPoint: {x: 0, y: 0}
+      mode: 0
+    segmentsLength:
+    - 0.38651714
+    - 0.36240166
+    - 0.14195879
+    - 0.34334993
+    - 0.31291214

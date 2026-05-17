@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ec3f87bc38615074fbbe4897342233cb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259041
+  packageName: Jigsaw Puzzle - Customize And Create
+  packageVersion: 2.3.0
+  assetPath: Assets/JigsawPuzzle/ScriptableObjects/PuzzleSettings/Medium/15x15.asset
+  uploadId: 820370
