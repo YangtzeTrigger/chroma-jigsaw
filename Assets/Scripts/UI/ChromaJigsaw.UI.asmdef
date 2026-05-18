@@ -4,6 +4,7 @@
     "references": [
         "ChromaJigsaw.Core",
         "ChromaJigsaw.Audio",
+        "ChromaJigsaw.Data",
         "HootyBird.JigsawPuzzleEngine",
         "Unity.InputSystem"
     ],

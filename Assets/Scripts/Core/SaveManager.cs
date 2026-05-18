@@ -13,6 +13,15 @@ namespace ChromaJigsaw.Core
     }
 
     [Serializable]
+    public class DailyRecord
+    {
+        public string dailyId;       // date string e.g. "2026-05-18"
+        public bool   completed;
+        public int    piecesSolved;
+        public string lastPlayedUtc;
+    }
+
+    [Serializable]
     public class SaveData
     {
         public float masterVolume        = 1f;
@@ -21,7 +30,10 @@ namespace ChromaJigsaw.Core
         public AccessibilityPrefs accessibilityPrefs = new AccessibilityPrefs();
 
         // B-02: pack ownership and completion state
-        public List<PackProgress> packs = new List<PackProgress>();
+        public List<PackProgress>  packs        = new List<PackProgress>();
+        // B-05: gallery UI
+        public int                 totalXP      = 0;
+        public List<DailyRecord>   dailyRecords = new List<DailyRecord>();
     }
 
     public class SaveManager : MonoBehaviour

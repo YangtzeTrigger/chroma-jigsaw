@@ -44,6 +44,9 @@ namespace ChromaJigsaw.Data
             */
         }
 
+        public void LogScreenView(string screenName) =>
+            LogEvent("screen_view", new Dictionary<string, object> { { "screen_name", screenName } });
+
         public void LogEvent(string eventName, Dictionary<string, object> parameters = null)
         {
             if (_sdkReady)
