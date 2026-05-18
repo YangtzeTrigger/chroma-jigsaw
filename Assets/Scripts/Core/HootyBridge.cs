@@ -21,6 +21,15 @@ namespace ChromaJigsaw.Core
             { 12, (3, 4) }, { 24, (4, 6) }, { 48, (6, 8) }, { 96, (8, 12) }
         };
 
+        // Snap radius tiers per piece count: generous (12/24) → tighter (48) → precise (96)
+        private static readonly Dictionary<int, (float min, float max, float deviation)> _snapByPieceCount = new()
+        {
+            { 12, (0.8f, 2.0f, 0.4f) },
+            { 24, (0.8f, 2.0f, 0.4f) },
+            { 48, (0.8f, 1.5f, 0.3f) },
+            { 96, (0.8f, 1.2f, 0.2f) },
+        };
+
         [SerializeField] private Puzzle _puzzlePrefab;
         [SerializeField] private float  _puzzlePieceSize = 100f;
 
@@ -37,11 +46,16 @@ namespace ChromaJigsaw.Core
         private Puzzle _activePuzzle;
         private string _activePuzzleId;
         private int    _piecesOnBoard;
+        private int    _draggingCount;
 
-        // Raised for every player-placed snap — wire AudioManager to this.
+        // Raised for every player-placed snap — wire AudioManager.PlaySFX(PieceSnap) here.
         public event Action OnPieceSnapped;
         // Raised when puzzle is complete; int = XP awarded.
         public event Action<int> OnPuzzleComplete;
+        // Raised after puzzle initialises — WorkspaceController subscribes to wire zoom/pan.
+        public event Action<Puzzle, PuzzlePanelInteraction> OnPuzzleLoaded;
+
+        public bool IsAnyPieceDragging => _draggingCount > 0;
 
         private void Awake()
         {
@@ -64,6 +78,14 @@ namespace ChromaJigsaw.Core
 
             _activePuzzleId = puzzleId;
             _piecesOnBoard  = 0;
+            _draggingCount  = 0;
+
+            if (_snapByPieceCount.TryGetValue(pieceCount, out var snap))
+            {
+                Settings.PuzzleSettings.PieceSnapPieceMinDistance      = snap.min;
+                Settings.PuzzleSettings.PieceSnapPieceMaxDistance      = snap.max;
+                Settings.PuzzleSettings.PieceSnapMaxDirectionDeviation = snap.deviation;
+            }
 
             var settings = new PuzzleSettings
             {
@@ -86,7 +108,24 @@ namespace ChromaJigsaw.Core
             _activePuzzle.OnPuzzlePieceCreated += piece =>
                 piece.OnSnappedToPuzzleBoard += HandlePieceSnapped;
 
+            _activePuzzle.OnPuzzleInitialized += OnPuzzleInitialized;
             _activePuzzle.Initialize(puzzleData, image, savedGame, _puzzlePieceSize);
+        }
+
+        private void OnPuzzleInitialized(bool fromSave)
+        {
+            _activePuzzle.OnPuzzleInitialized -= OnPuzzleInitialized;
+
+            foreach (var piece in _activePuzzle.PuzzlePieces)
+            {
+                var interaction = piece.GetComponent<PuzzlePieceInteraction>();
+                if (interaction == null) continue;
+                interaction.OnPiecePointerDown += (_, _) => _draggingCount++;
+                interaction.OnPiecePointerUp   += (_, _) => _draggingCount = Mathf.Max(0, _draggingCount - 1);
+            }
+
+            var panelInteraction = _activePuzzle.GetComponent<PuzzlePanelInteraction>();
+            OnPuzzleLoaded?.Invoke(_activePuzzle, panelInteraction);
         }
 
         private void HandlePieceSnapped(PuzzlePiece piece, PuzzlePieceEventOrigin origin)
@@ -118,6 +157,7 @@ namespace ChromaJigsaw.Core
         private void ClearActivePuzzle()
         {
             if (_activePuzzle == null) return;
+            _draggingCount = 0;
             foreach (var piece in _activePuzzle.PuzzlePieces)
                 piece.OnSnappedToPuzzleBoard -= HandlePieceSnapped;
             _activePuzzle.Clear();

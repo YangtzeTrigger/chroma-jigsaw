@@ -2,7 +2,10 @@
     "name": "ChromaJigsaw.UI",
     "rootNamespace": "ChromaJigsaw.UI",
     "references": [
-        "ChromaJigsaw.Core"
+        "ChromaJigsaw.Core",
+        "ChromaJigsaw.Audio",
+        "HootyBird.JigsawPuzzleEngine",
+        "Unity.InputSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
