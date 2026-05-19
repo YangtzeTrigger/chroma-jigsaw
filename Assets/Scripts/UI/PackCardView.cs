@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using ChromaJigsaw.Core;
+using ChromaJigsaw.Data;
 
 namespace ChromaJigsaw.UI
 {
@@ -43,11 +44,38 @@ namespace ChromaJigsaw.UI
             if (artwork != null)
                 _artworkImage.texture = artwork;
 
-            _titleText.text = pack.packId;  // display name wired in B-06
+            _titleText.text = pack.packId;
             _countText.text = $"{done}/{TotalImages}";
 
             if (isLocked)
-                ApplyLockedState();
+                ApplyLockedState("LOCKED");
+            else if (_isCompleted)
+                ApplyCompletedState();
+            else
+                ApplyInProgressState();
+
+            _button.onClick.RemoveAllListeners();
+            if (!isLocked)
+                _button.onClick.AddListener(HandleTap);
+            _button.interactable = !isLocked;
+        }
+
+        public void Populate(PackConfigSO config, PackUnlockResult unlockState, string lockedSubLabel,
+                             int completedCount, Action<string> onTap)
+        {
+            _packId      = config.packId;
+            _onTap       = onTap;
+            bool isLocked = unlockState != PackUnlockResult.Owned;
+            _isCompleted  = completedCount >= TotalImages;
+
+            if (config.thumbnailSprite != null)
+                _artworkImage.texture = config.thumbnailSprite.texture;
+
+            _titleText.text = config.packName;
+            _countText.text = isLocked ? "0/12" : $"{completedCount}/{TotalImages}";
+
+            if (isLocked)
+                ApplyLockedState(lockedSubLabel);
             else if (_isCompleted)
                 ApplyCompletedState();
             else
@@ -83,7 +111,7 @@ namespace ChromaJigsaw.UI
             _countText.color  = OnSurfaceVariant;
         }
 
-        private void ApplyLockedState()
+        private void ApplyLockedState(string subLabel)
         {
             _frameBorder.color = OutlineVariant;
             _spotlightHalo.gameObject.SetActive(false);
@@ -92,9 +120,8 @@ namespace ChromaJigsaw.UI
             _lockIcon.SetActive(true);
             _artworkImage.color = new Color(1f, 1f, 1f, 0.3f);
             Color dimText = new Color(OnSurfaceVariant.r, OnSurfaceVariant.g, OnSurfaceVariant.b, 0.5f);
-            _statusText.text  = "LOCKED";
+            _statusText.text  = subLabel;
             _statusText.color = dimText;
-            _countText.text   = "0/12";
             _countText.color  = dimText;
             _titleText.color  = dimText;
         }
