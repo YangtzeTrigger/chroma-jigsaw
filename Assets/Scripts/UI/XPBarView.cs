@@ -20,8 +20,10 @@ namespace ChromaJigsaw.UI
             int current = xp % _xpPerLevel;
             float t     = (float)current / _xpPerLevel;
             _xpLabel.text = $"XP  {current:N0} / {_xpPerLevel:N0}";
-            _fill.DOKill();
-            _fill.DOFillAmount(t, 0.5f).SetEase(Ease.OutCubic);
+            DOTween.Kill(_fill);
+            DOTween.To(() => _fill.fillAmount, x => _fill.fillAmount = x, t, 0.5f)
+                   .SetTarget(_fill)
+                   .SetEase(Ease.OutCubic);
         }
 
         public void Show()

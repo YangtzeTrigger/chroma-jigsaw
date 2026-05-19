@@ -102,7 +102,9 @@ namespace ChromaJigsaw.UI
         private void HandleTap()
         {
             if (_isCompleted)
-                _artworkImage.DOColor(Color.white, 0.7f).SetEase(Ease.OutCubic);
+                DOTween.To(() => _artworkImage.color, x => _artworkImage.color = x, Color.white, 0.7f)
+                       .SetTarget(_artworkImage)
+                       .SetEase(Ease.OutCubic);
             _onTap?.Invoke(_packId);
         }
     }

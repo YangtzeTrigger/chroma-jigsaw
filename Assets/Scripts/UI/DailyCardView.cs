@@ -32,7 +32,7 @@ namespace ChromaJigsaw.UI
 
             for (int i = 0; i < _dotIndicators.Length; i++)
             {
-                _dotIndicators[i].DOKill();
+                DOTween.Kill(_dotIndicators[i]);
 
                 if (i >= records.Count)
                 {
@@ -51,10 +51,14 @@ namespace ChromaJigsaw.UI
                 {
                     _dotIndicators[i].sprite = _dotInProgress;
                     _dotIndicators[i].color  = GoldColor;
-                    _dotIndicators[i]
-                        .DOFade(0.3f, 0.8f)
-                        .SetLoops(-1, LoopType.Yoyo)
-                        .SetEase(Ease.InOutSine);
+
+                    var dot = _dotIndicators[i];
+                    DOTween.To(() => dot.color.a,
+                               x => { var c = dot.color; c.a = x; dot.color = c; },
+                               0.3f, 0.8f)
+                           .SetTarget(dot)
+                           .SetLoops(-1, LoopType.Yoyo)
+                           .SetEase(Ease.InOutSine);
                 }
                 else
                 {
