@@ -41,7 +41,6 @@ B-05 ✅ Gallery UI complete. All scripts, prefabs, and scene wiring done via YA
 - Assign lock icon sprite to LockIcon Image in PackCard prefab (art needed)
 - Wire XPBarView._fill and ._xpLabel (XPBar child GOs not yet created)
 - Assign dot sprites (_dotCompleted, _dotInProgress, _dotEmpty) to DailyCardView (art needed)
-- Add [HootyBridge], [PuzzleController], [WorkspaceController] GOs to Game.unity (B-04)
 
 B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 🔲
 
@@ -276,4 +275,4 @@ Jason will paste this into the Notion Handoff Log.
 ---
 
 *Keep this file current. It is read at the start of every Claude Code session.*
-*Last updated: 2026-05-19 — B-05 ✅ All scene wiring complete via YAML (BottomNav, ArtworkSpotlight, DailyCard). B-06 next.*
+*Last updated: 2026-05-19 — B-05 ✅ Fully complete. All YAML wiring done (BottomNav, ArtworkSpotlight, DailyCard). Game.unity B-04 holdover done ([HootyBridge], [PuzzleController], [WorkspaceController] added). B-06 next.*
