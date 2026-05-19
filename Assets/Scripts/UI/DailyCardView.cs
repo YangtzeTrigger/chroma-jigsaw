@@ -1,6 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -32,50 +32,35 @@ namespace ChromaJigsaw.UI
 
             for (int i = 0; i < _dotIndicators.Length; i++)
             {
+                _dotIndicators[i].DOKill();
+
                 if (i >= records.Count)
                 {
-                    SetDot(i, _dotEmpty, DimColor, false);
+                    _dotIndicators[i].sprite = _dotEmpty;
+                    _dotIndicators[i].color  = DimColor;
                     continue;
                 }
+
                 var rec = records[i];
                 if (rec.completed)
-                    SetDot(i, _dotCompleted, GoldColor, false);
+                {
+                    _dotIndicators[i].sprite = _dotCompleted;
+                    _dotIndicators[i].color  = GoldColor;
+                }
                 else if (rec.piecesSolved > 0)
-                    SetDot(i, _dotInProgress, GoldColor, true);   // pulsing
+                {
+                    _dotIndicators[i].sprite = _dotInProgress;
+                    _dotIndicators[i].color  = GoldColor;
+                    _dotIndicators[i]
+                        .DOFade(0.3f, 0.8f)
+                        .SetLoops(-1, LoopType.Yoyo)
+                        .SetEase(Ease.InOutSine);
+                }
                 else
-                    SetDot(i, _dotEmpty, DimColor, false);
-            }
-        }
-
-        private void SetDot(int index, Sprite sprite, Color color, bool pulse)
-        {
-            _dotIndicators[index].sprite = sprite;
-            _dotIndicators[index].color  = color;
-            StopAllCoroutines();
-            if (pulse)
-                StartCoroutine(PulseDot(index));
-        }
-
-        private IEnumerator PulseDot(int index)
-        {
-            // DOTween: _dotIndicators[index].DOFade(0.3f, 0.8f).SetLoops(-1, LoopType.Yoyo);
-            while (true)
-            {
-                yield return Fade(index, 1f, 0.3f, 0.8f);
-                yield return Fade(index, 0.3f, 1f, 0.8f);
-            }
-        }
-
-        private IEnumerator Fade(int index, float from, float to, float duration)
-        {
-            float elapsed = 0f;
-            Color c = _dotIndicators[index].color;
-            while (elapsed < duration)
-            {
-                elapsed += Time.deltaTime;
-                c.a = Mathf.Lerp(from, to, elapsed / duration);
-                _dotIndicators[index].color = c;
-                yield return null;
+                {
+                    _dotIndicators[i].sprite = _dotEmpty;
+                    _dotIndicators[i].color  = DimColor;
+                }
             }
         }
 

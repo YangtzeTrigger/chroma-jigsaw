@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -25,9 +25,9 @@ namespace ChromaJigsaw.UI
         private static readonly Color OnSurfaceVariant = new Color(0.827f, 0.769f, 0.698f);  // #d3c4b2
         private static readonly Color VeilColor        = new Color(0.055f, 0.055f, 0.055f, 0.72f);
 
-        private string        _packId;
+        private string         _packId;
         private Action<string> _onTap;
-        private bool          _isCompleted;
+        private bool           _isCompleted;
 
         private const int TotalImages = 12;
 
@@ -36,9 +36,9 @@ namespace ChromaJigsaw.UI
             _packId = pack.packId;
             _onTap  = onTap;
 
-            int done  = pack.completedImageIds?.Count ?? 0;
+            int done      = pack.completedImageIds?.Count ?? 0;
             bool isLocked = !pack.isOwned;
-            _isCompleted = done >= TotalImages;
+            _isCompleted  = done >= TotalImages;
 
             if (artwork != null)
                 _artworkImage.texture = artwork;
@@ -102,22 +102,8 @@ namespace ChromaJigsaw.UI
         private void HandleTap()
         {
             if (_isCompleted)
-                StartCoroutine(ColourReveal());
+                _artworkImage.DOColor(Color.white, 0.7f).SetEase(Ease.OutCubic);
             _onTap?.Invoke(_packId);
-        }
-
-        private IEnumerator ColourReveal()
-        {
-            // 700ms greyscale → full colour. DOTween: _artworkImage.DOColor(Color.white, 0.7f);
-            float elapsed = 0f;
-            Color start   = _artworkImage.color;
-            while (elapsed < 0.7f)
-            {
-                elapsed += Time.deltaTime;
-                _artworkImage.color = Color.Lerp(start, Color.white, elapsed / 0.7f);
-                yield return null;
-            }
-            _artworkImage.color = Color.white;
         }
     }
 }

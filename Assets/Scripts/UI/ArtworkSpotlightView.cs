@@ -1,4 +1,4 @@
-using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -33,46 +33,25 @@ namespace ChromaJigsaw.UI
             gameObject.SetActive(true);
             _titleText.text = imageId.ToUpper();
             // TODO: load Texture2D for imageId via asset pipeline (B-06+)
-            StopAllCoroutines();
-            StartCoroutine(FadeIn());
+            _canvasGroup.DOKill();
+            _canvasGroup.DOFade(1f, 0.3f)
+                .OnStart(() =>
+                {
+                    _canvasGroup.blocksRaycasts = true;
+                    _canvasGroup.interactable   = true;
+                });
         }
 
         public void Close()
         {
-            StopAllCoroutines();
-            StartCoroutine(FadeOut());
-        }
-
-        private IEnumerator FadeIn()
-        {
-            // DOTween: _canvasGroup.DOFade(1f, 0.3f);
-            _canvasGroup.blocksRaycasts = true;
-            _canvasGroup.interactable   = true;
-            float elapsed = 0f;
-            while (elapsed < 0.3f)
-            {
-                elapsed += Time.deltaTime;
-                _canvasGroup.alpha = Mathf.Lerp(0f, 1f, elapsed / 0.3f);
-                yield return null;
-            }
-            _canvasGroup.alpha = 1f;
-        }
-
-        private IEnumerator FadeOut()
-        {
-            // DOTween: _canvasGroup.DOFade(0f, 0.25f).OnComplete(() => gameObject.SetActive(false));
+            _canvasGroup.DOKill();
             _canvasGroup.interactable = false;
-            float elapsed = 0f;
-            float start   = _canvasGroup.alpha;
-            while (elapsed < 0.25f)
-            {
-                elapsed += Time.deltaTime;
-                _canvasGroup.alpha = Mathf.Lerp(start, 0f, elapsed / 0.25f);
-                yield return null;
-            }
-            _canvasGroup.alpha          = 0f;
-            _canvasGroup.blocksRaycasts = false;
-            gameObject.SetActive(false);
+            _canvasGroup.DOFade(0f, 0.25f)
+                .OnComplete(() =>
+                {
+                    _canvasGroup.blocksRaycasts = false;
+                    gameObject.SetActive(false);
+                });
         }
 
         private void HandleReplay()

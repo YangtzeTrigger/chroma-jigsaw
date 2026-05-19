@@ -1,14 +1,8 @@
 {
-    "name": "ChromaJigsaw.UI",
-    "rootNamespace": "ChromaJigsaw.UI",
+    "name": "DOTween.Modules",
+    "rootNamespace": "",
     "references": [
-        "ChromaJigsaw.Core",
-        "ChromaJigsaw.Audio",
-        "ChromaJigsaw.Data",
-        "HootyBird.JigsawPuzzleEngine",
-        "Unity.InputSystem",
-        "Unity.TextMeshPro",
-        "DOTween.Modules"
+        "Unity.ugui"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
