@@ -22,25 +22,24 @@
 
 ## Current Stage
 
-**B-06 — Pack browser & unlock system** 🔲 Next
+**B-06 — Pack browser & unlock system** 🔲 Code complete. Needs Editor wiring.
 
-B-05 ✅ Gallery UI complete. All scripts, prefabs, and scene wiring done via YAML.
+B-06 scripts done:
+- `PackConfigSO` — ScriptableObject per pack (Data/)
+- `PackRegistry` — master list SO (Data/)
+- `PackUnlockService` — singleton, evaluates Free/XP/IAP/ZenPass lock states (Data/)
+- `PackBrowserController` — Puzzles tab pack grid (UI/)
+- `PackCardView` — new overload for PackConfigSO + PackUnlockResult + reason sub-label (UI/)
+- `GalleryController` — PopulateGrid() from PackRegistry (UI/)
 
-**Wired in MainMenu.unity (via text editing — no Editor needed):**
-- GalleryController: _panelPackGrid, _galleryWallView, _spotlightView ✅
-- GalleryWallView: _framesContainer, _frameItemPrefab, _packTitleText, _subtitleText ✅
-- BottomNavController: _tabs[4] (Button/TopBorder/Icon/Label each), _panels[4], _xpBarView ✅
-- ArtworkSpotlightView: _canvasGroup (CanvasGroup !u!225), _artworkImage, _titleText, all 4 buttons ✅
-  - Children built: Background scrim, ArtworkImage, TitleText, CloseButton, ReplayButton, ShareButton, WallpaperButton
-- DailyCardView: _artworkPreview, _beginButton, _dotIndicators[3] ✅
-  - Children built: ArtworkPreview, BeginButton (gold), Dot0/Dot1/Dot2
-
-**Remaining manual Unity Editor steps (must do before B-06 runs cleanly):**
-- Assign TMP font assets to all TextMeshProUGUI in PackCard + GalleryFrameItem prefabs
-- Assign TMP font assets to tab labels in scene (currently LiberationSans fallback)
-- Assign lock icon sprite to LockIcon Image in PackCard prefab (art needed)
-- Wire XPBarView._fill and ._xpLabel (XPBar child GOs not yet created)
-- Assign dot sprites (_dotCompleted, _dotInProgress, _dotEmpty) to DailyCardView (art needed)
+**Remaining manual Unity Editor steps (before B-06 runs):**
+- Create PackConfigSO assets in Assets/Data/Packs/ (one per pack)
+- Create PackRegistry SO at Assets/Data/ and assign all PackConfigSO assets to it
+- Attach PackBrowserController to Panel_Puzzles; wire _registry, _cardPrefab, _container
+- Wire GalleryController._registry, ._cardPrefab, ._gridContainer (PackGridPanel child)
+- Assign TMP font assets to PackCard + GalleryFrameItem prefabs
+- Assign lock icon sprite to PackCard prefab
+- Assign dot sprites to DailyCardView (_dotCompleted, _dotInProgress, _dotEmpty)
 
 B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 🔲
 
@@ -275,4 +274,4 @@ Jason will paste this into the Notion Handoff Log.
 ---
 
 *Keep this file current. It is read at the start of every Claude Code session.*
-*Last updated: 2026-05-19 — B-05 ✅ Fully complete. All YAML wiring done (BottomNav, ArtworkSpotlight, DailyCard). Game.unity B-04 holdover done ([HootyBridge], [PuzzleController], [WorkspaceController] added). B-06 next.*
+*Last updated: 2026-05-19 — B-06 code complete (PackConfigSO, PackRegistry, PackUnlockService, PackBrowserController, PackCardView overload, GalleryController grid). Editor wiring next.*
