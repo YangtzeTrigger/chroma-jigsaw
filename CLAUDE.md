@@ -22,21 +22,26 @@
 
 ## Current Stage
 
-**B-05 — Gallery UI** 🟡 In progress
+**B-06 — Pack browser & unlock system** 🔲 Next
 
-B-03 ✅ HootyBridge fully implemented. B-04 ✅ WorkspaceController + PuzzleController.
-B-05 scripts written: GalleryController, PackCardView, GalleryFrameItem, GalleryWallView,
-ArtworkSpotlightView, DailyCardView, BottomNavController, XPBarView, TopBarView.
-SaveData extended with `totalXP` + `DailyRecord`. `AnalyticsManager.LogScreenView` added.
+B-05 ✅ Gallery UI complete. All 9 scripts written + compiled clean. PackCard and
+GalleryFrameItem prefabs have full child hierarchies with Inspector fields wired.
+GalleryController wired in MainMenu: _panelPackGrid (PackGridPanel), _galleryWallView
+(GalleryWallPanel/GalleryWallView), _spotlightView (ArtworkSpotlightView).
+GalleryWallView wired: _framesContainer, _frameItemPrefab, _packTitleText, _subtitleText.
+Font SDF assets generated (EB Garamond + Montserrat variants) and committed.
 
-**Pending manual Unity steps for B-05:**
-- Import DOTween → add `DOTween.Modules` ref to `ChromaJigsaw.UI.asmdef`
-- Drop EB Garamond + Montserrat `.otf` into `Assets/Art/Fonts/` → generate TMP font assets
-- Build MainMenu.unity hierarchy (Canvas → TopBar, XPBar, TabContent panels, BottomNav; [Overlay] → Panel_ArtworkSpotlight)
-- Create PackCard and GalleryFrameItem prefabs, wire all serialized fields in Inspector
-- Add [HootyBridge], [PuzzleController], [WorkspaceController] GameObjects to Game.unity (B-04 pending)
+**Remaining manual Unity steps (do in Editor before B-06):**
+- Open MainMenu.unity and verify Panel_Gallery → PackGridPanel + GalleryWallPanel in hierarchy
+- Assign TMP font assets to all TextMeshProUGUI components in prefabs and scene
+- Assign sprites to LockIcon in PackCard prefab (lock icon art needed)
+- Wire BottomNavController._tabs (4 TabEntry), ._panels (4 panel GOs), ._xpBarView
+- Wire XPBarView._fill and ._xpLabel
+- Wire ArtworkSpotlightView._canvasGroup, ._artworkImage, ._titleText, all 4 buttons
+- Wire DailyCardView._artworkPreview, ._beginButton, ._dotIndicators[3], dot sprites
+- Add [HootyBridge], [PuzzleController], [WorkspaceController] GameObjects to Game.unity (B-04)
 
-B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 🟡
+B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 🔲
 
 ---
 
@@ -256,7 +261,7 @@ Jason will paste this into the Notion Handoff Log.
 | B-02 | Image asset pipeline | ✅ Done |
 | B-03 | Jigsaw piece system | ✅ Done |
 | B-04 | Touch controls | ✅ Done |
-| B-05 | Gallery UI | 🟡 In progress |
+| B-05 | Gallery UI | ✅ Done |
 | B-06 | Pack browser & unlock system | 🔲 |
 | B-07 | Daily Image system | 🔲 |
 | B-08 | Monetisation | 🔲 |
@@ -269,4 +274,4 @@ Jason will paste this into the Notion Handoff Log.
 ---
 
 *Keep this file current. It is read at the start of every Claude Code session.*
-*Last updated: 2026-05-19 — B-03 ✅ B-04 ✅ B-05 scripts written, pending Unity scene build.*
+*Last updated: 2026-05-19 — B-05 ✅ Prefab hierarchies built + wired, gallery scene wired. B-06 next.*
