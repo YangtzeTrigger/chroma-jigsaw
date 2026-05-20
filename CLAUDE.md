@@ -22,7 +22,7 @@
 
 ## Current Stage
 
-**B-07 — Daily Masterpiece system** 🔲 Code complete. Needs Editor wiring.
+**B-07 — Daily Masterpiece system** 🔲 Code + scene hierarchy done. Needs Editor wiring.
 
 B-07 scripts done:
 - `DailyManifest` + `DailyEntry` — SO holding 3 active daily entries (Core/)
@@ -34,14 +34,21 @@ B-07 scripts done:
 
 **Architecture note:** DailyManifest lives in Core (not Data) — asmdef constraint prevents Core from referencing Data.
 
+**Wired in MainMenu.unity via YAML (complete — no Editor needed for these):**
+- Panel_DailyMasterpiece: RT full-screen, Canvas Sort 10, CanvasScaler 1080×1920 Match 0.5, inactive by default ✅
+  - Background (#0e0e0e@94%), TitleText (EB Garamond 42px), PieceCountText (Montserrat-SemiBold 28px gold) ✅
+  - ArtworkImage (Image), EditorialText (EB Garamond italic 22px), BeginButton (gold bg + dark label) ✅
+  - CloseButton (top-right, ✕ label), Dot0/Dot1/Dot2 (24×24 Image+Button, center anchor) ✅
+- DailyMasterpieceView all slots wired: _canvasGroup, _titleText, _pieceCountText, _artworkImage, _editorialText, _beginButton, _closeButton, _dotButtons[3] ✅
+- GalleryController._masterpieceView → Panel_DailyMasterpiece ✅
+
 **Remaining manual Unity Editor steps (before B-07 runs):**
 - Create DailyManifest SO: Assets → Create → Chroma Jigsaw → Daily Manifest; add 3 DailyEntry entries
 - Wire AppBootstrap._dailyManifest slot in _Bootstrap.unity
-- Add Panel_DailyMasterpiece GO to MainMenu.unity overlay; attach DailyMasterpieceView.cs; wire all slots
-- Wire GalleryController._dailyCardView + ._masterpieceView
-- Wire GalleryController._registry, ._cardPrefab, ._gridContainer (B-06 holdover)
+- Wire GalleryController._registry, ._cardPrefab, ._gridContainer (B-06 holdover, if not done)
 - Attach PackBrowserController to Panel_Puzzles; wire slots (B-06 holdover)
-- Assign dot sprites to DailyCardView + DailyMasterpieceView
+- Assign dot sprites to DailyCardView + DailyMasterpieceView (art needed)
+- Assign TMP fonts to PackCard + GalleryFrameItem prefabs
 
 B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 ✅ | B-07 🔲
 
@@ -276,4 +283,4 @@ Jason will paste this into the Notion Handoff Log.
 ---
 
 *Keep this file current. It is read at the start of every Claude Code session.*
-*Last updated: 2026-05-20 — B-07 code complete (DailyManifest, DailyService, DailyMasterpieceView, DailyCardView, GalleryController, AppBootstrap). B-06 Editor assets committed (PackRegistry, Pack_ALP_000, Pack_FOR_000). Editor wiring next.*
+*Last updated: 2026-05-20 — B-07 Panel_DailyMasterpiece hierarchy built in MainMenu.unity via YAML (Background, TitleText, PieceCountText, ArtworkImage, EditorialText, BeginButton, CloseButton, Dot0/1/2). All DailyMasterpieceView slots wired. GalleryController._masterpieceView wired. Commit b5ecfa2. Remaining: DailyManifest SO creation + AppBootstrap wiring in Editor, then B-08.*
