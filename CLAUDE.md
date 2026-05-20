@@ -242,23 +242,39 @@ Pack size       : 12 images per pack
 
 ---
 
-## Handoff Loop
+## Handoff Loop — Dual-Note Protocol
+
+Each stage Notion page has two permanent channels. Read them before starting work.
+
+### 📨 Claude.ai → Claude Code
+Architectural brief: scope, design decisions (final), constraints, files to read.
+Written by Claude.ai. **Read this first. It defines what to build and why.**
+
+### 📤 Claude Code → Claude.ai
+Build report: what was built, commit hashes, deviations from spec, hard blockers,
+open questions that need a design decision before the next stage can start.
+**Append a timestamped entry at the end of every Claude Code session.**
 
 ```
-Claude.ai chat      → architecture + code generation → updates Notion
-      ↓  (paste "Claude Code prompt" from Notion Handoff page)
-Claude Code         → file creation + Unity work → reports what it did
-      ↓  (MANUAL: Jason updates Handoff Log in Notion)
-Claude.ai chat      → reads log → next stage planning
+Claude.ai        → writes 📨 brief to Notion stage page
+                        ↓
+Claude Code      → reads 📨 brief → builds → writes 📤 report to same page
+                        ↓
+Claude.ai        → reads 📤 report → writes next 📨 brief
 ```
 
-**At the end of every Claude Code session, report:**
-1. Every file created or modified with full path
-2. Any compile errors and how they were resolved
-3. Anything that deviated from the plan and why
-4. What the next session should tackle
+**Jason's role:** Open Unity Editor, provide art, approve direction.
+Not a relay — both Claude instances read Notion directly.
 
-Jason will paste this into the Notion Handoff Log.
+### At the end of every Claude Code session (unprompted):
+1. Append a `📤 Claude Code → Claude.ai` entry to the current stage Notion page
+2. Commit and push all changes
+3. Update CLAUDE.md Current Stage section to match reality
+4. Update memory/project_stage_progress.md
+
+**Entry must include:** files changed + commits, deviations from spec, hard blockers
+(things that will crash or break without Jason's Editor work), open design questions
+Claude.ai needs to answer before the next stage brief is written.
 
 ---
 
