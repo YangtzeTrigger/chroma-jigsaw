@@ -2,7 +2,8 @@
     "name": "ChromaJigsaw.Core",
     "rootNamespace": "ChromaJigsaw.Core",
     "references": [
-        "HootyBird.JigsawPuzzleEngine"
+        "HootyBird.JigsawPuzzleEngine",
+        "Unity.Purchasing"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

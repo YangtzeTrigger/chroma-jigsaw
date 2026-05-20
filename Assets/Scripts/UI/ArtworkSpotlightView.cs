@@ -64,25 +64,43 @@ namespace ChromaJigsaw.UI
 
         private void HandleShare()
         {
+            var title = _titleText != null ? _titleText.text : "a puzzle";
 #if UNITY_ANDROID && !UNITY_EDITOR
             var intentClass = new AndroidJavaClass("android.content.Intent");
             var intent      = new AndroidJavaObject("android.content.Intent");
             intent.Call<AndroidJavaObject>("setAction", intentClass.GetStatic<string>("ACTION_SEND"));
             intent.Call<AndroidJavaObject>("setType", "text/plain");
             intent.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"),
-                "Check out my puzzle on Chroma Jigsaw!");
+                $"I completed \"{title}\" on Chroma Jigsaw!");
             var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
             var activity    = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
             var chooser     = intentClass.CallStatic<AndroidJavaObject>("createChooser", intent, "Share via");
             activity.Call("startActivity", chooser);
+#elif UNITY_EDITOR
+            Debug.Log($"[Spotlight] Share — \"{title}\"");
 #endif
         }
 
         private void HandleWallpaper()
         {
-            // Stub — WallpaperManager API wired in B-08
-#if UNITY_EDITOR
-            Debug.Log("[Spotlight] Set Wallpaper pressed");
+#if UNITY_ANDROID && !UNITY_EDITOR
+            if (_artworkImage == null || _artworkImage.texture == null) return;
+            var tex = _artworkImage.texture as Texture2D;
+            if (tex == null) return;
+
+            byte[] png = tex.EncodeToPNG();
+
+            var bitmapFactory = new AndroidJavaClass("android.graphics.BitmapFactory");
+            var bitmap        = bitmapFactory.CallStatic<AndroidJavaObject>(
+                "decodeByteArray", png, 0, png.Length);
+
+            var unityPlayer      = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+            var activity         = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+            var wallpaperManager = new AndroidJavaClass("android.app.WallpaperManager")
+                .CallStatic<AndroidJavaObject>("getInstance", activity);
+            wallpaperManager.Call("setBitmap", bitmap);
+#elif UNITY_EDITOR
+            Debug.Log("[Spotlight] Set Wallpaper — Android device only");
 #endif
         }
     }

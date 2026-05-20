@@ -1,7 +1,9 @@
 {
     "name": "ChromaJigsaw.Ads",
     "rootNamespace": "ChromaJigsaw.Ads",
-    "references": [],
+    "references": [
+        "ChromaJigsaw.Core"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

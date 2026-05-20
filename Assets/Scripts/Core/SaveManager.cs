@@ -34,6 +34,9 @@ namespace ChromaJigsaw.Core
         // B-05: gallery UI
         public int                 totalXP      = 0;
         public List<DailyRecord>   dailyRecords = new List<DailyRecord>();
+        // B-08: monetisation — permanent fields, never rename
+        public bool zenPassLifetime    = false;
+        public bool zenPassSubscriber  = false;
     }
 
     public class SaveManager : MonoBehaviour

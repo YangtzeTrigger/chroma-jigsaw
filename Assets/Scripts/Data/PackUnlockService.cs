@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using ChromaJigsaw.Core;
 
@@ -19,12 +20,27 @@ namespace ChromaJigsaw.Data
             }
         }
 
+        // Wire in Inspector alongside GalleryController, or call SetRegistry() from GalleryController.Awake()
+        [SerializeField] private PackRegistry _registry;
+
+        // productId → packId, populated per-session by InitiatePurchase
+        private readonly Dictionary<string, string> _productToPackId = new();
+
         private void Awake()
         {
             if (_instance != null && _instance != this) { Destroy(gameObject); return; }
             _instance = this;
             DontDestroyOnLoad(gameObject);
+            IAPManager.OnPackPurchased += OnPackPurchasedExternally;
         }
+
+        private void OnDestroy()
+        {
+            IAPManager.OnPackPurchased -= OnPackPurchasedExternally;
+        }
+
+        // Called from GalleryController if registry is not wired in Inspector
+        public void SetRegistry(PackRegistry registry) => _registry = registry;
 
         public PackUnlockResult Evaluate(PackConfigSO config, out string lockedSubLabel)
         {
@@ -51,10 +67,16 @@ namespace ChromaJigsaw.Data
                     return PackUnlockResult.XPLocked;
 
                 case PackUnlockType.IAP:
-                    lockedSubLabel = "BUY PACK"; // IAP: replace with price string from billing SDK in B-08
+                    var price = IAPManager.Instance.GetLocalizedPrice(config.iapProductId);
+                    lockedSubLabel = string.IsNullOrEmpty(price) ? "BUY PACK" : price;
                     return PackUnlockResult.IAPLocked;
 
                 case PackUnlockType.ZenPass:
+                    if (ZenPassService.Instance.IsZenPass)
+                    {
+                        GrantOwnership(config.packId);
+                        return PackUnlockResult.Owned;
+                    }
                     lockedSubLabel = "ZEN PASS";
                     return PackUnlockResult.ZenPassLocked;
 
@@ -63,13 +85,32 @@ namespace ChromaJigsaw.Data
             }
         }
 
-        // IAP: wire real purchase flow in B-08
         public void InitiatePurchase(PackConfigSO config, Action<bool> onResult)
         {
-#if UNITY_EDITOR
-            Debug.Log($"[PackUnlockService] IAP stub — would purchase '{config.iapProductId}'");
-#endif
-            onResult?.Invoke(false);
+            // Record mapping so OnPackPurchasedExternally can match IAP event → packId
+            _productToPackId[config.iapProductId] = config.packId;
+            IAPManager.Instance.PurchasePack(config.iapProductId, onResult);
+        }
+
+        private void OnPackPurchasedExternally(string productId)
+        {
+            // Try session-local mapping first (normal purchase flow)
+            if (_productToPackId.TryGetValue(productId, out var packId))
+            {
+                GrantOwnership(packId);
+                return;
+            }
+
+            // Fallback: scan registry (handles cold-start restore or cross-session IAP events)
+            if (_registry == null) return;
+            foreach (var config in _registry.packs)
+            {
+                if (config.iapProductId == productId)
+                {
+                    GrantOwnership(config.packId);
+                    return;
+                }
+            }
         }
 
         private void GrantOwnership(string packId)
@@ -81,8 +122,11 @@ namespace ChromaJigsaw.Data
                 p = new PackProgress { packId = packId };
                 save.packs.Add(p);
             }
-            p.isOwned = true;
-            SaveManager.Instance.Save();
+            if (!p.isOwned)
+            {
+                p.isOwned = true;
+                SaveManager.Instance.Save();
+            }
         }
     }
 }
