@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.Purchasing.Extension;
 
+#pragma warning disable CS0618 // Unity IAP v4 API deprecated in 5.x — upgrade to v5 before launch (B-13)
+
 namespace ChromaJigsaw.Core
 {
     public class IAPManager : MonoBehaviour, IDetailedStoreListener
@@ -184,3 +186,5 @@ namespace ChromaJigsaw.Core
         }
     }
 }
+
+#pragma warning restore CS0618
