@@ -22,26 +22,28 @@
 
 ## Current Stage
 
-**B-06 — Pack browser & unlock system** 🔲 Code complete. Needs Editor wiring.
+**B-07 — Daily Masterpiece system** 🔲 Code complete. Needs Editor wiring.
 
-B-06 scripts done:
-- `PackConfigSO` — ScriptableObject per pack (Data/)
-- `PackRegistry` — master list SO (Data/)
-- `PackUnlockService` — singleton, evaluates Free/XP/IAP/ZenPass lock states (Data/)
-- `PackBrowserController` — Puzzles tab pack grid (UI/)
-- `PackCardView` — new overload for PackConfigSO + PackUnlockResult + reason sub-label (UI/)
-- `GalleryController` — PopulateGrid() from PackRegistry (UI/)
+B-07 scripts done:
+- `DailyManifest` + `DailyEntry` — SO holding 3 active daily entries (Core/)
+- `DailyService` — singleton; Initialise(), GetActiveDailies(), GetDailyState(), SaveProgress(), MarkComplete() (Core/)
+- `DailyMasterpieceView` — full-screen daily view, dot switching, BEGIN RITUAL stub (UI/)
+- `DailyCardView` — updated; Refresh(Action) reads DailyService; newest artwork preview (UI/)
+- `GalleryController` — ShowL1 calls DailyCardView.Refresh; OpenDailyMasterpiece() added (UI/)
+- `AppBootstrap` — _dailyManifest SerializeField; Boot() calls DailyService.Initialise() (Core/)
 
-**Remaining manual Unity Editor steps (before B-06 runs):**
-- Create PackConfigSO assets in Assets/Data/Packs/ (one per pack)
-- Create PackRegistry SO at Assets/Data/ and assign all PackConfigSO assets to it
-- Attach PackBrowserController to Panel_Puzzles; wire _registry, _cardPrefab, _container
-- Wire GalleryController._registry, ._cardPrefab, ._gridContainer (PackGridPanel child)
-- Assign TMP font assets to PackCard + GalleryFrameItem prefabs
-- Assign lock icon sprite to PackCard prefab
-- Assign dot sprites to DailyCardView (_dotCompleted, _dotInProgress, _dotEmpty)
+**Architecture note:** DailyManifest lives in Core (not Data) — asmdef constraint prevents Core from referencing Data.
 
-B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 🔲
+**Remaining manual Unity Editor steps (before B-07 runs):**
+- Create DailyManifest SO: Assets → Create → Chroma Jigsaw → Daily Manifest; add 3 DailyEntry entries
+- Wire AppBootstrap._dailyManifest slot in _Bootstrap.unity
+- Add Panel_DailyMasterpiece GO to MainMenu.unity overlay; attach DailyMasterpieceView.cs; wire all slots
+- Wire GalleryController._dailyCardView + ._masterpieceView
+- Wire GalleryController._registry, ._cardPrefab, ._gridContainer (B-06 holdover)
+- Attach PackBrowserController to Panel_Puzzles; wire slots (B-06 holdover)
+- Assign dot sprites to DailyCardView + DailyMasterpieceView
+
+B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 ✅ | B-07 🔲
 
 ---
 
@@ -274,4 +276,4 @@ Jason will paste this into the Notion Handoff Log.
 ---
 
 *Keep this file current. It is read at the start of every Claude Code session.*
-*Last updated: 2026-05-19 — B-06 code complete (PackConfigSO, PackRegistry, PackUnlockService, PackBrowserController, PackCardView overload, GalleryController grid). Editor wiring next.*
+*Last updated: 2026-05-20 — B-07 code complete (DailyManifest, DailyService, DailyMasterpieceView, DailyCardView, GalleryController, AppBootstrap). B-06 Editor assets committed (PackRegistry, Pack_ALP_000, Pack_FOR_000). Editor wiring next.*
