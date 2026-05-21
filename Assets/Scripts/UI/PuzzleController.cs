@@ -1,6 +1,7 @@
 using ChromaJigsaw.Audio;
 using ChromaJigsaw.Core;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ChromaJigsaw.UI
 {
@@ -10,6 +11,9 @@ namespace ChromaJigsaw.UI
     {
         // Assign all HUD CanvasGroups (TopBar, any overlays) that should hide in Focus Mode.
         [SerializeField] private CanvasGroup[] _hudGroups;
+
+        // Full-screen transparent button; tap toggles HUD when Focus Mode is active.
+        [SerializeField] private Button _workspaceTapButton;
 
         private bool _focusModeActive;
         private bool _hudVisible = true;
@@ -24,6 +28,7 @@ namespace ChromaJigsaw.UI
                 HootyBridge.Instance.OnPuzzleComplete += HandlePuzzleComplete;
             }
 
+            _workspaceTapButton?.onClick.AddListener(HandleWorkspaceTap);
             AccessibilityService.OnFocusModeChanged += OnFocusModeChanged;
             // Apply current saved state immediately.
             if (SaveManager.Instance != null)
@@ -40,6 +45,7 @@ namespace ChromaJigsaw.UI
                 HootyBridge.Instance.OnPuzzleComplete -= HandlePuzzleComplete;
             }
 
+            _workspaceTapButton?.onClick.RemoveListener(HandleWorkspaceTap);
             AccessibilityService.OnFocusModeChanged -= OnFocusModeChanged;
         }
 
