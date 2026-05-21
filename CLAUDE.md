@@ -32,22 +32,20 @@ B-10 scene work done (commit dfe1887):
 
 **Remaining manual Unity Editor steps (still outstanding):**
 
-B-07:
-- Create DailyManifest SO: Assets → Create → Chroma Jigsaw → Daily Manifest; add 3 DailyEntry entries
-- Wire AppBootstrap._dailyManifest slot in _Bootstrap.unity
+B-07 (cosmetic — not blocking):
 - Assign dot sprites to DailyCardView + DailyMasterpieceView (art needed)
 - Assign TMP fonts to PackCard + GalleryFrameItem prefabs
 
-B-09 (audio):
+B-09 (audio — blocked on art):
 - Add MusicContextController GO to MainMenu.unity and Game.unity; call SetContext() from scene controllers
-- Assign AudioMixer asset to AudioManager Inspector slot
 - Assign Suno .mp3 clips to AudioManager Inspector slots (after Jason generates them)
 
 B-10 (accessibility):
-- Add AccessibilityService GO to _Bootstrap.unity ⚠️ crashes without this
-- Assign HUD CanvasGroups to PuzzleController._hudGroups in Game.unity (currently empty `[]`)
+- Assign HUD CanvasGroups to PuzzleController._hudGroups in Game.unity — Focus Mode silently does nothing without this
 - Refine Panel_ZenPass button positions in Unity Editor (currently approximate absolute offsets)
-- Wire OnGrandInterfaceChanged + OnArtworkBrightnessChanged in scene controllers
+- Wire OnGrandInterfaceChanged + OnArtworkBrightnessChanged in scene controllers (Grand Interface + Artwork Brightness are no-ops until subscribers exist)
+
+**Resolved in commit 18b1e7c (Editor session 2026-05-21):** ✅ AccessibilityService GO in _Bootstrap ✅ IAPManager / ZenPassService / SubscriptionService GOs in _Bootstrap ✅ AppBootstrap._dailyManifest wired ✅ AudioManager.mixer wired
 
 ⚠️ Burst AOT: Edit → Project Settings → Player → Other Settings → Burst AOT Settings → **uncheck Enable Burst AOT Compilation** (Burst 1.8.29 crash bug)
 
