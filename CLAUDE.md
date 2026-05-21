@@ -22,30 +22,33 @@
 
 ## Current Stage
 
-**B-09 — Audio System** 🔲 In progress. Brief received from Claude.ai (Notion B-09 page).
+**B-10 — Accessibility Suite** ✅ Code complete. Needs Editor wiring.
 
-B-09 scope:
-- `MusicContextController` — maps GameContext enum to MoodType; calls AudioManager.PlayMusic()
-- `AtelierView` — settings screen; wires ambient volume slider + tactile feedback toggle + focus mode toggle
-- SFX call sites wired in: HootyBridge, BottomNavController, PackCardView, DailyCardView, ZenPassView, GalleryController
-- All audio clip slots left as `None` — Jason assigns .mp3 files after Suno generation
+B-09 ✅ complete (commit 87613f4 / ed0fbf3). B-10 ✅ code complete (commit 4c68998).
 
 **Remaining manual Unity Editor steps:**
 
-B-07 (still outstanding — will cause crashes or missing features):
+B-07 (still outstanding):
 - Create DailyManifest SO: Assets → Create → Chroma Jigsaw → Daily Manifest; add 3 DailyEntry entries
 - Wire AppBootstrap._dailyManifest slot in _Bootstrap.unity
 - Assign dot sprites to DailyCardView + DailyMasterpieceView (art needed)
 - Assign TMP fonts to PackCard + GalleryFrameItem prefabs
 
-B-08 ✅ fully complete (code + Editor — confirmed 2026-05-20):
-- IAPManager + ZenPassService + SubscriptionService GOs added to _Bootstrap.unity
-- Panel_ZenPass hierarchy built + ZenPassView slots wired
-- FakeStore warning only (expected in Editor)
+B-09 (audio):
+- Add MusicContextController GO to MainMenu.unity and Game.unity; call SetContext() from scene controllers
+- Assign AudioMixer asset to AudioManager Inspector slot
+- Assign Suno .mp3 clips to AudioManager Inspector slots (after Jason generates them)
+- Add PuzzleController GO to Game.unity (already exists — confirm present)
 
-⚠️ Burst AOT: Edit → Project Settings → Player → Other Settings → Burst AOT Settings → **uncheck Enable Burst AOT Compilation** (Jason still needs to do this — Burst 1.8.29 crash bug)
+B-10 (accessibility):
+- Add AccessibilityService GO to _Bootstrap.unity
+- Build Settings.unity Atelier screen hierarchy; wire AtelierView Inspector slots
+- Add transparent workspace tap button in Game.unity calling PuzzleController.HandleWorkspaceTap()
+- Wire OnGrandInterfaceChanged + OnArtworkBrightnessChanged subscribers in scene controllers
 
-B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 ✅ | B-07 🔲 (Editor wiring) | B-08 ✅ | B-09 🔲
+⚠️ Burst AOT: Edit → Project Settings → Player → Other Settings → Burst AOT Settings → **uncheck Enable Burst AOT Compilation** (Burst 1.8.29 crash bug)
+
+B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 ✅ | B-07 🔲 (Editor) | B-08 ✅ | B-09 ✅ | B-10 ✅ (code)
 
 ---
 
@@ -285,8 +288,8 @@ Claude.ai needs to answer before the next stage brief is written.
 | B-06 | Pack browser & unlock system | ✅ Done |
 | B-07 | Daily Image system | 🔲 Code ✅ — Editor wiring pending |
 | B-08 | Monetisation | ✅ Done |
-| B-09 | Audio system | 🔲 In progress |
-| B-10 | Accessibility suite | 🔲 |
+| B-09 | Audio system | ✅ Code done — clip slots + scene wiring pending |
+| B-10 | Accessibility suite | ✅ Code done — Settings.unity scene + Editor wiring pending |
 | B-11 | Analytics & event tracking | 🔲 |
 | B-12 | Polish & QA | 🔲 |
 | B-13 | Launch prep | 🔲 |
@@ -294,4 +297,4 @@ Claude.ai needs to answer before the next stage brief is written.
 ---
 
 *Keep this file current. It is read at the start of every Claude Code session.*
-*Last updated: 2026-05-21 — B-08 fully complete (code + Editor, confirmed by Jason). B-09 Audio system in progress. MusicContextController + AtelierView to create. SFX call sites to wire. Burst AOT still needs unchecking in Editor. B-07 Editor wiring still outstanding.*
+*Last updated: 2026-05-21 — B-09 audio system complete (commit ed0fbf3). B-10 accessibility suite code complete (commit 4c68998). AccessibilityService, AtelierView (all 4 sections), SaveData fields, Vibrate() on snap/complete. Editor wiring outstanding for B-07/B-09/B-10. B-11 Analytics next.*
