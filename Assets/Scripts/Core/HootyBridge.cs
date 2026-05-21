@@ -141,6 +141,7 @@ namespace ChromaJigsaw.Core
 
             if (origin != PuzzlePieceEventOrigin.Player) return;
 
+            AccessibilityService.Instance.Vibrate(50);
             OnPieceSnapped?.Invoke();
             SaveGameService.SaveGame(_activePuzzle);
 
@@ -152,6 +153,7 @@ namespace ChromaJigsaw.Core
         {
             _xpByPieceCount.TryGetValue(_activePuzzle.PuzzlePieces.Count, out int xp);
             SaveGameService.DeleteSavedGameData(_activePuzzleId);
+            AccessibilityService.Instance.Vibrate(80);
             OnPuzzleComplete?.Invoke(xp);
         }
 

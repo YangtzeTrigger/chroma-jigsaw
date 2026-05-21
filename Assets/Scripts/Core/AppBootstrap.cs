@@ -32,6 +32,7 @@ namespace ChromaJigsaw.Core
             // Script Execution Order guarantees all singleton Awake()s have fired
             // before this coroutine body runs after yield.
             yield return null;
+            AccessibilityService.Instance.Initialise();
             ZenPassService.Instance.Initialise();
             SubscriptionService.Instance.Initialise();
             IAPManager.Instance.InitializeIAP();

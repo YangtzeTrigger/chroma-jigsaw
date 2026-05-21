@@ -1,39 +1,91 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using TMPro;
 using ChromaJigsaw.Audio;
+using ChromaJigsaw.Core;
 
 namespace ChromaJigsaw.UI
 {
-    // Settings screen (The Atelier). Wire Inspector slots and assign to the Settings scene root.
+    // The Atelier — Settings screen. Lives in Settings.unity (scene index 3).
+    // All player-facing labels use "Sensory Ambience" / "Visual Clarity" — never "accessibility".
     public class AtelierView : MonoBehaviour
     {
-        [Header("Audio")]
-        [SerializeField] private Slider _ambientVolumeSlider;  // controls Music + SFX together
+        [Header("Navigation")]
+        [SerializeField] private Button _backButton;
 
-        [Header("Accessibility")]
+        // ── Section 1: Sensory Ambience ──────────────────────────────────────
+        [Header("Sensory Ambience")]
+        [SerializeField] private Slider _ambientVolumeSlider;
         [SerializeField] private Toggle _tactileFeedbackToggle;
         [SerializeField] private Toggle _focusModeToggle;
 
+        // ── Section 2: Visual Clarity ────────────────────────────────────────
+        [Header("Visual Clarity")]
+        [SerializeField] private Toggle _highContrastToggle;
+        [SerializeField] private Toggle _grandInterfaceToggle;
+        [SerializeField] private Slider _artworkBrightnessSlider;  // range 0.5–1.5
+
+        // ── Section 3: The Zen Pass ──────────────────────────────────────────
+        [Header("Zen Pass")]
+        [SerializeField] private TextMeshProUGUI _zenPassStatusText;   // "Active Sanctuary Member" / "Discover the Sanctuary"
+        [SerializeField] private TextMeshProUGUI _zenPassButtonLabel;  // "MANAGE" / "UPGRADE"
+        [SerializeField] private Button          _zenPassButton;
+        [SerializeField] private ZenPassView     _zenPassView;
+
+        // ── Section 4: Archive & Atelier ─────────────────────────────────────
+        [Header("Archive & Atelier")]
+        [SerializeField] private Button _restorePurchasesButton;
+        [SerializeField] private Button _privacyButton;
+        [SerializeField] private Button _supportButton;
+
+        private const string PrivacyUrl = "https://yourstudio.com/privacy";   // replaced in B-13
+        private const string SupportUrl = "https://yourstudio.com/support";   // replaced in B-13
+
         private void Awake()
         {
-            if (_ambientVolumeSlider != null)
+            if (_artworkBrightnessSlider != null)
             {
-                _ambientVolumeSlider.onValueChanged.AddListener(OnAmbientVolumeChanged);
+                _artworkBrightnessSlider.minValue = 0.5f;
+                _artworkBrightnessSlider.maxValue = 1.5f;
             }
 
-            if (_tactileFeedbackToggle != null)
-                _tactileFeedbackToggle.onValueChanged.AddListener(OnTactileFeedbackChanged);
+            _backButton?.onClick.AddListener(OnBack);
 
-            if (_focusModeToggle != null)
-                _focusModeToggle.onValueChanged.AddListener(OnFocusModeChanged);
+            _ambientVolumeSlider?.onValueChanged.AddListener(OnAmbientVolumeChanged);
+            _tactileFeedbackToggle?.onValueChanged.AddListener(OnTactileFeedbackChanged);
+            _focusModeToggle?.onValueChanged.AddListener(OnFocusModeChanged);
+
+            _highContrastToggle?.onValueChanged.AddListener(OnHighContrastChanged);
+            _grandInterfaceToggle?.onValueChanged.AddListener(OnGrandInterfaceChanged);
+            _artworkBrightnessSlider?.onValueChanged.AddListener(OnArtworkBrightnessChanged);
+
+            _zenPassButton?.onClick.AddListener(OnZenPassTapped);
+            _restorePurchasesButton?.onClick.AddListener(OnRestorePurchases);
+            _privacyButton?.onClick.AddListener(() => Application.OpenURL(PrivacyUrl));
+            _supportButton?.onClick.AddListener(() => Application.OpenURL(SupportUrl));
         }
 
         private void OnEnable()
         {
-            // Sync sliders to saved values when the screen opens.
-            if (_ambientVolumeSlider != null && AudioManager.Instance != null)
-                _ambientVolumeSlider.SetValueWithoutNotify(AudioManager.Instance.GetSavedVolume(AudioChannel.Music));
+            var data = SaveManager.Instance.Data;
+
+            // Sync sliders and toggles to saved values.
+            _ambientVolumeSlider?.SetValueWithoutNotify(AudioManager.Instance.GetSavedVolume(AudioChannel.Music));
+            _tactileFeedbackToggle?.SetIsOnWithoutNotify(data.tactileFeedback);
+            _focusModeToggle?.SetIsOnWithoutNotify(data.focusMode);
+            _highContrastToggle?.SetIsOnWithoutNotify(data.highContrast);
+            _grandInterfaceToggle?.SetIsOnWithoutNotify(data.grandInterface);
+            _artworkBrightnessSlider?.SetValueWithoutNotify(data.artworkBrightness);
+
+            RefreshZenPassCard();
         }
+
+        // ── Navigation ───────────────────────────────────────────────────────
+
+        private void OnBack() => SceneManager.LoadScene(SceneNames.MainMenu);
+
+        // ── Sensory Ambience ─────────────────────────────────────────────────
 
         private void OnAmbientVolumeChanged(float value)
         {
@@ -41,18 +93,44 @@ namespace ChromaJigsaw.UI
             AudioManager.Instance.SetVolume(AudioChannel.SFX,   value);
         }
 
-        private void OnTactileFeedbackChanged(bool enabled)
+        private void OnTactileFeedbackChanged(bool enabled) =>
+            AccessibilityService.Instance.SetTactileFeedback(enabled);
+
+        private void OnFocusModeChanged(bool enabled) =>
+            AccessibilityService.Instance.SetFocusMode(enabled);
+
+        // ── Visual Clarity ───────────────────────────────────────────────────
+
+        private void OnHighContrastChanged(bool enabled) =>
+            AccessibilityService.Instance.SetHighContrast(enabled);
+
+        private void OnGrandInterfaceChanged(bool enabled) =>
+            AccessibilityService.Instance.SetGrandInterface(enabled);
+
+        private void OnArtworkBrightnessChanged(float value) =>
+            AccessibilityService.Instance.SetArtworkBrightness(value);
+
+        // ── Zen Pass ─────────────────────────────────────────────────────────
+
+        private void RefreshZenPassCard()
         {
-            // TODO: Android Vibrator API stub — wire in B-10 Accessibility
-#if UNITY_ANDROID && !UNITY_EDITOR
-            // AndroidJavaClass vibrator = new AndroidJavaClass("android.os.Vibrator");
-            // vibrator.Call("vibrate", enabled ? 50L : 0L);
-#endif
+            bool isZenPass = ZenPassService.Instance != null && ZenPassService.Instance.IsZenPass;
+
+            if (_zenPassStatusText != null)
+                _zenPassStatusText.text = isZenPass ? "Active Sanctuary Member" : "Discover the Sanctuary";
+
+            if (_zenPassButtonLabel != null)
+                _zenPassButtonLabel.text = isZenPass ? "MANAGE" : "UPGRADE";
         }
 
-        private void OnFocusModeChanged(bool enabled)
+        private void OnZenPassTapped()
         {
-            // TODO: wire to GameManager.FocusMode when HUD hide is implemented
+            if (_zenPassView != null)
+                _zenPassView.Show(RefreshZenPassCard);
         }
+
+        // ── Archive & Atelier ────────────────────────────────────────────────
+
+        private void OnRestorePurchases() => IAPManager.Instance.RestorePurchases();
     }
 }

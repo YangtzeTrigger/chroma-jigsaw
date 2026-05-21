@@ -37,6 +37,12 @@ namespace ChromaJigsaw.Core
         // B-08: monetisation — permanent fields, never rename
         public bool zenPassLifetime    = false;
         public bool zenPassSubscriber  = false;
+        // B-10: accessibility / sensory + visual settings — permanent fields, never rename
+        public bool  tactileFeedback   = true;
+        public bool  focusMode         = false;
+        public bool  highContrast      = false;
+        public bool  grandInterface    = false;
+        public float artworkBrightness = 1.0f;  // range 0.5–1.5, never fully black
     }
 
     public class SaveManager : MonoBehaviour
