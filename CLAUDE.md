@@ -22,13 +22,11 @@
 
 ## Current Stage
 
-**B-10 — Accessibility Suite** ✅ Complete (code + scene wiring done). Awaiting B-11 Claude.ai brief.
+**B-11 — Analytics & Event Tracking** ✅ Complete. Awaiting B-12 Claude.ai brief.
 
-B-09 ✅ complete (commit 87613f4 / ed0fbf3). B-10 ✅ complete (commit 4c68998 + dfe1887).
+B-10 ✅ complete (commit dfe1887). B-11 ✅ complete (commit 9f2ae43).
 
-B-10 scene work done (commit dfe1887):
-- Settings.unity: Full Atelier screen — 4 sections (Sensory Ambience, Visual Clarity, Zen Pass, Archive & Atelier), Panel_ZenPass overlay, AtelierView 14 Inspector slots wired, ZenPassView 8 slots wired, EventSystem
-- Game.unity: FocusHUD_Canvas + WorkspaceTapButton (full-stretch transparent), EventSystem added, PuzzleController._workspaceTapButton wired
+B-11 call sites wired: app lifecycle (AnalyticsManager.Start/OnApplicationPause), puzzle funnel (PuzzleController static session data), zen pass funnel (ZenPassView trigger param), atelier (accessibility_changed + atelier_opened), gallery (pack_opened + artwork events), daily (daily_opened/dot_tapped), pack browser (pack_opened). Not wired: hint_used, ambience_played, pack_purchase_started/completed/failed (no call sites yet).
 
 **Remaining manual Unity Editor steps (still outstanding):**
 
@@ -291,11 +289,11 @@ Claude.ai needs to answer before the next stage brief is written.
 | B-08 | Monetisation | ✅ Done |
 | B-09 | Audio system | ✅ Code done — clip slots + scene wiring pending |
 | B-10 | Accessibility suite | ✅ Done (code + scene wiring complete) |
-| B-11 | Analytics & event tracking | 🔲 |
+| B-11 | Analytics & event tracking | ✅ Done |
 | B-12 | Polish & QA | 🔲 |
 | B-13 | Launch prep | 🔲 |
 
 ---
 
 *Keep this file current. It is read at the start of every Claude Code session.*
-*Last updated: 2026-05-21 — B-10 scene wiring complete (commit dfe1887). Settings.unity Atelier screen (4 sections, Panel_ZenPass, 14 AtelierView slots wired). Game.unity FocusHUD_Canvas + WorkspaceTapButton + EventSystem. Editor work still outstanding: AccessibilityService GO in _Bootstrap, PuzzleController._hudGroups, DailyManifest SO, audio clip slots. B-11 Analytics next — awaiting Claude.ai brief.*
+*Last updated: 2026-05-21 — B-11 analytics complete (commit 9f2ae43). All event call sites wired across 10 scripts. Monetisation funnel, puzzle lifecycle, daily, gallery, accessibility all instrumented. B-12 Polish & QA next — awaiting Claude.ai brief.*
