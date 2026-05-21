@@ -41,24 +41,27 @@ namespace ChromaJigsaw.UI
             _titleText.text = imageId.ToUpper();
             // TODO: load Texture2D for imageId via asset pipeline (B-06+)
             _canvasGroup.DOKill();
-            _canvasGroup.DOFade(1f, 0.3f)
-                        .OnStart(() =>
-                        {
-                            _canvasGroup.blocksRaycasts = true;
-                            _canvasGroup.interactable   = true;
-                        });
+            transform.DOKill();
+            _canvasGroup.alpha          = 1f;
+            _canvasGroup.blocksRaycasts = true;
+            _canvasGroup.interactable   = true;
+            transform.localScale        = Vector3.one * 0.92f;
+            transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
         }
 
         public void Close()
         {
             _canvasGroup.DOKill();
-            _canvasGroup.interactable = false;
-            _canvasGroup.DOFade(0f, 0.25f)
-                        .OnComplete(() =>
-                        {
-                            _canvasGroup.blocksRaycasts = false;
-                            gameObject.SetActive(false);
-                        });
+            transform.DOKill();
+            _canvasGroup.interactable   = false;
+            _canvasGroup.blocksRaycasts = false;
+            transform.DOScale(Vector3.one * 0.92f, 0.25f)
+                     .SetEase(Ease.InCubic)
+                     .OnComplete(() =>
+                     {
+                         _canvasGroup.alpha = 0f;
+                         gameObject.SetActive(false);
+                     });
         }
 
         private void HandleReplay()

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -73,6 +74,8 @@ namespace ChromaJigsaw.UI
 
         private void HandleBeginRitual()
         {
+            _beginButton.transform.DOKill();
+            _beginButton.transform.DOPunchScale(Vector3.one * 0.12f, 0.35f, 6, 0.5f);
             AudioManager.Instance.Play(SFXType.ButtonClick);
             var entries = DailyService.Instance.GetActiveDailies();
             string dailyId = entries.Length > 0 ? entries[0].dailyId : "";

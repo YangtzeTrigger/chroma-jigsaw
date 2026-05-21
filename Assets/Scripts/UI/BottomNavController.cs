@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -12,6 +13,8 @@ namespace ChromaJigsaw.UI
         [SerializeField] private TabEntry[] _tabs;    // 4 elements: Gallery, Puzzles, Ambience, Sanctuary
         [SerializeField] private GameObject[] _panels; // matching panel GameObjects
         [SerializeField] private XPBarView  _xpBarView;
+
+        private CanvasGroup[] _panelGroups;
 
         private static readonly Color ActiveColor   = new Color(0.957f, 0.741f, 0.380f);        // #f4bd61
         private static readonly Color InactiveColor = new Color(0.827f, 0.769f, 0.698f, 0.6f);  // #d3c4b2 @ 60%
@@ -27,6 +30,17 @@ namespace ChromaJigsaw.UI
 
         private void Start()
         {
+            _panelGroups = new CanvasGroup[_panels.Length];
+            for (int i = 0; i < _panels.Length; i++)
+            {
+                _panels[i].SetActive(true);
+                _panelGroups[i] = _panels[i].GetComponent<CanvasGroup>();
+                if (_panelGroups[i] == null)
+                    _panelGroups[i] = _panels[i].AddComponent<CanvasGroup>();
+                _panelGroups[i].alpha          = 0f;
+                _panelGroups[i].blocksRaycasts = false;
+                _panelGroups[i].interactable   = false;
+            }
             for (int i = 0; i < _tabs.Length; i++)
             {
                 int idx = i;
@@ -38,13 +52,32 @@ namespace ChromaJigsaw.UI
         public void SelectTab(int index)
         {
             if (index == _activeIndex) return;
+            int previous = _activeIndex;
             _activeIndex = index;
             AudioManager.Instance.Play(SFXType.ButtonClick);
+
+            if (previous >= 0 && previous < _panelGroups.Length && _panelGroups[previous] != null)
+            {
+                var outGroup = _panelGroups[previous];
+                outGroup.DOKill();
+                outGroup.interactable   = false;
+                outGroup.blocksRaycasts = false;
+                outGroup.DOFade(0f, 0.2f).SetEase(Ease.InCubic);
+            }
+
+            if (index < _panelGroups.Length && _panelGroups[index] != null)
+            {
+                var inGroup = _panelGroups[index];
+                inGroup.DOKill();
+                inGroup.alpha          = 0f;
+                inGroup.blocksRaycasts = true;
+                inGroup.interactable   = true;
+                inGroup.DOFade(1f, 0.3f).SetEase(Ease.OutCubic);
+            }
 
             for (int i = 0; i < _tabs.Length; i++)
             {
                 bool active = i == index;
-                if (i < _panels.Length) _panels[i].SetActive(active);
                 _tabs[i].topBorder.gameObject.SetActive(active);
                 _tabs[i].icon.color  = active ? ActiveColor : InactiveColor;
                 _tabs[i].label.color = active ? ActiveColor : InactiveColor;

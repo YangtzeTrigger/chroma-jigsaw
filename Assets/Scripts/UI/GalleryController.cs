@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using ChromaJigsaw.Audio;
 using ChromaJigsaw.Core;
@@ -18,11 +19,16 @@ namespace ChromaJigsaw.UI
         [SerializeField] private DailyCardView        _dailyCardView;
         [SerializeField] private DailyMasterpieceView _masterpieceView;
 
+        private RectTransform _gridRT;
+        private RectTransform _wallRT;
+
         private readonly Stack<Action>    _backStack = new();
         private readonly List<PackCardView> _cards   = new();
 
         private void Start()
         {
+            _gridRT = _panelPackGrid.GetComponent<RectTransform>();
+            _wallRT = _galleryWallView.GetComponent<RectTransform>();
             IAPManager.OnPackPurchased += OnPackUnlocked;
             PopulateGrid();
             ShowL1();
@@ -93,8 +99,15 @@ namespace ChromaJigsaw.UI
                 { "pack_name",   config?.packName ?? ""      },
                 { "unlock_type", result.ToString().ToLower() }
             });
-            _panelPackGrid.SetActive(false);
+            _gridRT.DOKill();
+            _gridRT.DOAnchorPosY(_gridRT.anchoredPosition.y + 60f, 0.3f)
+                   .SetEase(Ease.InCubic)
+                   .OnComplete(() => _panelPackGrid.SetActive(false));
+
             _galleryWallView.gameObject.SetActive(true);
+            _wallRT.DOKill();
+            _wallRT.anchoredPosition = new Vector2(_wallRT.anchoredPosition.x, _wallRT.anchoredPosition.y - 60f);
+            _wallRT.DOAnchorPosY(_wallRT.anchoredPosition.y + 60f, 0.3f).SetEase(Ease.OutCubic);
             _galleryWallView.Load(packId, this);
             _backStack.Push(BackToL1);
             AnalyticsManager.Instance.LogScreenView("gallery_wall");
@@ -120,8 +133,14 @@ namespace ChromaJigsaw.UI
 
         private void BackToL1()
         {
-            _galleryWallView.gameObject.SetActive(false);
             _panelPackGrid.SetActive(true);
+            _gridRT.DOKill();
+            _gridRT.DOAnchorPosY(_gridRT.anchoredPosition.y - 60f, 0.3f).SetEase(Ease.OutCubic);
+
+            _wallRT.DOKill();
+            _wallRT.DOAnchorPosY(_wallRT.anchoredPosition.y - 60f, 0.3f)
+                   .SetEase(Ease.InCubic)
+                   .OnComplete(() => _galleryWallView.gameObject.SetActive(false));
         }
     }
 }

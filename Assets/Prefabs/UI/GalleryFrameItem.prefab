@@ -438,7 +438,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Image Title
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
+  m_fontAsset: {fileID: 11400000, guid: ac2d70bbd419dfc438a960bfb701b4aa, type: 2}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -573,7 +573,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 48 pieces
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
+  m_fontAsset: {fileID: 11400000, guid: 5d9b3ebb3279b5546b481afb0b72ab20, type: 2}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

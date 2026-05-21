@@ -92,6 +92,9 @@ namespace ChromaJigsaw.UI
         {
             _frameBorder.color = GoldBorder;
             _spotlightHalo.gameObject.SetActive(true);
+            _spotlightHalo.DOKill();
+            _spotlightHalo.color = new Color(GoldBorder.r, GoldBorder.g, GoldBorder.b, 0f);
+            _spotlightHalo.DOFade(0.4f, 1.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
             _veil.gameObject.SetActive(false);
             _lockIcon.SetActive(false);
             _artworkImage.color = Color.gray;  // greyscale until tapped; swap for greyscale material in polish pass
@@ -103,6 +106,8 @@ namespace ChromaJigsaw.UI
         private void ApplyInProgressState()
         {
             _frameBorder.color = FrameBorder;
+            _spotlightHalo.DOKill();
+            _spotlightHalo.color = new Color(GoldBorder.r, GoldBorder.g, GoldBorder.b, 0f);
             _spotlightHalo.gameObject.SetActive(false);
             _veil.gameObject.SetActive(false);
             _lockIcon.SetActive(false);
@@ -115,6 +120,8 @@ namespace ChromaJigsaw.UI
         private void ApplyLockedState(string subLabel)
         {
             _frameBorder.color = OutlineVariant;
+            _spotlightHalo.DOKill();
+            _spotlightHalo.color = new Color(GoldBorder.r, GoldBorder.g, GoldBorder.b, 0f);
             _spotlightHalo.gameObject.SetActive(false);
             _veil.gameObject.SetActive(true);
             _veil.color = VeilColor;

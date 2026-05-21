@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -44,18 +45,34 @@ namespace ChromaJigsaw.UI
             AnalyticsManager.Instance.LogZenPassShown(trigger);
             _onDismiss = onDismiss;
             gameObject.SetActive(true);
-            _canvasGroup.alpha          = 1f;
-            _canvasGroup.interactable   = true;
-            _canvasGroup.blocksRaycasts = true;
+            _canvasGroup.DOKill();
+            transform.DOKill();
+            _canvasGroup.alpha          = 0f;
+            _canvasGroup.interactable   = false;
+            _canvasGroup.blocksRaycasts = false;
+            transform.localScale        = Vector3.one * 0.95f;
             SetLoadingVisible(false);
             RefreshPrices();
+            _canvasGroup.DOFade(1f, 0.3f).SetEase(Ease.OutCubic).OnComplete(() =>
+            {
+                _canvasGroup.interactable   = true;
+                _canvasGroup.blocksRaycasts = true;
+            });
+            transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
         }
 
         public void Hide()
         {
-            gameObject.SetActive(false);
-            _onDismiss?.Invoke();
-            _onDismiss = null;
+            _canvasGroup.DOKill();
+            transform.DOKill();
+            _canvasGroup.interactable   = false;
+            _canvasGroup.blocksRaycasts = false;
+            _canvasGroup.DOFade(0f, 0.2f).SetEase(Ease.InCubic).OnComplete(() =>
+            {
+                gameObject.SetActive(false);
+                _onDismiss?.Invoke();
+                _onDismiss = null;
+            });
         }
 
         private void RefreshPrices()

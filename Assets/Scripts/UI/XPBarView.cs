@@ -21,7 +21,7 @@ namespace ChromaJigsaw.UI
             float t     = (float)current / _xpPerLevel;
             _xpLabel.text = $"XP  {current:N0} / {_xpPerLevel:N0}";
             _fill.DOKill();
-            _fill.DOFillAmount(t, 0.5f).SetEase(Ease.OutCubic);
+            _fill.DOFillAmount(t, 0.8f).SetEase(Ease.OutCubic);
         }
 
         public void Show()
