@@ -22,17 +22,17 @@
 
 ## Current Stage
 
-**B-11 — Analytics & Event Tracking** ✅ Complete. Awaiting B-12 Claude.ai brief.
+**B-12a — Visual Polish (Gallery Nocturne)** ✅ Code complete (commit 48e1f91). Awaiting B-12b/remaining polish.
 
-B-10 ✅ complete (commit dfe1887). B-11 ✅ complete (commit 9f2ae43).
+B-11 ✅ complete (commit 9f2ae43). B-12a ✅ code complete (commit 48e1f91).
 
-B-11 call sites wired: app lifecycle (AnalyticsManager.Start/OnApplicationPause), puzzle funnel (PuzzleController static session data), zen pass funnel (ZenPassView trigger param), atelier (accessibility_changed + atelier_opened), gallery (pack_opened + artwork events), daily (daily_opened/dot_tapped), pack browser (pack_opened). Not wired: hint_used, ambience_played, pack_purchase_started/completed/failed (no call sites yet).
+B-12a completed: Font assignments (EBGaramond Regular SDF → TitleText, Montserrat SemiBold → StatusText, Montserrat Light → CountText/PieceCountText in both prefabs). Animations: XPBarView 0.8s, ZenPassView DOFade+DOScale, DailyCardView DOPunchScale, BottomNavController CanvasGroup DOFade, GalleryController DOAnchorPosY slide, ArtworkSpotlightView DOScale, PackCardView spotlight halo pulse. Dot sprites generated (32×32 RGBA white PNGs in Assets/Art/UI/).
 
 **Remaining manual Unity Editor steps (still outstanding):**
 
 B-07 (cosmetic — not blocking):
-- Assign dot sprites to DailyCardView + DailyMasterpieceView (art needed)
-- Assign TMP fonts to PackCard + GalleryFrameItem prefabs
+- Assign dot sprites (Assets/Art/UI/dot_*.png) to DailyCardView + DailyMasterpieceView Inspector slots
+- EBGaramond SemiBold SDF: create via Font Asset Creator (Window → TextMeshPro → Font Asset Creator; source: Assets/Art/Fonts/EBGaramond-SemiBold.ttf); then re-assign TitleText in prefabs
 
 B-09 (audio — blocked on art):
 - Add MusicContextController GO to MainMenu.unity and Game.unity; call SetContext() from scene controllers
@@ -47,7 +47,7 @@ B-10 (accessibility):
 
 ⚠️ Burst AOT: Edit → Project Settings → Player → Other Settings → Burst AOT Settings → **uncheck Enable Burst AOT Compilation** (Burst 1.8.29 crash bug)
 
-B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 ✅ | B-07 🔲 (Editor) | B-08 ✅ | B-09 ✅ | B-10 ✅ | B-11 🔲
+B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 ✅ | B-07 🔲 (Editor) | B-08 ✅ | B-09 ✅ | B-10 ✅ | B-11 ✅ | B-12 🔲 (a: code done)
 
 ---
 
@@ -290,10 +290,10 @@ Claude.ai needs to answer before the next stage brief is written.
 | B-09 | Audio system | ✅ Code done — clip slots + scene wiring pending |
 | B-10 | Accessibility suite | ✅ Done (code + scene wiring complete) |
 | B-11 | Analytics & event tracking | ✅ Done |
-| B-12 | Polish & QA | 🔲 |
+| B-12 | Polish & QA | 🔲 (B-12a code done — Editor + art pending) |
 | B-13 | Launch prep | 🔲 |
 
 ---
 
 *Keep this file current. It is read at the start of every Claude Code session.*
-*Last updated: 2026-05-21 — B-11 analytics complete (commit 9f2ae43). All event call sites wired across 10 scripts. Monetisation funnel, puzzle lifecycle, daily, gallery, accessibility all instrumented. B-12 Polish & QA next — awaiting Claude.ai brief.*
+*Last updated: 2026-05-21 — B-12a Gallery Nocturne visual polish code complete (commit 48e1f91). Font assignments in prefabs, DOTween animations across 7 scripts, dot sprites generated. Blockers: EBGaramond SemiBold SDF (Font Asset Creator), dot sprite Inspector wiring, piece shadow material (Editor). B-12b remaining Polish & QA next — awaiting Claude.ai brief.*
