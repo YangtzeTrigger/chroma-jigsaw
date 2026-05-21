@@ -5,7 +5,6 @@ using HootyBird.JigsawPuzzleEngine.Gameplay;
 using HootyBird.JigsawPuzzleEngine.Model;
 using HootyBird.JigsawPuzzleEngine.Services;
 using HootyBird.JigsawPuzzleEngine.Tools;
-using ChromaJigsaw.Audio;
 
 namespace ChromaJigsaw.Core
 {
@@ -49,11 +48,10 @@ namespace ChromaJigsaw.Core
         private int    _piecesOnBoard;
         private int    _draggingCount;
 
-        // Raised for every player-placed snap — wire AudioManager.PlaySFX(PieceSnap) here.
-        public event Action OnPieceSnapped;
-        // Raised when puzzle is complete; int = XP awarded.
+        public event Action OnPiecePickedUp;   // finger down on a piece
+        public event Action OnPiecePlaced;     // finger released (piece set down, may or may not snap)
+        public event Action OnPieceSnapped;    // piece locked to board by player
         public event Action<int> OnPuzzleComplete;
-        // Raised after puzzle initialises — WorkspaceController subscribes to wire zoom/pan.
         public event Action<Puzzle, PuzzlePanelInteraction> OnPuzzleLoaded;
 
         public bool IsAnyPieceDragging => _draggingCount > 0;
@@ -124,12 +122,12 @@ namespace ChromaJigsaw.Core
                 interaction.OnPiecePointerDown += (_, _) =>
                 {
                     _draggingCount++;
-                    AudioManager.Instance.Play(SFXType.PiecePickup);
+                    OnPiecePickedUp?.Invoke();
                 };
                 interaction.OnPiecePointerUp += (_, _) =>
                 {
                     _draggingCount = Mathf.Max(0, _draggingCount - 1);
-                    AudioManager.Instance.Play(SFXType.PiecePlaced);
+                    OnPiecePlaced?.Invoke();
                 };
             }
 
@@ -143,7 +141,6 @@ namespace ChromaJigsaw.Core
 
             if (origin != PuzzlePieceEventOrigin.Player) return;
 
-            AudioManager.Instance.Play(SFXType.PieceSnap);
             OnPieceSnapped?.Invoke();
             SaveGameService.SaveGame(_activePuzzle);
 
@@ -155,7 +152,6 @@ namespace ChromaJigsaw.Core
         {
             _xpByPieceCount.TryGetValue(_activePuzzle.PuzzlePieces.Count, out int xp);
             SaveGameService.DeleteSavedGameData(_activePuzzleId);
-            AudioManager.Instance.Play(SFXType.PuzzleComplete);
             OnPuzzleComplete?.Invoke(xp);
         }
 

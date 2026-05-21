@@ -1,7 +1,7 @@
-using ChromaJigsaw.Audio;
 using UnityEngine;
+using ChromaJigsaw.Core;
 
-namespace ChromaJigsaw.Core
+namespace ChromaJigsaw.Audio
 {
     // Not a singleton — place one instance in MainMenu scene, one in Game scene.
     // Call SetContext() when the player's current screen or puzzle difficulty changes.
@@ -65,7 +65,7 @@ namespace ChromaJigsaw.Core
                 case GameContext.Sanctuary:
                     _savedSfxVolume  = AudioManager.Instance.GetSavedVolume(AudioChannel.SFX);
                     _sanctuaryActive = true;
-                    AudioManager.Instance.PlayMusic(MoodType.Relaxed, 3f);  // 3-second fade per spec
+                    AudioManager.Instance.PlayMusic(MoodType.Relaxed, 3f);
                     AudioManager.Instance.SetTransientVolume(AudioChannel.SFX, 0.6f);
                     _currentMood = MoodType.Relaxed;
                     break;
