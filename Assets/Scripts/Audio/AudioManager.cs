@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -7,21 +8,28 @@ namespace ChromaJigsaw.Audio
 {
     public enum SFXType
     {
-        PiecePickup,
-        PieceSnap,
-        PieceWrongSnap,
-        PuzzleComplete,
-        ButtonTap,
-        ButtonBack,
+        PiecePickup,    // soft tactile lift
+        PiecePlaced,    // gentle thud, resting on felt
+        PieceSnap,      // satisfying soft click — locked to board
+        PuzzleComplete, // warm resonant tone
+        ButtonClick,    // very subtle tap
+        HintUsed,       // soft chime
+        CountdownTick,  // never called — no timers in this game
+        Error,          // muted low tone, not alarming
+        Reward,         // warm ascending tone
     }
 
     public enum MoodType
     {
-        None,
-        Menu,
-        Puzzle,
-        Celebration,
+        None,     // silence
+        Menu,     // warm, unhurried — MainMenu / Gallery / Puzzles tabs
+        Relaxed,  // slow, meditative — 12/24 piece solve + Sanctuary + Ambience
+        Focused,  // slightly more present — 48 piece solve
+        Tense,    // sparse, attentive — 96 piece solve only
+        Victory,  // brief warm resolution — plays once after PuzzleComplete
     }
+
+    public enum AudioChannel { Master, SFX, Music }
 
     public class AudioManager : MonoBehaviour
     {
@@ -36,10 +44,10 @@ namespace ChromaJigsaw.Audio
             }
         }
 
-        [SerializeField] private AudioMixer mixer;
-        [SerializeField] private AudioClip[] sfxClips;   // indexed by SFXType
-        [SerializeField] private AudioClip[] musicClips; // indexed by MoodType
-        [SerializeField] private int sfxPoolSize = 8;
+        [SerializeField] private AudioMixer  mixer;
+        [SerializeField] private AudioClip[] sfxClips;   // indexed by SFXType — assign in Inspector
+        [SerializeField] private AudioClip[] musicClips; // indexed by MoodType — assign in Inspector
+        [SerializeField] private int         sfxPoolSize = 8;
 
         private AudioSource[] _sfxPool;
         private AudioSource   _musicA;
@@ -98,12 +106,14 @@ namespace ChromaJigsaw.Audio
         {
             if (SaveManager.Instance == null || mixer == null) return;
             var data = SaveManager.Instance.Data;
-            SetMixerVolume("MasterVol", data.masterVolume);
-            SetMixerVolume("SFXVol",    data.sfxVolume);
-            SetMixerVolume("MusicVol",  data.musicVolume);
+            SetMixerDb("MasterVol", data.masterVolume);
+            SetMixerDb("SFXVol",    data.sfxVolume);
+            SetMixerDb("MusicVol",  data.musicVolume);
         }
 
-        public void PlaySFX(SFXType type)
+        // ── SFX ─────────────────────────────────────────────────────────────
+
+        public void Play(SFXType type)
         {
             int idx = (int)type;
             if (sfxClips == null || idx >= sfxClips.Length || sfxClips[idx] == null) return;
@@ -112,19 +122,38 @@ namespace ChromaJigsaw.Audio
             src.PlayOneShot(sfxClips[idx]);
         }
 
+        // ── Music ────────────────────────────────────────────────────────────
+
         public void PlayMusic(MoodType mood, float fadeDuration = 1f)
         {
             int idx = (int)mood;
             AudioClip clip = (musicClips != null && idx < musicClips.Length) ? musicClips[idx] : null;
-            StartCoroutine(CrossFade(clip, fadeDuration));
+            StopAllCoroutines();
+            StartCoroutine(CrossFade(clip, fadeDuration, loop: true, onFinished: null));
         }
 
-        private IEnumerator CrossFade(AudioClip incoming, float duration)
+        // Plays without looping — calls onFinished when clip ends (used for Victory).
+        public void PlayMusicOnce(MoodType mood, float fadeDuration, Action onFinished)
+        {
+            int idx = (int)mood;
+            AudioClip clip = (musicClips != null && idx < musicClips.Length) ? musicClips[idx] : null;
+            StopAllCoroutines();
+            StartCoroutine(CrossFade(clip, fadeDuration, loop: false, onFinished: onFinished));
+        }
+
+        public void StopMusic(float fadeDuration = 1f)
+        {
+            StopAllCoroutines();
+            StartCoroutine(CrossFade(null, fadeDuration, loop: false, onFinished: null));
+        }
+
+        private IEnumerator CrossFade(AudioClip incoming, float duration, bool loop, Action onFinished)
         {
             var outSrc = _activeMusicSource;
             var inSrc  = (_activeMusicSource == _musicA) ? _musicB : _musicA;
             _activeMusicSource = inSrc;
 
+            inSrc.loop   = loop;
             inSrc.clip   = incoming;
             inSrc.volume = 0f;
             if (incoming != null) inSrc.Play();
@@ -143,25 +172,66 @@ namespace ChromaJigsaw.Audio
             outSrc.Stop();
             outSrc.volume = 0f;
             inSrc.volume  = 1f;
+
+            if (!loop && incoming != null)
+            {
+                yield return new WaitWhile(() => inSrc.isPlaying);
+                onFinished?.Invoke();
+            }
+            else
+            {
+                onFinished?.Invoke();
+            }
         }
 
-        public void SetVolume(string channel, float linear)
+        // ── Volume ───────────────────────────────────────────────────────────
+
+        // Persists to SaveData — use for user-controlled slider changes.
+        public void SetVolume(AudioChannel channel, float linear)
         {
             linear = Mathf.Clamp01(linear);
-            SetMixerVolume(channel, linear);
+            SetMixerDb(ChannelToParam(channel), linear);
 
             if (SaveManager.Instance == null) return;
             var data = SaveManager.Instance.Data;
             switch (channel)
             {
-                case "MasterVol": data.masterVolume = linear; break;
-                case "SFXVol":    data.sfxVolume    = linear; break;
-                case "MusicVol":  data.musicVolume  = linear; break;
+                case AudioChannel.Master: data.masterVolume = linear; break;
+                case AudioChannel.SFX:   data.sfxVolume    = linear; break;
+                case AudioChannel.Music: data.musicVolume  = linear; break;
             }
             SaveManager.Instance.Save();
         }
 
-        private void SetMixerVolume(string param, float linear)
+        // Sets mixer only — does not persist. Use for transient context overrides (e.g. Sanctuary 60% SFX).
+        public void SetTransientVolume(AudioChannel channel, float linear)
+        {
+            linear = Mathf.Clamp01(linear);
+            SetMixerDb(ChannelToParam(channel), linear);
+        }
+
+        public float GetSavedVolume(AudioChannel channel)
+        {
+            if (SaveManager.Instance == null) return 1f;
+            var data = SaveManager.Instance.Data;
+            return channel switch
+            {
+                AudioChannel.Master => data.masterVolume,
+                AudioChannel.SFX   => data.sfxVolume,
+                AudioChannel.Music => data.musicVolume,
+                _                  => 1f,
+            };
+        }
+
+        private static string ChannelToParam(AudioChannel channel) => channel switch
+        {
+            AudioChannel.Master => "MasterVol",
+            AudioChannel.SFX   => "SFXVol",
+            AudioChannel.Music => "MusicVol",
+            _                  => "MasterVol",
+        };
+
+        private void SetMixerDb(string param, float linear)
         {
             mixer?.SetFloat(param, LinearToDb(linear));
         }

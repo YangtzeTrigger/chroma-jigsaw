@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using ChromaJigsaw.Audio;
 using ChromaJigsaw.Data;
 
 namespace ChromaJigsaw.UI
@@ -34,6 +35,7 @@ namespace ChromaJigsaw.UI
         {
             if (index == _activeIndex) return;
             _activeIndex = index;
+            AudioManager.Instance.Play(SFXType.ButtonClick);
 
             for (int i = 0; i < _tabs.Length; i++)
             {

@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using ChromaJigsaw.Audio;
 using ChromaJigsaw.Core;
 
 namespace ChromaJigsaw.UI
@@ -78,7 +79,11 @@ namespace ChromaJigsaw.UI
         {
             SetLoadingVisible(false);
             _canvasGroup.interactable = true;
-            if (success) Hide();
+            if (success)
+            {
+                AudioManager.Instance.Play(SFXType.Reward);
+                Hide();
+            }
         }
 
         private void OnMonthlyTapped()
@@ -92,7 +97,11 @@ namespace ChromaJigsaw.UI
         {
             SetLoadingVisible(false);
             _canvasGroup.interactable = true;
-            if (success) Hide();
+            if (success)
+            {
+                AudioManager.Instance.Play(SFXType.Reward);
+                Hide();
+            }
         }
 
         private void OnRestoreTapped()

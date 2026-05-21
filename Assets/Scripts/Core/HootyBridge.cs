@@ -5,6 +5,7 @@ using HootyBird.JigsawPuzzleEngine.Gameplay;
 using HootyBird.JigsawPuzzleEngine.Model;
 using HootyBird.JigsawPuzzleEngine.Services;
 using HootyBird.JigsawPuzzleEngine.Tools;
+using ChromaJigsaw.Audio;
 
 namespace ChromaJigsaw.Core
 {
@@ -120,8 +121,16 @@ namespace ChromaJigsaw.Core
             {
                 var interaction = piece.GetComponent<PuzzlePieceInteraction>();
                 if (interaction == null) continue;
-                interaction.OnPiecePointerDown += (_, _) => _draggingCount++;
-                interaction.OnPiecePointerUp   += (_, _) => _draggingCount = Mathf.Max(0, _draggingCount - 1);
+                interaction.OnPiecePointerDown += (_, _) =>
+                {
+                    _draggingCount++;
+                    AudioManager.Instance.Play(SFXType.PiecePickup);
+                };
+                interaction.OnPiecePointerUp += (_, _) =>
+                {
+                    _draggingCount = Mathf.Max(0, _draggingCount - 1);
+                    AudioManager.Instance.Play(SFXType.PiecePlaced);
+                };
             }
 
             var panelInteraction = _activePuzzle.GetComponent<PuzzlePanelInteraction>();
@@ -134,6 +143,7 @@ namespace ChromaJigsaw.Core
 
             if (origin != PuzzlePieceEventOrigin.Player) return;
 
+            AudioManager.Instance.Play(SFXType.PieceSnap);
             OnPieceSnapped?.Invoke();
             SaveGameService.SaveGame(_activePuzzle);
 
@@ -145,6 +155,7 @@ namespace ChromaJigsaw.Core
         {
             _xpByPieceCount.TryGetValue(_activePuzzle.PuzzlePieces.Count, out int xp);
             SaveGameService.DeleteSavedGameData(_activePuzzleId);
+            AudioManager.Instance.Play(SFXType.PuzzleComplete);
             OnPuzzleComplete?.Invoke(xp);
         }
 

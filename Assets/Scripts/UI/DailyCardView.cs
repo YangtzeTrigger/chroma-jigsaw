@@ -2,6 +2,7 @@ using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using ChromaJigsaw.Audio;
 using ChromaJigsaw.Core;
 using ChromaJigsaw.Data;
 
@@ -72,6 +73,7 @@ namespace ChromaJigsaw.UI
 
         private void HandleBeginRitual()
         {
+            AudioManager.Instance.Play(SFXType.ButtonClick);
             AnalyticsManager.Instance.LogEvent("daily_begin");
             _onBeginRitual?.Invoke();
         }

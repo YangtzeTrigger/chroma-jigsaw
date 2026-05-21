@@ -3,6 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using ChromaJigsaw.Audio;
 using ChromaJigsaw.Core;
 using ChromaJigsaw.Data;
 
@@ -128,6 +129,7 @@ namespace ChromaJigsaw.UI
 
         private void HandleTap()
         {
+            AudioManager.Instance.Play(SFXType.ButtonClick);
             if (_isCompleted)
                 _artworkImage.DOColor(Color.white, 0.7f).SetEase(Ease.OutCubic);
             _onTap?.Invoke(_packId);

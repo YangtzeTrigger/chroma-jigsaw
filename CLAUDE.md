@@ -22,37 +22,30 @@
 
 ## Current Stage
 
-**B-08 — Monetisation** ✅ Code complete. Needs Panel_ZenPass scene hierarchy + Editor wiring.
+**B-09 — Audio System** 🔲 In progress. Brief received from Claude.ai (Notion B-09 page).
 
-B-08 scripts done:
-- `IAPManager` — Unity IAP 5.3.0 wrapper; lifetime + monthly + pack purchase flow; OnPackPurchased event; RestorePurchases; GetLocalizedPrice (Core/)
-- `ZenPassService` — IsZenPass bool (lifetime OR subscriber); GrantLifetime/GrantSubscriber/RevokeSubscriber (Core/)
-- `SubscriptionService` — monthly sub state; POST-LAUNCH loyalty stub (Core/)
-- `ZenPassView` — purchase screen; lifetime + monthly CTAs; loading overlay; restore (UI/)
-- `SaveManager` — added zenPassLifetime + zenPassSubscriber (permanent, additive)
-- `AdsManager` — ZenPassService.IsZenPass guard on all three ad methods
-- `PackUnlockService` — real IAPManager calls; ZenPass→Owned in Evaluate; OnPackPurchased subscription; SetRegistry() helper
-- `AppBootstrap` — init order: ZenPass → Subscription → IAP → Daily → LoadScene
-- `ArtworkSpotlightView` — WallpaperManager API wired (Android); share text includes artwork title
-- `ChromaJigsaw.Core.asmdef` — added Unity.Purchasing reference
-- `ChromaJigsaw.Ads.asmdef` — added ChromaJigsaw.Core reference
+B-09 scope:
+- `MusicContextController` — maps GameContext enum to MoodType; calls AudioManager.PlayMusic()
+- `AtelierView` — settings screen; wires ambient volume slider + tactile feedback toggle + focus mode toggle
+- SFX call sites wired in: HootyBridge, BottomNavController, PackCardView, DailyCardView, ZenPassView, GalleryController
+- All audio clip slots left as `None` — Jason assigns .mp3 files after Suno generation
 
 **Remaining manual Unity Editor steps:**
 
-B-07 (blocking — must do before B-07/B-08 run):
+B-07 (still outstanding — will cause crashes or missing features):
 - Create DailyManifest SO: Assets → Create → Chroma Jigsaw → Daily Manifest; add 3 DailyEntry entries
 - Wire AppBootstrap._dailyManifest slot in _Bootstrap.unity
-- Wire GalleryController._registry, ._cardPrefab, ._gridContainer (B-06 holdover)
-- Attach PackBrowserController to Panel_Puzzles; wire slots (B-06 holdover)
 - Assign dot sprites to DailyCardView + DailyMasterpieceView (art needed)
 - Assign TMP fonts to PackCard + GalleryFrameItem prefabs
 
-B-08 (ZenPassView needs scene hierarchy — ask Claude.ai for spec):
-- Build Panel_ZenPass hierarchy in MainMenu.unity (same YAML pattern as Panel_DailyMasterpiece)
-- Wire ZenPassView Inspector slots: _canvasGroup, _lifetimePriceText, _monthlyPriceText, _lifetimeButton, _monthlyButton, _dismissButton, _restoreButton, _loadingOverlay
-- Add IAPManager + ZenPassService + SubscriptionService GOs to _Bootstrap.unity
+B-08 ✅ fully complete (code + Editor — confirmed 2026-05-20):
+- IAPManager + ZenPassService + SubscriptionService GOs added to _Bootstrap.unity
+- Panel_ZenPass hierarchy built + ZenPassView slots wired
+- FakeStore warning only (expected in Editor)
 
-B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 ✅ | B-07 🔲 | B-08 ✅ (code)
+⚠️ Burst AOT: Edit → Project Settings → Player → Other Settings → Burst AOT Settings → **uncheck Enable Burst AOT Compilation** (Jason still needs to do this — Burst 1.8.29 crash bug)
+
+B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 ✅ | B-07 🔲 (Editor wiring) | B-08 ✅ | B-09 🔲
 
 ---
 
@@ -289,10 +282,10 @@ Claude.ai needs to answer before the next stage brief is written.
 | B-03 | Jigsaw piece system | ✅ Done |
 | B-04 | Touch controls | ✅ Done |
 | B-05 | Gallery UI | ✅ Done |
-| B-06 | Pack browser & unlock system | 🔲 |
-| B-07 | Daily Image system | 🔲 (code ✅, needs Editor wiring) |
-| B-08 | Monetisation | ✅ Code done — Panel_ZenPass hierarchy + Editor wiring pending |
-| B-09 | Audio system | 🔲 |
+| B-06 | Pack browser & unlock system | ✅ Done |
+| B-07 | Daily Image system | 🔲 Code ✅ — Editor wiring pending |
+| B-08 | Monetisation | ✅ Done |
+| B-09 | Audio system | 🔲 In progress |
 | B-10 | Accessibility suite | 🔲 |
 | B-11 | Analytics & event tracking | 🔲 |
 | B-12 | Polish & QA | 🔲 |
@@ -301,4 +294,4 @@ Claude.ai needs to answer before the next stage brief is written.
 ---
 
 *Keep this file current. It is read at the start of every Claude Code session.*
-*Last updated: 2026-05-20 — B-08 monetisation code complete. Commit ce8a6cc. IAPManager, ZenPassService, SubscriptionService, ZenPassView created. AdsManager, PackUnlockService, AppBootstrap, ArtworkSpotlightView updated. SaveData: zenPassLifetime + zenPassSubscriber added. Panel_ZenPass hierarchy not yet built — Claude.ai to spec before next session. B-07 Editor steps still outstanding.*
+*Last updated: 2026-05-21 — B-08 fully complete (code + Editor, confirmed by Jason). B-09 Audio system in progress. MusicContextController + AtelierView to create. SFX call sites to wire. Burst AOT still needs unchecking in Editor. B-07 Editor wiring still outstanding.*

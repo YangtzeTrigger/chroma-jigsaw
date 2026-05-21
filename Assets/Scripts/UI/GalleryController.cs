@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using ChromaJigsaw.Audio;
 using ChromaJigsaw.Core;
 using ChromaJigsaw.Data;
 
@@ -22,8 +23,20 @@ namespace ChromaJigsaw.UI
 
         private void Start()
         {
+            IAPManager.OnPackPurchased += OnPackUnlocked;
             PopulateGrid();
             ShowL1();
+        }
+
+        private void OnDestroy()
+        {
+            IAPManager.OnPackPurchased -= OnPackUnlocked;
+        }
+
+        private void OnPackUnlocked(string packId)
+        {
+            AudioManager.Instance.Play(SFXType.Reward);
+            PopulateGrid();
         }
 
         private void PopulateGrid()
