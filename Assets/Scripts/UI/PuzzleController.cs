@@ -11,6 +11,8 @@ namespace ChromaJigsaw.UI
         private void OnEnable()
         {
             if (HootyBridge.Instance == null) return;
+            HootyBridge.Instance.OnPiecePickedUp  += HandlePiecePickedUp;
+            HootyBridge.Instance.OnPiecePlaced    += HandlePiecePlaced;
             HootyBridge.Instance.OnPieceSnapped   += HandlePieceSnapped;
             HootyBridge.Instance.OnPuzzleComplete += HandlePuzzleComplete;
         }
@@ -18,14 +20,15 @@ namespace ChromaJigsaw.UI
         private void OnDisable()
         {
             if (HootyBridge.Instance == null) return;
+            HootyBridge.Instance.OnPiecePickedUp  -= HandlePiecePickedUp;
+            HootyBridge.Instance.OnPiecePlaced    -= HandlePiecePlaced;
             HootyBridge.Instance.OnPieceSnapped   -= HandlePieceSnapped;
             HootyBridge.Instance.OnPuzzleComplete -= HandlePuzzleComplete;
         }
 
-        private void HandlePieceSnapped() =>
-            AudioManager.Instance.PlaySFX(SFXType.PieceSnap);
-
-        private void HandlePuzzleComplete(int xp) =>
-            AudioManager.Instance.PlaySFX(SFXType.PuzzleComplete);
+        private void HandlePiecePickedUp()      => AudioManager.Instance.Play(SFXType.PiecePickup);
+        private void HandlePiecePlaced()        => AudioManager.Instance.Play(SFXType.PiecePlaced);
+        private void HandlePieceSnapped()       => AudioManager.Instance.Play(SFXType.PieceSnap);
+        private void HandlePuzzleComplete(int _) => AudioManager.Instance.Play(SFXType.PuzzleComplete);
     }
 }
