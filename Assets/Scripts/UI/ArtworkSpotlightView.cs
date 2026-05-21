@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using ChromaJigsaw.Data;
 
 namespace ChromaJigsaw.UI
 {
@@ -14,6 +16,9 @@ namespace ChromaJigsaw.UI
         [SerializeField] private Button          _replayButton;
         [SerializeField] private Button          _shareButton;
         [SerializeField] private Button          _wallpaperButton;
+
+        private string _packId;
+        private string _imageId;
 
         private void Awake()
         {
@@ -30,6 +35,8 @@ namespace ChromaJigsaw.UI
 
         public void Open(string packId, string imageId)
         {
+            _packId = packId;
+            _imageId = imageId;
             gameObject.SetActive(true);
             _titleText.text = imageId.ToUpper();
             // TODO: load Texture2D for imageId via asset pipeline (B-06+)
@@ -56,6 +63,11 @@ namespace ChromaJigsaw.UI
 
         private void HandleReplay()
         {
+            AnalyticsManager.Instance.LogEvent("artwork_replayed", new Dictionary<string, object>
+            {
+                { "pack_id",  _packId  },
+                { "image_id", _imageId }
+            });
             // Stub — puzzle replay animation wired in a later stage
 #if UNITY_EDITOR
             Debug.Log("[Spotlight] Replay pressed");
@@ -64,6 +76,11 @@ namespace ChromaJigsaw.UI
 
         private void HandleShare()
         {
+            AnalyticsManager.Instance.LogEvent("artwork_shared", new Dictionary<string, object>
+            {
+                { "pack_id",  _packId  },
+                { "image_id", _imageId }
+            });
             var title = _titleText != null ? _titleText.text : "a puzzle";
 #if UNITY_ANDROID && !UNITY_EDITOR
             var intentClass = new AndroidJavaClass("android.content.Intent");
@@ -83,6 +100,11 @@ namespace ChromaJigsaw.UI
 
         private void HandleWallpaper()
         {
+            AnalyticsManager.Instance.LogEvent("artwork_wallpaper_set", new Dictionary<string, object>
+            {
+                { "pack_id",  _packId  },
+                { "image_id", _imageId }
+            });
 #if UNITY_ANDROID && !UNITY_EDITOR
             if (_artworkImage == null || _artworkImage.texture == null) return;
             var tex = _artworkImage.texture as Texture2D;

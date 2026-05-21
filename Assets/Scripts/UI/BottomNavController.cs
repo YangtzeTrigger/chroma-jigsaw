@@ -19,6 +19,10 @@ namespace ChromaJigsaw.UI
         private static readonly string[] ScreenNames =
             { "tab_gallery", "tab_puzzles", "tab_ambience", "tab_sanctuary" };
 
+        // null = no named event (Sanctuary is a no-tracking space)
+        private static readonly string[] TabEvents =
+            { "gallery_opened", "puzzles_opened", "ambience_opened", null };
+
         private int _activeIndex = -1;
 
         private void Start()
@@ -54,6 +58,9 @@ namespace ChromaJigsaw.UI
             }
 
             AnalyticsManager.Instance.LogScreenView(ScreenNames[index]);
+            var tabEvent = index < TabEvents.Length ? TabEvents[index] : null;
+            if (tabEvent != null)
+                AnalyticsManager.Instance.LogEvent(tabEvent);
         }
 
         [Serializable]

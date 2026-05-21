@@ -83,6 +83,16 @@ namespace ChromaJigsaw.UI
 
         public void OpenPack(string packId)
         {
+            var config = _registry?.packs.Find(p => p.packId == packId);
+            var result = config != null
+                ? PackUnlockService.Instance.Evaluate(config, out _)
+                : PackUnlockResult.Owned;
+            AnalyticsManager.Instance.LogEvent("pack_opened", new Dictionary<string, object>
+            {
+                { "pack_id",     packId                      },
+                { "pack_name",   config?.packName ?? ""      },
+                { "unlock_type", result.ToString().ToLower() }
+            });
             _panelPackGrid.SetActive(false);
             _galleryWallView.gameObject.SetActive(true);
             _galleryWallView.Load(packId, this);
@@ -95,6 +105,11 @@ namespace ChromaJigsaw.UI
             _spotlightView.Open(packId, imageId);
             _backStack.Push(_spotlightView.Close);
             AnalyticsManager.Instance.LogScreenView("artwork_spotlight");
+            AnalyticsManager.Instance.LogEvent("artwork_spotlight_opened", new Dictionary<string, object>
+            {
+                { "pack_id",  packId  },
+                { "image_id", imageId }
+            });
         }
 
         public void NavigateBack()

@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using ChromaJigsaw.Audio;
 using ChromaJigsaw.Core;
+using ChromaJigsaw.Data;
 
 namespace ChromaJigsaw.UI
 {
@@ -68,6 +70,7 @@ namespace ChromaJigsaw.UI
 
         private void OnEnable()
         {
+            AnalyticsManager.Instance.LogEvent("atelier_opened");
             var data = SaveManager.Instance.Data;
 
             // Sync sliders and toggles to saved values.
@@ -91,24 +94,40 @@ namespace ChromaJigsaw.UI
         {
             AudioManager.Instance.SetVolume(AudioChannel.Music, value);
             AudioManager.Instance.SetVolume(AudioChannel.SFX,   value);
+            AnalyticsManager.Instance.LogAccessibilityChanged("ambient_volume", value);
         }
 
-        private void OnTactileFeedbackChanged(bool enabled) =>
+        private void OnTactileFeedbackChanged(bool enabled)
+        {
             AccessibilityService.Instance.SetTactileFeedback(enabled);
+            AnalyticsManager.Instance.LogAccessibilityChanged("tactile_feedback", enabled);
+        }
 
-        private void OnFocusModeChanged(bool enabled) =>
+        private void OnFocusModeChanged(bool enabled)
+        {
             AccessibilityService.Instance.SetFocusMode(enabled);
+            AnalyticsManager.Instance.LogAccessibilityChanged("focus_mode", enabled);
+        }
 
         // ── Visual Clarity ───────────────────────────────────────────────────
 
-        private void OnHighContrastChanged(bool enabled) =>
+        private void OnHighContrastChanged(bool enabled)
+        {
             AccessibilityService.Instance.SetHighContrast(enabled);
+            AnalyticsManager.Instance.LogAccessibilityChanged("high_contrast", enabled);
+        }
 
-        private void OnGrandInterfaceChanged(bool enabled) =>
+        private void OnGrandInterfaceChanged(bool enabled)
+        {
             AccessibilityService.Instance.SetGrandInterface(enabled);
+            AnalyticsManager.Instance.LogAccessibilityChanged("grand_interface", enabled);
+        }
 
-        private void OnArtworkBrightnessChanged(float value) =>
+        private void OnArtworkBrightnessChanged(float value)
+        {
             AccessibilityService.Instance.SetArtworkBrightness(value);
+            AnalyticsManager.Instance.LogAccessibilityChanged("artwork_brightness", value);
+        }
 
         // ── Zen Pass ─────────────────────────────────────────────────────────
 
@@ -126,11 +145,16 @@ namespace ChromaJigsaw.UI
         private void OnZenPassTapped()
         {
             if (_zenPassView != null)
-                _zenPassView.Show(RefreshZenPassCard);
+                _zenPassView.Show("settings", RefreshZenPassCard);
         }
 
         // ── Archive & Atelier ────────────────────────────────────────────────
 
-        private void OnRestorePurchases() => IAPManager.Instance.RestorePurchases();
+        private void OnRestorePurchases()
+        {
+            IAPManager.Instance.RestorePurchases();
+            AnalyticsManager.Instance.LogEvent("iap_restored",
+                new Dictionary<string, object> { { "products_restored", 0 } });
+        }
     }
 }

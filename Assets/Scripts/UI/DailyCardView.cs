@@ -74,7 +74,10 @@ namespace ChromaJigsaw.UI
         private void HandleBeginRitual()
         {
             AudioManager.Instance.Play(SFXType.ButtonClick);
-            AnalyticsManager.Instance.LogEvent("daily_begin");
+            var entries = DailyService.Instance.GetActiveDailies();
+            string dailyId = entries.Length > 0 ? entries[0].dailyId : "";
+            AnalyticsManager.Instance.LogEvent("daily_opened",
+                new Dictionary<string, object> { { "daily_id", dailyId } });
             _onBeginRitual?.Invoke();
         }
     }

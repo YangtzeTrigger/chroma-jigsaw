@@ -36,7 +36,18 @@ namespace ChromaJigsaw.UI
             for (int i = 0; i < _dotButtons.Length; i++)
             {
                 int idx = i;
-                _dotButtons[i].onClick.AddListener(() => Open(idx));
+                _dotButtons[i].onClick.AddListener(() =>
+                {
+                    var entries  = DailyService.Instance.GetActiveDailies();
+                    int entryIdx = (_dotButtons.Length - 1) - idx;
+                    string dailyId = entryIdx < entries.Length ? entries[entryIdx].dailyId : "";
+                    AnalyticsManager.Instance.LogEvent("daily_dot_tapped", new Dictionary<string, object>
+                    {
+                        { "daily_id",  dailyId },
+                        { "dot_index", idx     }
+                    });
+                    Open(idx);
+                });
             }
 
             _canvasGroup.alpha          = 0f;

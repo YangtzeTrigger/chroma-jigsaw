@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using ChromaJigsaw.Audio;
 using ChromaJigsaw.Core;
+using ChromaJigsaw.Data;
 
 namespace ChromaJigsaw.UI
 {
@@ -33,13 +34,14 @@ namespace ChromaJigsaw.UI
         {
             _lifetimeButton.onClick.AddListener(OnLifetimeTapped);
             _monthlyButton.onClick.AddListener(OnMonthlyTapped);
-            _dismissButton.onClick.AddListener(Hide);
+            _dismissButton.onClick.AddListener(OnDismissTapped);
             _restoreButton.onClick.AddListener(OnRestoreTapped);
             gameObject.SetActive(false);
         }
 
-        public void Show(Action onDismiss = null)
+        public void Show(string trigger = "settings", Action onDismiss = null)
         {
+            AnalyticsManager.Instance.LogZenPassShown(trigger);
             _onDismiss = onDismiss;
             gameObject.SetActive(true);
             _canvasGroup.alpha          = 1f;
@@ -68,8 +70,15 @@ namespace ChromaJigsaw.UI
                 _monthlyPriceText.text = string.IsNullOrEmpty(monthly) ? "$1.99 / Month" : $"{monthly} / Month";
         }
 
+        private void OnDismissTapped()
+        {
+            AnalyticsManager.Instance.LogEvent("zen_pass_dismissed");
+            Hide();
+        }
+
         private void OnLifetimeTapped()
         {
+            AnalyticsManager.Instance.LogEvent("zen_pass_lifetime_tapped");
             SetLoadingVisible(true);
             _canvasGroup.interactable = false;
             IAPManager.Instance.PurchaseZenPassLifetime(OnLifetimeResult);
@@ -88,6 +97,7 @@ namespace ChromaJigsaw.UI
 
         private void OnMonthlyTapped()
         {
+            AnalyticsManager.Instance.LogEvent("zen_pass_monthly_tapped");
             SetLoadingVisible(true);
             _canvasGroup.interactable = false;
             IAPManager.Instance.PurchaseZenPassMonthly(OnMonthlyResult);

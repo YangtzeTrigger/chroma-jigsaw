@@ -38,9 +38,16 @@ namespace ChromaJigsaw.UI
 
         private void OnPackTapped(string packId)
         {
-            // B-07: navigate into pack puzzle selection
-            AnalyticsManager.Instance.LogEvent("pack_tapped",
-                new Dictionary<string, object> { { "pack_id", packId } });
+            var config = _registry?.packs.Find(p => p.packId == packId);
+            var result = config != null
+                ? PackUnlockService.Instance.Evaluate(config, out _)
+                : PackUnlockResult.Owned;
+            AnalyticsManager.Instance.LogEvent("pack_opened", new Dictionary<string, object>
+            {
+                { "pack_id",     packId                      },
+                { "pack_name",   config?.packName ?? ""      },
+                { "unlock_type", result.ToString().ToLower() }
+            });
         }
 
         private static int GetCompletedCount(string packId)
