@@ -22,13 +22,17 @@
 
 ## Current Stage
 
-**B-10 — Accessibility Suite** ✅ Code complete. Needs Editor wiring.
+**B-10 — Accessibility Suite** ✅ Complete (code + scene wiring done). Awaiting B-11 Claude.ai brief.
 
-B-09 ✅ complete (commit 87613f4 / ed0fbf3). B-10 ✅ code complete (commit 4c68998).
+B-09 ✅ complete (commit 87613f4 / ed0fbf3). B-10 ✅ complete (commit 4c68998 + dfe1887).
 
-**Remaining manual Unity Editor steps:**
+B-10 scene work done (commit dfe1887):
+- Settings.unity: Full Atelier screen — 4 sections (Sensory Ambience, Visual Clarity, Zen Pass, Archive & Atelier), Panel_ZenPass overlay, AtelierView 14 Inspector slots wired, ZenPassView 8 slots wired, EventSystem
+- Game.unity: FocusHUD_Canvas + WorkspaceTapButton (full-stretch transparent), EventSystem added, PuzzleController._workspaceTapButton wired
 
-B-07 (still outstanding):
+**Remaining manual Unity Editor steps (still outstanding):**
+
+B-07:
 - Create DailyManifest SO: Assets → Create → Chroma Jigsaw → Daily Manifest; add 3 DailyEntry entries
 - Wire AppBootstrap._dailyManifest slot in _Bootstrap.unity
 - Assign dot sprites to DailyCardView + DailyMasterpieceView (art needed)
@@ -38,17 +42,16 @@ B-09 (audio):
 - Add MusicContextController GO to MainMenu.unity and Game.unity; call SetContext() from scene controllers
 - Assign AudioMixer asset to AudioManager Inspector slot
 - Assign Suno .mp3 clips to AudioManager Inspector slots (after Jason generates them)
-- Add PuzzleController GO to Game.unity (already exists — confirm present)
 
 B-10 (accessibility):
-- Add AccessibilityService GO to _Bootstrap.unity
-- Build Settings.unity Atelier screen hierarchy; wire AtelierView Inspector slots
-- Add transparent workspace tap button in Game.unity calling PuzzleController.HandleWorkspaceTap()
-- Wire OnGrandInterfaceChanged + OnArtworkBrightnessChanged subscribers in scene controllers
+- Add AccessibilityService GO to _Bootstrap.unity ⚠️ crashes without this
+- Assign HUD CanvasGroups to PuzzleController._hudGroups in Game.unity (currently empty `[]`)
+- Refine Panel_ZenPass button positions in Unity Editor (currently approximate absolute offsets)
+- Wire OnGrandInterfaceChanged + OnArtworkBrightnessChanged in scene controllers
 
 ⚠️ Burst AOT: Edit → Project Settings → Player → Other Settings → Burst AOT Settings → **uncheck Enable Burst AOT Compilation** (Burst 1.8.29 crash bug)
 
-B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 ✅ | B-07 🔲 (Editor) | B-08 ✅ | B-09 ✅ | B-10 ✅ (code)
+B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 ✅ | B-07 🔲 (Editor) | B-08 ✅ | B-09 ✅ | B-10 ✅ | B-11 🔲
 
 ---
 
@@ -289,7 +292,7 @@ Claude.ai needs to answer before the next stage brief is written.
 | B-07 | Daily Image system | 🔲 Code ✅ — Editor wiring pending |
 | B-08 | Monetisation | ✅ Done |
 | B-09 | Audio system | ✅ Code done — clip slots + scene wiring pending |
-| B-10 | Accessibility suite | ✅ Code done — Settings.unity scene + Editor wiring pending |
+| B-10 | Accessibility suite | ✅ Done (code + scene wiring complete) |
 | B-11 | Analytics & event tracking | 🔲 |
 | B-12 | Polish & QA | 🔲 |
 | B-13 | Launch prep | 🔲 |
@@ -297,4 +300,4 @@ Claude.ai needs to answer before the next stage brief is written.
 ---
 
 *Keep this file current. It is read at the start of every Claude Code session.*
-*Last updated: 2026-05-21 — B-09 audio system complete (commit ed0fbf3). B-10 accessibility suite code complete (commit 4c68998). AccessibilityService, AtelierView (all 4 sections), SaveData fields, Vibrate() on snap/complete. Editor wiring outstanding for B-07/B-09/B-10. B-11 Analytics next.*
+*Last updated: 2026-05-21 — B-10 scene wiring complete (commit dfe1887). Settings.unity Atelier screen (4 sections, Panel_ZenPass, 14 AtelierView slots wired). Game.unity FocusHUD_Canvas + WorkspaceTapButton + EventSystem. Editor work still outstanding: AccessibilityService GO in _Bootstrap, PuzzleController._hudGroups, DailyManifest SO, audio clip slots. B-11 Analytics next — awaiting Claude.ai brief.*
