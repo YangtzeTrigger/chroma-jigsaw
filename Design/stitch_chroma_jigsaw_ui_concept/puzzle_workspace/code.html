@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chroma Jigsaw - Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&amp;family=Montserrat:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-error": "#690005",
+                        "on-tertiary-container": "#003861",
+                        "secondary-fixed-dim": "#e2c375",
+                        "on-secondary": "#3d2e00",
+                        "on-background": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#05497c",
+                        "inverse-on-surface": "#313030",
+                        "surface-tint": "#f4bd61",
+                        "on-primary-fixed-variant": "#604100",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary-fixed": "#281900",
+                        "on-tertiary-fixed": "#001d36",
+                        "on-primary-container": "#4a3100",
+                        "primary-container": "#c8963e",
+                        "on-tertiary": "#003258",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#5b4601",
+                        "outline-variant": "#4f4537",
+                        "on-primary": "#432c00",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container-low": "#1c1b1b",
+                        "on-secondary-container": "#d3b568",
+                        "secondary-fixed": "#ffdf91",
+                        "primary-fixed-dim": "#f4bd61",
+                        "primary-fixed": "#ffdead",
+                        "surface-variant": "#353534",
+                        "primary": "#f4bd61",
+                        "secondary": "#e2c375",
+                        "surface-bright": "#3a3939",
+                        "on-secondary-fixed-variant": "#584400",
+                        "tertiary": "#9ecaff",
+                        "surface-container": "#201f1f",
+                        "background": "#131313",
+                        "surface-dim": "#131313",
+                        "surface": "#131313",
+                        "tertiary-fixed": "#d1e4ff",
+                        "outline": "#9c8f7e",
+                        "tertiary-container": "#71a2da",
+                        "on-secondary-fixed": "#241a00",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#353534",
+                        "inverse-primary": "#7e5700",
+                        "surface-container-high": "#2a2a2a",
+                        "on-surface": "#e5e2e1",
+                        "on-surface-variant": "#d3c4b2"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "margin-screen": "32px",
+                        "gutter-frame": "16px",
+                        "section-gap": "48px",
+                        "unit": "8px"
+                    },
+                    fontFamily: {
+                        "headline-italic": ["EB Garamond"],
+                        "metadata-sm": ["Montserrat"],
+                        "body-ui": ["Montserrat"],
+                        "display-title": ["EB Garamond"],
+                        "label-caps": ["Montserrat"]
+                    },
+                    fontSize: {
+                        "headline-italic": ["20px", { lineHeight: "28px", fontWeight: "400" }],
+                        "metadata-sm": ["13px", { lineHeight: "18px", fontWeight: "300" }],
+                        "body-ui": ["16px", { lineHeight: "24px", letterSpacing: "0.02em", fontWeight: "400" }],
+                        "display-title": ["24px", { lineHeight: "32px", letterSpacing: "0.2em", fontWeight: "600" }],
+                        "label-caps": ["12px", { lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Simulating the tactile puzzle piece edge highlight */
+        .puzzle-piece {
+            box-shadow: inset 1px 1px 2px rgba(255,255,255,0.15), inset -1px -1px 2px rgba(0,0,0,0.8), 2px 2px 5px rgba(0,0,0,0.5);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background h-screen w-screen overflow-hidden flex flex-col font-body-ui">
+<!-- Minimal Workspace Header (Adapted from TopAppBar logic for task focus) -->
+<header class="flex justify-between items-center w-full px-margin-screen h-20 border-b border-primary/10 bg-background/80 backdrop-blur-sm z-50 shrink-0">
+<button class="text-primary hover:opacity-80 transition-opacity p-2 flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+<div class="flex flex-col items-center justify-center">
+<h1 class="font-display-title text-display-title text-primary tracking-widest uppercase">ALPINE SUNSET</h1>
+<span class="font-metadata-sm text-metadata-sm text-on-surface-variant uppercase tracking-widest mt-1">48 Pieces</span>
+</div>
+<button class="text-primary hover:opacity-80 transition-opacity p-2 flex items-center justify-center border border-primary/30 rounded-full w-10 h-10">
+<span class="material-symbols-outlined text-xl">zoom_in</span>
+</button>
+</header>
+<!-- Workspace Canvas -->
+<!-- Using a very dark radial gradient to simulate the 'Spotlight Halo' on the dark felt table -->
+<main class="flex-grow relative bg-surface-container-lowest" style="background: radial-gradient(circle at center, #1c1b1b 0%, #0e0e0e 70%);">
+<!-- Central Puzzle Board Outline -->
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] border border-outline-variant/20 rounded shadow-2xl flex items-center justify-center">
+<!-- Partially Completed Corner (Bottom Left) -->
+<!-- Soft gold outline highlight for the active group -->
+<div class="absolute bottom-0 left-0 w-[200px] h-[150px] border border-primary shadow-[0_0_20px_rgba(244,189,97,0.15)] rounded-bl flex flex-wrap bg-surface-container overflow-hidden">
+<!-- Using a single image shifted for pieces to simulate completion -->
+<div class="w-full h-full bg-cover bg-no-repeat" data-alt="A serene alpine sunset puzzle image showing dark silhouetted mountain peaks against a vibrant, rich gold and deep violet evening sky. The art style is hyper-realistic yet painterly, fitting a luxurious gallery aesthetic. High contrast, low overall brightness, meditative mood." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBomzX9bTYTnwTgzRtYJMJCQTCsW8ou-VjPswxmogaVp1BezrofdXhuPbrM03OfXFDwUgt_DE7GMAf0n3TtSVIYyGxq0A5fDcOhsa7Z5RULUlxJSw2nVR_Pmk-dZGsntav6f2pq55_1Xe5Th-a7-s0-LqnmiqelcWn8vo-pjRMCY28Ta7AlGrWUQnwF6rf8BLkk0q0WK1vX05Zv6SY3aY3BGLEfytN_4STUUyoppk1MhVFW8a0QvaglJOKYDCsXx3KHuataurihXR4'); background-position: bottom left;"></div>
+<!-- Overlay to create individual piece lines -->
+<div class="absolute inset-0 grid grid-cols-4 grid-rows-3 pointer-events-none opacity-30">
+<!-- Generic grid lines for simulation -->
+<div class="border-r border-b border-black"></div><div class="border-r border-b border-black"></div><div class="border-r border-b border-black"></div><div class="border-b border-black"></div>
+<div class="border-r border-b border-black"></div><div class="border-r border-b border-black"></div><div class="border-r border-b border-black"></div><div class="border-b border-black"></div>
+<div class="border-r border-black"></div><div class="border-r border-black"></div><div class="border-r border-black"></div><div></div>
+</div>
+</div>
+</div>
+<!-- Scattered Puzzle Pieces (Absolute Positioning) -->
+<!-- These use the puzzle-piece class for tactile depth -->
+<!-- Piece 1: Top Left area -->
+<div class="absolute top-[15%] left-[10%] w-[50px] h-[50px] puzzle-piece bg-surface-container rotate-12 cursor-pointer hover:border hover:border-primary/50 transition-colors" data-alt="A single jigsaw puzzle piece showing a fragment of a bright golden sunset sky from an alpine landscape. High detail, tactile edge texture." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD15lrIDdI-tr5-Ogxj1mkMJNJLXmUShbe6UYsvxMX3aqjE3lXEyCK207Vivpdp2nLTCBJfarRDRPFQR5jPrKxLQdzMI94wDFa9UwpBBVMTbVu7lsop-bCZDQVdV_pZHt5UMd9I7l8IO7ej_y3b_jyEo7CAjs01sMMh-aqpIDx_KfekYEOX8U7fLrug3UaKvyA_BvE2vxbrbbqfGa6nLB3Xp4C9QqLqhJz8W9qvhahXrUy_36h5ynwoISqgIikb3Sy9lPBIfMCQGT8'); background-position: top center; background-size: 600px 400px;"></div>
+<!-- Piece 2: Top Right area -->
+<div class="absolute top-[25%] right-[15%] w-[50px] h-[50px] puzzle-piece bg-surface-container -rotate-6 cursor-pointer hover:border hover:border-primary/50 transition-colors" data-alt="A single jigsaw puzzle piece showing a fragment of dark mountain silhouettes against a twilight sky. High detail, tactile edge texture." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAlCa3KfXOkwgv8WvHCRnfIDP07PcoNang0vPq-YY2yIcadTdRyFFcHJxqVTcSOlI6P0zhjkbwJhB9k3qPa_OY8v_oidPeg6ILd7cIRLZbAoCF4FWjnIECUgDL2YTJYtZnguQ02kqjXzrIrIVSzs0vgobU0f6fmoH9DgTdm2QGrKvquhFm6H5RONo4lguq78yq7G6SChy1BE0i7iuddcVZGbvs8IDcAPuFoIcuzXDPCKgFy-4gtNqIJ8Wpz6zpLxJ5hVhTuff0lbL0'); background-position: top right; background-size: 600px 400px;"></div>
+<!-- Piece 3: Bottom Right area -->
+<div class="absolute bottom-[20%] right-[10%] w-[50px] h-[50px] puzzle-piece bg-surface-container rotate-45 cursor-pointer hover:border hover:border-primary/50 transition-colors" data-alt="A single jigsaw puzzle piece showing a fragment of deep purple clouds and distant mountain peaks. High detail, tactile edge texture." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDCxfqxmgJoMPoq4wZkT1pVJQ3S0ijOM7zo2CIH7kgJNk2ppXXm-twAt8O5tT3PVBGdR9VyelCBevqkq0h5vxKUda62tsmS4VrLdclZn0prwB_A9qwjfPttFFYtN26RBidbN5Z0sIolAKiQhiEl15wu0Cd3JgqmNOLepInau0x0GaeDvZJ_qPd2QBTWAFx1z5_5-fOWJs66nPyh63MPdxzt2qTIvRVlHBLyj4ASKBwmYizwT1RGds7Bql9QhOGv7TqVyNwc3oY03VY'); background-position: center right; background-size: 600px 400px;"></div>
+<!-- Piece 4: Middle Left area -->
+<div class="absolute top-[50%] left-[5%] w-[50px] h-[50px] puzzle-piece bg-surface-container -rotate-12 cursor-pointer hover:border hover:border-primary/50 transition-colors" data-alt="A single jigsaw puzzle piece showing a fragment of a hazy mountain valley in the evening light. High detail, tactile edge texture." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAZlk-ZrdYtPaGvlZokiLwIejwAO5_PPQQjcEVaCvhiWYHIFT696Eskjy1FuD293Y3mOzYlky4v5MyjUPqL8srB4ba-6XsYEtHB_hQLyEAE_hJ5LOc50yFotdOI95DOz_5N3IAdoXvS-H1KVwsyJj198ZCn-0ya_TMesEWwoBRxByC08AilFc9dX4UB9Ga32hiRR5OmaFXbVvM2bICss-RsaSEp_EjMIKQCYWRDMlVsfjYhizAMLfytXckoEAxX4PWtDfyhMd3TwQk'); background-position: center left; background-size: 600px 400px;"></div>
+<!-- Minimal control hint (bottom center) -->
+<div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex items-center gap-2 text-on-surface-variant/50">
+<span class="material-symbols-outlined text-sm">touch_app</span>
+<span class="font-label-caps text-label-caps uppercase tracking-widest">Drag to assemble</span>
+</div>
+</main>
+</body></html>

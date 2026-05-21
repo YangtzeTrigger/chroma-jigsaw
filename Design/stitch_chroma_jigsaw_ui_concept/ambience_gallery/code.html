@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ambience - Chroma Jigsaw</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#690005",
+                        "on-tertiary-container": "#003861",
+                        "secondary-fixed-dim": "#e2c375",
+                        "on-secondary": "#3d2e00",
+                        "on-background": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#05497c",
+                        "inverse-on-surface": "#313030",
+                        "surface-tint": "#f4bd61",
+                        "on-primary-fixed-variant": "#604100",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary-fixed": "#281900",
+                        "on-tertiary-fixed": "#001d36",
+                        "on-primary-container": "#4a3100",
+                        "primary-container": "#c8963e",
+                        "on-tertiary": "#003258",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#5b4601",
+                        "outline-variant": "#4f4537",
+                        "on-primary": "#432c00",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container-low": "#1c1b1b",
+                        "on-secondary-container": "#d3b568",
+                        "secondary-fixed": "#ffdf91",
+                        "primary-fixed-dim": "#f4bd61",
+                        "primary-fixed": "#ffdead",
+                        "surface-variant": "#353534",
+                        "primary": "#f4bd61",
+                        "secondary": "#e2c375",
+                        "surface-bright": "#3a3939",
+                        "on-secondary-fixed-variant": "#584400",
+                        "tertiary": "#9ecaff",
+                        "surface-container": "#201f1f",
+                        "background": "#131313",
+                        "surface-dim": "#131313",
+                        "surface": "#131313",
+                        "tertiary-fixed": "#d1e4ff",
+                        "outline": "#9c8f7e",
+                        "tertiary-container": "#71a2da",
+                        "on-secondary-fixed": "#241a00",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#353534",
+                        "inverse-primary": "#7e5700",
+                        "surface-container-high": "#2a2a2a",
+                        "on-surface": "#e5e2e1",
+                        "on-surface-variant": "#d3c4b2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-screen": "32px",
+                        "gutter-frame": "16px",
+                        "section-gap": "48px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-italic": ["EB Garamond"],
+                        "metadata-sm": ["Montserrat"],
+                        "body-ui": ["Montserrat"],
+                        "display-title": ["EB Garamond"],
+                        "label-caps": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-italic": ["20px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "metadata-sm": ["13px", { "lineHeight": "18px", "fontWeight": "300" }],
+                        "body-ui": ["16px", { "lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "display-title": ["24px", { "lineHeight": "32px", "letterSpacing": "0.2em", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&amp;family=Montserrat:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        .spotlight-glow {
+            background: radial-gradient(circle at 50% 30%, rgba(244, 189, 97, 0.12) 0%, rgba(19, 19, 19, 0) 65%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col pb-24 font-body-ui">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-margin-screen h-20 bg-background dark:bg-background border-b border-primary/30 top-0 z-40 sticky">
+<div class="flex items-center">
+<button class="hover:opacity-80 transition-opacity flex items-center justify-center p-2 text-primary dark:text-primary active:scale-95 duration-300">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+<div class="text-center">
+<h1 class="font-display-title text-display-title text-primary tracking-widest uppercase">CHROMA JIGSAW</h1>
+</div>
+<div class="flex items-center">
+<button class="hover:opacity-80 transition-opacity active:scale-95 duration-300 flex items-center justify-center rounded-full overflow-hidden w-10 h-10 border border-primary/30">
+<img alt="User profile portrait" class="w-full h-full object-cover" data-alt="A sophisticated, high-fashion portrait of a woman in low-key lighting, matching the midnight gallery aesthetic. Soft, directional light highlights her features against a pitch-black background, echoing the minimalist luxury vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOHLmZTNqFPxYgXSk1ziMedrouFn61Jv31tldTouEJgaz4qwk5dvLLApLu9G9vyVvolSXUYqh78uDRC5pKuFQOCFCb9AKbj-g_jr1VQMNhnXtoIHVA76HqVTXb-6axe1L-geXUrHMdTIYGJDDnF4GYHyWjcwsiUrmhgdmZwdJBVawth8Qmxkp3K8pB9gHfe09WaJFPOlmDtr-MdIzLoI7cvZwUMh-l-OEyuGMa4MZoBOTn9Gi1XsP1v35eXAOU3erepIp4TUNIuxs"/>
+</button>
+</div>
+</header>
+<!-- Navigation Hub (Web) -->
+<nav class="hidden md:flex sticky top-20 w-full z-30 justify-center gap-16 py-6 bg-background/90 backdrop-blur-md border-b border-primary/10">
+<a class="text-on-surface-variant/60 hover:text-primary/80 font-label-caps text-label-caps transition-all uppercase tracking-widest" href="#">Gallery</a>
+<a class="text-on-surface-variant/60 hover:text-primary/80 font-label-caps text-label-caps transition-all uppercase tracking-widest" href="#">Puzzles</a>
+<a class="text-primary font-label-caps text-label-caps flex flex-col items-center relative uppercase tracking-widest" href="#">
+            Ambience
+            <span class="absolute -bottom-3 text-[10px] text-primary">◇</span>
+</a>
+<a class="text-on-surface-variant/60 hover:text-primary/80 font-label-caps text-label-caps transition-all uppercase tracking-widest" href="#">Sanctuary</a>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-grow px-margin-screen pt-12 pb-12 flex flex-col items-center">
+<!-- Page Intent Header -->
+<div class="text-center mb-section-gap w-full max-w-4xl relative">
+<h2 class="font-display-title text-display-title text-primary mb-3">AMBIENCE</h2>
+<div class="font-headline-italic text-headline-italic text-on-surface-variant flex items-center justify-center gap-6">
+<div class="w-16 h-px bg-primary/30"></div>
+                Moving Memories
+                <div class="w-16 h-px bg-primary/30"></div>
+</div>
+</div>
+<!-- Cinematic Gallery Layout -->
+<div class="w-full max-w-4xl space-y-24">
+<!-- Focus Card: Fully Unlocked -->
+<div class="relative w-full group">
+<!-- Spotlight Halo -->
+<div class="absolute -inset-12 spotlight-glow rounded-full blur-3xl opacity-100 z-0 pointer-events-none transition-opacity duration-700"></div>
+<div class="relative z-10 border border-outline-variant bg-surface-container p-gutter-frame">
+<div class="relative w-full aspect-video overflow-hidden bg-surface-container-lowest mb-6 border border-primary/10">
+<img class="w-full h-full object-cover opacity-80 mix-blend-screen transition-transform duration-1000 group-hover:scale-105" data-alt="A striking digital installation art piece featuring glowing, generative geometric shapes suspended in a vast, minimalist gallery space. The room is illuminated by high-key, soft white lighting that creates a bright, modern light-mode aesthetic. The artwork relies on a sophisticated palette of deep blacks and pristine whites, punctuated by intense accents of vibrant gold. The mood is serene yet technologically advanced." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfz6plMoJP-FAvlYfwS-WWCKGBnWy6faphCbo62adbImoLCmAvE8zb6S7yOGXCJ9ofB2lnYD2gKSLzvkpfkuHnTBq3HSCiDJq9aSXERmerBooJgsex9pVLv77LARb8dlxAJvg9n-uqfatI3HTWwjl137FWuXaTa8OaJBqIO7rCN2pI9mlaz5NNySptvCXyHaDitubRNUvWRYzjVb3kzkW697q59E7Xl8F59Lv5xLs7Xu5I-joRSeluK4V2OJCZgK3h8okSJEhaXTI"/>
+<!-- Cinematic Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-background/95 via-background/20 to-transparent"></div>
+<!-- Play Action -->
+<div class="absolute inset-0 flex items-center justify-center">
+<button class="w-20 h-20 rounded-full border border-primary/40 flex items-center justify-center text-primary bg-background/40 backdrop-blur-md hover:bg-primary/10 transition-colors group-hover:border-primary/80">
+<span class="material-symbols-outlined text-5xl ml-2" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row justify-between sm:items-end gap-6 border-t border-primary/20 pt-6 relative">
+<div class="absolute -top-px left-1/2 -translate-x-1/2 text-primary text-[10px]">◇</div>
+<div>
+<h3 class="font-body-ui text-body-ui text-on-surface mb-2 uppercase tracking-widest">Midnight Solstice</h3>
+<p class="font-metadata-sm text-metadata-sm text-on-surface-variant flex items-center gap-3">
+                                Ambient Loop <span class="w-1 h-1 bg-primary/50 rounded-full inline-block"></span> 4K Resolution
+                            </p>
+</div>
+<div class="text-right w-full sm:w-auto">
+<p class="font-label-caps text-label-caps text-primary mb-3">12/12 - 60s Unlocked</p>
+<div class="w-full sm:w-56 h-px bg-surface-container-highest overflow-hidden relative">
+<div class="absolute top-0 left-0 h-full bg-primary w-full shadow-[0_0_8px_rgba(244,189,97,0.5)]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- In Progress Card (The Veil) -->
+<div class="relative w-full group opacity-80 hover:opacity-100 transition-opacity duration-500">
+<div class="relative z-10 border border-outline-variant/50 bg-surface-container p-gutter-frame">
+<div class="relative w-full aspect-video overflow-hidden bg-surface-container-lowest mb-6 border border-primary/5">
+<img class="w-full h-full object-cover" data-alt="A moody, abstract cinematic still of dark oceanic waves at midnight, lit only by a faint, distant luminescent glow. The scene is shrouded in a deep, translucent veil, evoking a sense of mystery and calm. Subtle gold reflections skip across the water's surface, contrasting against the profound blackness of the night. The composition is vast, minimalist, and highly textural." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjWI-7Sxg0ZzYuIpY-0Y_OTbqWaBNfB9JmiW9N3LR7jtKFgjyCRbMt7t_ioy0XQYQokB_Ax8J7dIrSTKgElhOLkpFTLEqW4AnPxcADawyxpsKk_PKqCfPhL0UGVdYyPvAjCJQsSZH-Ot30pOpOadQk5kN5PlXLeZan-8DzSO7StmrRK9cewOCTv5YTKMDH6JKgbUc1ncohI5-l7JAgQQdahzs1t1UlOKGuj4jLbbGuFHKmOqdNcOh1MLOV66TeqxaTX9SaiDinHp4"/>
+<!-- The Veil Layer -->
+<div class="absolute inset-0 bg-background/85 backdrop-blur-[2px]"></div>
+<!-- Lock Iconography -->
+<div class="absolute inset-0 flex items-center justify-center flex-col gap-3">
+<div class="w-16 h-16 rounded-full border border-outline-variant/50 flex items-center justify-center text-on-surface-variant bg-surface-container/50 backdrop-blur-sm">
+<span class="material-symbols-outlined text-3xl" data-icon="lock">lock</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row justify-between sm:items-end gap-6 border-t border-primary/10 pt-6 relative">
+<div class="absolute -top-px left-1/2 -translate-x-1/2 text-primary/30 text-[10px]">◇</div>
+<div>
+<h3 class="font-body-ui text-body-ui text-on-surface/70 mb-2 uppercase tracking-widest">Abyssal Currents</h3>
+<p class="font-metadata-sm text-metadata-sm text-on-surface-variant/60 flex items-center gap-3">
+                                Memory Fragment <span class="w-1 h-1 bg-outline-variant rounded-full inline-block"></span> Standard
+                            </p>
+</div>
+<div class="text-right w-full sm:w-auto">
+<p class="font-label-caps text-label-caps text-secondary mb-3">6/12 - 30s Unlocked</p>
+<div class="w-full sm:w-56 h-px bg-surface-container-highest overflow-hidden relative">
+<div class="absolute top-0 left-0 h-full bg-secondary w-1/2 shadow-[0_0_8px_rgba(226,195,117,0.3)]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Locked Card (Deep Veil) -->
+<div class="relative w-full group opacity-50">
+<div class="relative z-10 border border-surface-container-highest bg-surface-dim p-gutter-frame">
+<div class="relative w-full aspect-video overflow-hidden bg-surface-container-lowest mb-6">
+<!-- Placeholder texture for completely locked -->
+<div class="w-full h-full bg-background relative overflow-hidden">
+<div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-surface-container-low to-background opacity-50"></div>
+</div>
+<!-- The Deep Veil -->
+<div class="absolute inset-0 bg-background/95 backdrop-blur-md"></div>
+<!-- Lock Iconography -->
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-surface-variant text-4xl" data-icon="lock">lock</span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row justify-between sm:items-end gap-6 border-t border-surface-container-highest pt-6 relative">
+<div>
+<h3 class="font-body-ui text-body-ui text-surface-variant mb-2 uppercase tracking-widest">Unknown Resonance</h3>
+<p class="font-metadata-sm text-metadata-sm text-surface-variant/50">Undiscovered</p>
+</div>
+<div class="text-right w-full sm:w-auto">
+<p class="font-label-caps text-label-caps text-surface-variant mb-3">0/12 - Locked</p>
+<div class="w-full sm:w-56 h-px bg-surface-container-highest"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-screen bg-background/95 backdrop-blur-md border-t border-primary/20 md:hidden pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 pt-3 pb-5 hover:text-primary/80 w-full" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="frame_inspect">frame_inspect</span>
+<span class="font-label-caps text-label-caps tracking-widest uppercase">Gallery</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 pt-3 pb-5 hover:text-primary/80 w-full" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="extension">extension</span>
+<span class="font-label-caps text-label-caps tracking-widest uppercase">Puzzles</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary pt-3 pb-5 transition-all duration-500 ease-in-out relative w-full border-t-2 border-primary -mt-[2px]" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="filter_vintage" data-weight="fill" style="font-variation-settings: 'FILL' 1;">filter_vintage</span>
+<span class="font-label-caps text-label-caps tracking-widest uppercase">Ambience</span>
+<span class="absolute bottom-1 text-[10px] text-primary">◇</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 pt-3 pb-5 hover:text-primary/80 w-full" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="coffee">coffee</span>
+<span class="font-label-caps text-label-caps tracking-widest uppercase">Sanctuary</span>
+</a>
+</nav>
+</body></html>

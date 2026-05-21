@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chroma Jigsaw - Puzzles</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600&amp;family=Montserrat:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#690005",
+                        "on-tertiary-container": "#003861",
+                        "secondary-fixed-dim": "#e2c375",
+                        "on-secondary": "#3d2e00",
+                        "on-background": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#05497c",
+                        "inverse-on-surface": "#313030",
+                        "surface-tint": "#f4bd61",
+                        "on-primary-fixed-variant": "#604100",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary-fixed": "#281900",
+                        "on-tertiary-fixed": "#001d36",
+                        "on-primary-container": "#4a3100",
+                        "primary-container": "#c8963e",
+                        "on-tertiary": "#003258",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#5b4601",
+                        "outline-variant": "#4f4537",
+                        "on-primary": "#432c00",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container-low": "#1c1b1b",
+                        "on-secondary-container": "#d3b568",
+                        "secondary-fixed": "#ffdf91",
+                        "primary-fixed-dim": "#f4bd61",
+                        "primary-fixed": "#ffdead",
+                        "surface-variant": "#353534",
+                        "primary": "#f4bd61",
+                        "secondary": "#e2c375",
+                        "surface-bright": "#3a3939",
+                        "on-secondary-fixed-variant": "#584400",
+                        "tertiary": "#9ecaff",
+                        "surface-container": "#201f1f",
+                        "background": "#131313",
+                        "surface-dim": "#131313",
+                        "surface": "#131313",
+                        "tertiary-fixed": "#d1e4ff",
+                        "outline": "#9c8f7e",
+                        "tertiary-container": "#71a2da",
+                        "on-secondary-fixed": "#241a00",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#353534",
+                        "inverse-primary": "#7e5700",
+                        "surface-container-high": "#2a2a2a",
+                        "on-surface": "#e5e2e1",
+                        "on-surface-variant": "#d3c4b2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-screen": "32px",
+                        "gutter-frame": "16px",
+                        "section-gap": "48px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-italic": ["EB Garamond"],
+                        "metadata-sm": ["Montserrat"],
+                        "body-ui": ["Montserrat"],
+                        "display-title": ["EB Garamond"],
+                        "label-caps": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-italic": ["20px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "metadata-sm": ["13px", { "lineHeight": "18px", "fontWeight": "300" }],
+                        "body-ui": ["16px", { "lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "display-title": ["24px", { "lineHeight": "32px", "letterSpacing": "0.2em", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .spotlight_glow {
+            background: radial-gradient(circle at top center, rgba(244, 189, 97, 0.15) 0%, transparent 60%);
+        }
+        .overlay_veil {
+            background-color: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-ui min-h-screen flex flex-col pb-24">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-margin-screen h-20 docked full-width top-0 bg-background dark:bg-background border-b border-primary/30 flat no shadows z-40 relative">
+<div class="flex items-center text-primary dark:text-primary hover:opacity-80 transition-opacity active:scale-95 duration-300 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</div>
+<div class="text-center">
+<h1 class="text-display-title font-display-title text-primary tracking-widest uppercase">CHROMA JIGSAW</h1>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/30 flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity active:scale-95 duration-300">
+<img alt="User profile portrait" class="w-full h-full object-cover" data-alt="A sophisticated black and white portrait of a person looking softly towards the camera. The lighting is low-key, evoking a moody, midnight gallery atmosphere. The background is a pure, deep dark void. The styling emphasizes tactile textures, fitting a luxurious, minimalist aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG-7SA_Qc12CBRcAJzdFMzwCHTnBhf95eN9fxzUi1p869xRNNLnd6QNQMwgK_n1T9nEVJI9sMIDofCvOirB6JB13GsJsDZqOP7RxUILy9-dk1cHuFmclb4-Gn6o035tg6Xfi7dSDr0CtDDPLuseba5IFSeu2D3xgdfQyxiw4SyvSIFDJpJXUTrNgPOO93kAIEW6uU11Xv0xzRbeP2DI3g5t1ou0-IXyx2SCOrvzVOfFVez88ub-oFkZe1EdpSi8sCi9RNaEye1QMk"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow px-margin-screen pt-section-gap pb-section-gap spotlight_glow relative">
+<!-- Header Section -->
+<div class="mb-section-gap text-center relative">
+<h2 class="font-display-title text-display-title text-on-surface mb-2 tracking-widest">PUZZLES</h2>
+<p class="font-headline-italic text-headline-italic text-on-surface-variant flex items-center justify-center gap-4">
+<span class="h-[1px] w-12 bg-primary/30 block"></span>
+<span class="text-primary text-[10px]">◇</span>
+                Browse Collections
+                <span class="text-primary text-[10px]">◇</span>
+<span class="h-[1px] w-12 bg-primary/30 block"></span>
+</p>
+</div>
+<!-- XP Progress Component -->
+<div class="mb-section-gap max-w-md mx-auto p-gutter-frame border border-outline-variant bg-surface-container rounded flex flex-col gap-3">
+<div class="flex justify-between items-center font-label-caps text-label-caps text-primary tracking-widest">
+<span>XP</span>
+<span class="text-secondary-fixed-dim">7,450 / 10,000</span>
+</div>
+<div class="w-full h-1 bg-background relative overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-primary/80" style="width: 74.5%;"></div>
+</div>
+</div>
+<!-- Bento Grid Packs -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter-frame pb-8">
+<!-- Forest Pack -->
+<div class="group relative overflow-hidden rounded border border-[#3d2b1a] bg-surface aspect-[4/3] cursor-pointer transition-all duration-500 hover:border-primary/50">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=2070&amp;q=80')] bg-cover bg-center opacity-40 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-60" data-alt="A dark, moody forest scene captured at twilight. Tall silhouettes of pine trees emerge from a thick, ethereal mist. The overall color palette is dominated by deep charcoal blacks and subtle, desaturated olive greens. The lighting is extremely soft, resembling a low-stimulation museum display of natural textures."></div>
+<!-- Woodgrain texture hint overlay -->
+<div class="absolute inset-0 bg-surface/20 mix-blend-multiply border-b-2 border-transparent group-hover:border-primary/20 transition-all duration-500"></div>
+<div class="absolute bottom-0 left-0 w-full p-gutter-frame bg-gradient-to-t from-surface-lowest to-transparent flex flex-col gap-1">
+<h3 class="font-display-title text-[20px] text-on-surface tracking-wider">Forest Pack</h3>
+<div class="flex justify-between items-center">
+<span class="font-metadata-sm text-metadata-sm text-on-surface-variant">12 Puzzles</span>
+<span class="material-symbols-outlined text-primary/70 text-sm group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Coastal Pack -->
+<div class="group relative overflow-hidden rounded border border-[#3d2b1a] bg-surface aspect-[4/3] cursor-pointer transition-all duration-500 hover:border-primary/50">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1468581264429-2548ef9eb732?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=2070&amp;q=80')] bg-cover bg-center opacity-40 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-60" data-alt="A minimalist photograph of a dark, turbulent ocean at night. Only the faintest crests of waves are visible against the pitch-black water. The sky above is a seamless dark gradient. The aesthetic is extremely hushed and textured, like an expensive linen canvas displayed in a private midnight art gallery."></div>
+<!-- Linen texture hint overlay -->
+<div class="absolute inset-0 bg-surface/10 mix-blend-color-burn border-b-2 border-transparent group-hover:border-primary/20 transition-all duration-500"></div>
+<div class="absolute bottom-0 left-0 w-full p-gutter-frame bg-gradient-to-t from-surface-lowest to-transparent flex flex-col gap-1">
+<h3 class="font-display-title text-[20px] text-on-surface tracking-wider">Coastal Pack</h3>
+<div class="flex justify-between items-center">
+<span class="font-metadata-sm text-metadata-sm text-on-surface-variant">8 Puzzles</span>
+<span class="material-symbols-outlined text-primary/70 text-sm group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Nordic Pack (Locked) -->
+<div class="group relative overflow-hidden rounded border border-outline-variant/30 bg-surface aspect-[4/3] cursor-not-allowed">
+<!-- Image with veil -->
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1476820865390-c52aeebb9891?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=2070&amp;q=80')] bg-cover bg-center opacity-20 filter grayscale" data-alt="An abstract, out-of-focus interpretation of a snow-covered Nordic landscape at midnight. Deep shadows obscure most details, leaving only hints of jagged rock formations and icy expanses. The palette consists entirely of stark blacks and muted cool grays. The overall feeling is distant, untouchable, and heavily veiled in darkness."></div>
+<div class="absolute inset-0 overlay_veil flex items-center justify-center">
+<div class="flex flex-col items-center gap-2 text-primary/50">
+<span class="material-symbols-outlined text-3xl" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="font-label-caps text-label-caps tracking-widest">LOCKED</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-gutter-frame flex flex-col gap-1 opacity-50 z-10">
+<h3 class="font-display-title text-[20px] text-on-surface-variant tracking-wider">Nordic Pack</h3>
+<span class="font-metadata-sm text-metadata-sm text-outline">Unlocks at XP 10,000</span>
+</div>
+</div>
+<!-- Abstract Pack -->
+<div class="group relative overflow-hidden rounded border border-[#3d2b1a] bg-surface aspect-[4/3] cursor-pointer transition-all duration-500 hover:border-primary/50">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=2070&amp;q=80')] bg-cover bg-center opacity-40 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-60" data-alt="A macro shot of luxurious, dark geometric architectural forms. Thin lines of gold catch sparse, directional light against a background of matte black surfaces. The image relies heavily on negative space and architectural precision, embodying a high-end, tactile minimalism suitable for a refined puzzle collection cover."></div>
+<div class="absolute bottom-0 left-0 w-full p-gutter-frame bg-gradient-to-t from-surface-lowest to-transparent flex flex-col gap-1">
+<h3 class="font-display-title text-[20px] text-on-surface tracking-wider">Abstract Form</h3>
+<div class="flex justify-between items-center">
+<span class="font-metadata-sm text-metadata-sm text-on-surface-variant">15 Puzzles</span>
+<span class="material-symbols-outlined text-primary/70 text-sm group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-screen bg-background/95 backdrop-blur-md border-t border-primary/20 bg-surface-container-lowest dark:bg-surface-container-lowest docked full-width bottom-0 flat no shadows">
+<div class="flex flex-col items-center justify-center text-on-surface-variant/60 pt-2 pb-4 hover:text-primary/80 transition-all duration-500 ease-in-out cursor-pointer">
+<span class="material-symbols-outlined mb-1" data-icon="frame_inspect">frame_inspect</span>
+<span class="font-label-caps text-label-caps">Gallery</span>
+</div>
+<!-- Active Tab: Puzzles -->
+<div class="flex flex-col items-center justify-center text-primary border-t-2 border-primary pt-2 pb-4 transition-all duration-500 ease-in-out cursor-pointer relative">
+<span class="material-symbols-outlined mb-1" data-icon="extension" style="font-variation-settings: 'FILL' 1;">extension</span>
+<span class="font-label-caps text-label-caps">Puzzles</span>
+<div class="absolute bottom-1 text-[8px] text-primary">◇</div>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant/60 pt-2 pb-4 hover:text-primary/80 transition-all duration-500 ease-in-out cursor-pointer">
+<span class="material-symbols-outlined mb-1" data-icon="filter_vintage">filter_vintage</span>
+<span class="font-label-caps text-label-caps">Ambience</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant/60 pt-2 pb-4 hover:text-primary/80 transition-all duration-500 ease-in-out cursor-pointer">
+<span class="material-symbols-outlined mb-1" data-icon="coffee">coffee</span>
+<span class="font-label-caps text-label-caps">Sanctuary</span>
+</div>
+</nav>
+</body></html>

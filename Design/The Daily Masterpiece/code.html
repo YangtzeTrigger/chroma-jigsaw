@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Daily Masterpiece - Chroma Jigsaw</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Montserrat:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#9c8f7e",
+                      "on-tertiary": "#003258",
+                      "error-container": "#93000a",
+                      "on-error-container": "#ffdad6",
+                      "background": "#131313",
+                      "primary-container": "#c8963e",
+                      "surface-container-high": "#2a2a2a",
+                      "on-background": "#e5e2e1",
+                      "on-secondary-fixed-variant": "#584400",
+                      "on-primary-container": "#4a3100",
+                      "surface-bright": "#3a3939",
+                      "primary": "#f4bd61",
+                      "surface-variant": "#353534",
+                      "surface-container-low": "#1c1b1b",
+                      "surface-container-highest": "#353534",
+                      "secondary": "#e2c375",
+                      "on-primary": "#432c00",
+                      "surface-tint": "#f4bd61",
+                      "inverse-surface": "#e5e2e1",
+                      "secondary-fixed": "#ffdf91",
+                      "tertiary-fixed-dim": "#9ecaff",
+                      "secondary-fixed-dim": "#e2c375",
+                      "tertiary-fixed": "#d1e4ff",
+                      "outline-variant": "#4f4537",
+                      "tertiary-container": "#71a2da",
+                      "on-tertiary-fixed": "#001d36",
+                      "on-surface-variant": "#d3c4b2",
+                      "inverse-on-surface": "#313030",
+                      "on-error": "#690005",
+                      "secondary-container": "#5b4601",
+                      "primary-fixed": "#ffdead",
+                      "surface-container": "#201f1f",
+                      "on-secondary-fixed": "#241a00",
+                      "on-secondary": "#3d2e00",
+                      "on-surface": "#e5e2e1",
+                      "error": "#ffb4ab",
+                      "surface-container-lowest": "#0e0e0e",
+                      "on-tertiary-fixed-variant": "#05497c",
+                      "primary-fixed-dim": "#f4bd61",
+                      "on-tertiary-container": "#003861",
+                      "surface": "#131313",
+                      "on-primary-fixed-variant": "#604100",
+                      "inverse-primary": "#7e5700",
+                      "tertiary": "#9ecaff",
+                      "surface-dim": "#131313",
+                      "on-primary-fixed": "#281900",
+                      "on-secondary-container": "#d3b568"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "section-gap": "48px",
+                      "margin-screen": "32px",
+                      "unit": "8px",
+                      "gutter-frame": "16px"
+              },
+              "fontFamily": {
+                      "metadata-sm": [
+                              "Montserrat"
+                      ],
+                      "label-caps": [
+                              "Montserrat"
+                      ],
+                      "body-ui": [
+                              "Montserrat"
+                      ],
+                      "headline-italic": [
+                              "EB Garamond"
+                      ],
+                      "display-title": [
+                              "EB Garamond"
+                      ]
+              },
+              "fontSize": {
+                      "metadata-sm": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "300"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-ui": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-italic": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400",
+                                      "fontStyle": "italic"
+                              }
+                      ],
+                      "display-title": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "0.2em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .spotlight-glow {
+            background: radial-gradient(circle at center, rgba(244, 189, 97, 0.1) 0%, rgba(19, 19, 19, 0) 70%);
+        }
+        .gold-border-1px {
+            border: 1px solid #9c8f7e;
+        }
+        .gold-border-t-1px {
+            border-top: 1px solid #9c8f7e;
+        }
+        .gold-border-b-1px {
+            border-bottom: 1px solid #9c8f7e;
+        }
+        .diamond-divider::before, .diamond-divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #9c8f7e;
+            opacity: 0.3;
+        }
+        .diamond-divider::before {
+            margin-right: 1rem;
+        }
+        .diamond-divider::after {
+            margin-left: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-ui antialiased selection:bg-primary/30 selection:text-primary">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background docked full-width top-0 border-b border-primary/20 mx-margin-screen mx-auto max-w-7xl">
+<div class="flex justify-between items-center w-full px-margin-screen py-gutter-frame">
+<button aria-label="Menu" class="text-primary dark:text-primary hover:text-secondary transition-colors duration-500 scale-95 duration-300 ease-in-out focus:outline-none">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+<h1 class="font-display-title text-display-title tracking-[0.3em] text-primary uppercase text-center flex-1">
+                CHROMA JIGSAW
+            </h1>
+<button aria-label="Profile" class="text-outline hover:text-secondary transition-colors duration-500 scale-95 duration-300 ease-in-out focus:outline-none">
+<span class="material-symbols-outlined text-2xl">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-margin-screen py-section-gap relative overflow-hidden max-w-4xl mx-auto w-full">
+<!-- Ambient Spotlight -->
+<div class="absolute inset-0 spotlight-glow pointer-events-none z-0"></div>
+<!-- Header Section -->
+<div class="text-center z-10 mb-section-gap w-full">
+<h2 class="font-display-title text-display-title text-primary uppercase tracking-widest mb-4">THE DAILY MASTERPIECE</h2>
+<p class="font-headline-italic text-headline-italic text-outline-variant mb-6">A quiet ritual for today</p>
+<!-- Diamond Divider -->
+<div class="flex items-center justify-center w-3/4 mx-auto diamond-divider text-outline text-[10px]">
+                ◇
+            </div>
+</div>
+<!-- Masterpiece Card -->
+<div class="z-10 w-full max-w-lg relative group">
+<div class="bg-surface p-4 border border-[#3d2b1a] relative shadow-2xl transition-transform duration-700 ease-out hover:scale-[1.02]">
+<!-- Subtle corner accents to suggest a frame -->
+<div class="absolute top-0 left-0 w-4 h-4 border-t border-l border-primary/30"></div>
+<div class="absolute top-0 right-0 w-4 h-4 border-t border-r border-primary/30"></div>
+<div class="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-primary/30"></div>
+<div class="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-primary/30"></div>
+<div class="aspect-square relative overflow-hidden bg-surface-container-low gold-border-1px mb-6">
+<img alt="A stunning macro photograph of a golden dewdrop resting on a textured autumn leaf. The lighting is warm and dramatic, highlighting the intricate veins of the leaf and the perfect spherical reflection within the droplet. The mood is meditative, serene, and highly detailed, fitting a luxury digital art gallery aesthetic." class="object-cover w-full h-full opacity-90 transition-opacity duration-700 group-hover:opacity-100 mix-blend-luminosity hover:mix-blend-normal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx6jEcWLPavmEPuQ6Yisy37GGmods7502NT49mrAcU8O2I5djMDlVDZVJhwbVqAytRBv_x67dEdLK2lYWyOLzBoI_ItBFYAaU5GX77IRPvwbjHOMx_fFsOs9jGpfwr3JnFFGRI5zmn3ljcs_fzkf-UowwbcE1b0DKNTWbS9Iz_qyT-YOMxKd6JAlc3hkA_wn-pS-9jmLQPpZNZ63JRApiQPNpLE3bOdMw1cqIQxvEvMPeiNjZqXZzvEHFysq5AX8IPTfBd1yB1awQ"/>
+</div>
+<div class="text-center flex flex-col items-center gap-2">
+<h3 class="font-label-caps text-label-caps text-on-surface uppercase tracking-widest">GOLDEN DEWDROP</h3>
+<p class="font-metadata-sm text-metadata-sm text-outline">24 PIECES</p>
+</div>
+</div>
+<!-- Begin Button -->
+<div class="mt-8 flex justify-center">
+<button class="gold-border-1px px-8 py-3 font-label-caps text-label-caps text-primary hover:bg-primary/10 transition-colors duration-500 ease-in-out focus:outline-none flex items-center gap-2 group">
+                    BEGIN RITUAL
+                    <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Minimal Calendar Row -->
+<div class="z-10 mt-section-gap w-full max-w-md">
+<div class="flex justify-between items-center px-4">
+<span class="font-metadata-sm text-metadata-sm text-outline-variant">M</span>
+<span class="font-metadata-sm text-metadata-sm text-outline-variant">T</span>
+<span class="font-metadata-sm text-metadata-sm text-outline-variant">W</span>
+<span class="font-metadata-sm text-metadata-sm text-primary">T</span>
+<span class="font-metadata-sm text-metadata-sm text-outline-variant">F</span>
+<span class="font-metadata-sm text-metadata-sm text-outline-variant">S</span>
+<span class="font-metadata-sm text-metadata-sm text-outline-variant">S</span>
+</div>
+<div class="flex justify-between items-center px-4 mt-3">
+<!-- Completed Days -->
+<div class="w-2 h-2 rounded-full bg-primary/60"></div>
+<div class="w-2 h-2 rounded-full bg-primary/60"></div>
+<div class="w-2 h-2 rounded-full bg-primary/60"></div>
+<!-- Today (Empty Circle) -->
+<div class="w-3 h-3 rounded-full border border-primary relative flex items-center justify-center">
+<div class="w-1 h-1 rounded-full bg-primary animate-pulse"></div>
+</div>
+<!-- Future Days -->
+<div class="w-2 h-2 rounded-full border border-outline-variant/30"></div>
+<div class="w-2 h-2 rounded-full border border-outline-variant/30"></div>
+<div class="w-2 h-2 rounded-full border border-outline-variant/30"></div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-surface dark:bg-surface fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-screen pb-8 pt-4 border-t border-primary/30 mx-margin-screen md:hidden">
+<a class="flex flex-col items-center text-outline opacity-60 hover:text-primary hover:opacity-100 transition-opacity duration-300 group" href="#">
+<span class="material-symbols-outlined text-2xl group-active:scale-110 transition-transform duration-500 ease-out">museum</span>
+</a>
+<a class="flex flex-col items-center text-primary after:content-['\25c7'] after:text-[10px] after:mt-1 group" href="#">
+<span class="material-symbols-outlined text-2xl group-active:scale-110 transition-transform duration-500 ease-out" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+</a>
+<a class="flex flex-col items-center text-outline opacity-60 hover:text-primary hover:opacity-100 transition-opacity duration-300 group" href="#">
+<span class="material-symbols-outlined text-2xl group-active:scale-110 transition-transform duration-500 ease-out">auto_awesome</span>
+</a>
+<a class="flex flex-col items-center text-outline opacity-60 hover:text-primary hover:opacity-100 transition-opacity duration-300 group" href="#">
+<span class="material-symbols-outlined text-2xl group-active:scale-110 transition-transform duration-500 ease-out">settings</span>
+</a>
+</nav>
+<!-- Desktop Nav Shim to prevent content from hiding under a potential bottom nav if resized -->
+<div class="h-24 md:hidden"></div>
+</body></html>

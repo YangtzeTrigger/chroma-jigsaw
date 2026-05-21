@@ -8,6 +8,8 @@ Logs/
 UserSettings/
 MemoryCaptures/
 RecordingCaptures/
+*/_Recovery/
+*/_Recovery.meta
 
 # Unity asset meta files for ignored assets
 *.pidb.meta

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chroma Jigsaw - Sanctuary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&amp;family=Montserrat:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#0e0e0e",
+                      "on-surface": "#e5e2e1",
+                      "on-secondary-fixed": "#241a00",
+                      "error-container": "#93000a",
+                      "tertiary-container": "#71a2da",
+                      "inverse-surface": "#e5e2e1",
+                      "tertiary-fixed-dim": "#9ecaff",
+                      "surface-container-high": "#2a2a2a",
+                      "outline": "#9c8f7e",
+                      "secondary-container": "#5b4601",
+                      "surface-container-low": "#1c1b1b",
+                      "on-tertiary-fixed-variant": "#05497c",
+                      "tertiary": "#9ecaff",
+                      "secondary-fixed": "#ffdf91",
+                      "primary-container": "#c8963e",
+                      "tertiary-fixed": "#d1e4ff",
+                      "on-error-container": "#ffdad6",
+                      "surface-dim": "#131313",
+                      "secondary": "#e2c375",
+                      "on-secondary-fixed-variant": "#584400",
+                      "primary": "#f4bd61",
+                      "on-tertiary": "#003258",
+                      "surface": "#131313",
+                      "surface-bright": "#3a3939",
+                      "on-surface-variant": "#d3c4b2",
+                      "inverse-primary": "#7e5700",
+                      "on-secondary": "#3d2e00",
+                      "on-primary": "#432c00",
+                      "surface-variant": "#353534",
+                      "primary-fixed-dim": "#f4bd61",
+                      "on-tertiary-container": "#003861",
+                      "background": "#131313",
+                      "surface-tint": "#f4bd61",
+                      "on-primary-fixed-variant": "#604100",
+                      "on-background": "#e5e2e1",
+                      "error": "#ffb4ab",
+                      "secondary-fixed-dim": "#e2c375",
+                      "on-error": "#690005",
+                      "outline-variant": "#4f4537",
+                      "surface-container-highest": "#353534",
+                      "on-secondary-container": "#d3b568",
+                      "inverse-on-surface": "#313030",
+                      "on-primary-container": "#4a3100",
+                      "primary-fixed": "#ffdead",
+                      "on-primary-fixed": "#281900",
+                      "on-tertiary-fixed": "#001d36",
+                      "surface-container": "#201f1f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "margin-screen": "32px",
+                      "section-gap": "48px",
+                      "gutter-frame": "16px"
+              },
+              "fontFamily": {
+                      "display-title": [
+                              "EB Garamond"
+                      ],
+                      "body-ui": [
+                              "Montserrat"
+                      ],
+                      "headline-italic": [
+                              "EB Garamond"
+                      ],
+                      "metadata-sm": [
+                              "Montserrat"
+                      ],
+                      "label-caps": [
+                              "Montserrat"
+                      ]
+              },
+              "fontSize": {
+                      "display-title": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "0.2em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-ui": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-italic": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "metadata-sm": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "300"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #0a0a0a; /* Level 0 Wall */
+        }
+        .spotlight-glow {
+            background: radial-gradient(circle at center, rgba(244, 189, 97, 0.05) 0%, transparent 70%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface font-body-ui min-h-screen flex flex-col pt-16 pb-20 md:pb-0">
+<!-- TopAppBar (Hidden on desktop if using full nav, but requested to show TopAppBar with bottom nav logic based on JSON) -->
+<header class="bg-surface dark:bg-surface text-primary dark:text-primary font-display-title text-display-title fixed top-0 w-full z-50 border-b border-outline-variant/30 flex items-center justify-between px-margin-screen h-16 transition-all duration-500 ease-in-out md:hidden">
+<button class="hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<span class="font-display-title text-display-title text-primary tracking-[0.2em]">CHROMA JIGSAW</span>
+<button class="hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="flex-grow px-margin-screen py-section-gap flex flex-col items-center max-w-4xl mx-auto w-full relative">
+<!-- Header Section -->
+<div class="text-center mb-section-gap w-full flex flex-col items-center">
+<h1 class="font-display-title text-display-title text-on-surface mb-unit">Sanctuary</h1>
+<p class="font-headline-italic text-headline-italic text-on-surface-variant italic">Quiet moments, no obligation.</p>
+<div class="w-12 h-px bg-primary mt-unit flex items-center justify-center relative">
+<span class="absolute text-[8px] text-primary">◇</span>
+</div>
+</div>
+<!-- Curated Selection -->
+<div class="w-full flex flex-col gap-section-gap relative">
+<div class="absolute inset-0 spotlight-glow -z-10"></div>
+<!-- Focus Image 1 -->
+<div class="bg-[#141414] border border-outline-variant rounded-DEFAULT p-gutter-frame flex flex-col items-center group relative overflow-hidden">
+<div class="w-full aspect-[4/3] rounded-sm overflow-hidden mb-gutter-frame">
+<img alt="Quiet lake at dawn" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700 group-hover:scale-105" data-alt="A serene, minimalist photograph of a completely still lake at dawn, shrouded in a soft, atmospheric mist. The lighting is low and moody, evoking a private art gallery at midnight aesthetic. Subtle, elegant highlights catch the gentle ripples of water in the foreground, contrasting with the deep, muted darkness of the surrounding silhouetted landscape. The composition is sparse and calming, prioritizing dark negative space and a meditative stillness suitable for a tactile luxury UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBLSWdMdC-Q3bkogp6th2EY-8qyg88E218awcOdfuPsVAR_nS2lvoo2EgnntYGDOh55pKw0x-KDM4NE7frnx_Kt9czC58OhK5co4Lnedt4LHRv8E1JR80jz2ShzivLaj4nLvur26xQqhYXJulZLD7F41zOQT4lXxgjkn1YrP8yk-_Fpe9rRTT3D0cR3UEwWXlIVFaG4G0Dcj8HR7KVwggqkIxGpA0O4cllbrxBuZVYtwYCGlzZfZ9Oa04CrokTNh8tqV6kq5eQFOo"/>
+</div>
+<div class="flex flex-col items-center w-full">
+<span class="font-label-caps text-label-caps text-on-surface mb-unit">Still Water</span>
+<span class="font-metadata-sm text-metadata-sm text-on-surface-variant mb-unit">12 pieces</span>
+<button class="border border-primary text-primary font-label-caps text-label-caps px-6 py-2 rounded-DEFAULT hover:bg-primary/10 transition-colors duration-300">
+                        Begin
+                    </button>
+</div>
+</div>
+<!-- Focus Image 2 -->
+<div class="bg-[#141414] border border-outline-variant rounded-DEFAULT p-gutter-frame flex flex-col items-center group relative overflow-hidden">
+<div class="w-full aspect-[4/3] rounded-sm overflow-hidden mb-gutter-frame">
+<img alt="Single golden leaf" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700 group-hover:scale-105" data-alt="A macro, fine-art photograph of a single, fragile golden autumn leaf resting on a textured, deep black felt-like surface. The lighting simulates a focused gallery spotlight from above, illuminating the intricate veins of the leaf while leaving the edges to fade away into profound darkness. The aesthetic is tactile luxury and high-end minimalism, emphasizing the quiet beauty of a solitary object against a backdrop of deep, meditative shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYbxIozLI108127U7sm4ShDDN_cjz0R3NZhYuGiVzdbt9Y8qXhJfw52nvImZp7fnDTUhn19W8ufBYsBjvzA180NHOs0HeXfZvy-TCIPgsG_03nV6JzV9qgicel3860URNQpeVgPoZqyCwmYgkvtNcxgQEgRROlFX52PqAKAv5GP6a9yJb8azC3KYNcbtqFHkhUFXhyga7Y7UciXQmjHr6msxlz__skvJaPIv-XbquEzeC2Dh3jHpJl6PBrVyTjMoGhVOAc230HvjE"/>
+</div>
+<div class="flex flex-col items-center w-full">
+<span class="font-label-caps text-label-caps text-on-surface mb-unit">Solitary Leaf</span>
+<span class="font-metadata-sm text-metadata-sm text-on-surface-variant mb-unit">24 pieces</span>
+<button class="border border-primary text-primary font-label-caps text-label-caps px-6 py-2 rounded-DEFAULT hover:bg-primary/10 transition-colors duration-300">
+                        Begin
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-surface-container dark:bg-surface-container text-primary dark:text-primary font-label-caps text-label-caps fixed bottom-0 w-full z-50 h-20 shadow-md flex justify-around items-center px-gutter-frame md:hidden">
+<a class="flex flex-col items-center justify-center text-outline gap-1 hover:text-secondary transition-colors scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span>Gallery</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline gap-1 hover:text-secondary transition-colors scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="extension">extension</span>
+<span>Puzzles</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline gap-1 hover:text-secondary transition-colors scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="filter_vintage">filter_vintage</span>
+<span>Ambience</span>
+</a>
+<!-- Active Tab -->
+<a class="flex flex-col items-center justify-center text-primary gap-1 after:content-['◇'] after:text-[10px] after:mt-1 hover:text-secondary transition-colors scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="spa" style="font-variation-settings: 'FILL' 1;">spa</span>
+<span>Sanctuary</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chroma Jigsaw - Gallery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600&amp;family=Montserrat:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-error": "#690005",
+                        "on-tertiary-container": "#003861",
+                        "secondary-fixed-dim": "#e2c375",
+                        "on-secondary": "#3d2e00",
+                        "on-background": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#05497c",
+                        "inverse-on-surface": "#313030",
+                        "surface-tint": "#f4bd61",
+                        "on-primary-fixed-variant": "#604100",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary-fixed": "#281900",
+                        "on-tertiary-fixed": "#001d36",
+                        "on-primary-container": "#4a3100",
+                        "primary-container": "#c8963e",
+                        "on-tertiary": "#003258",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#5b4601",
+                        "outline-variant": "#4f4537",
+                        "on-primary": "#432c00",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container-low": "#1c1b1b",
+                        "on-secondary-container": "#d3b568",
+                        "secondary-fixed": "#ffdf91",
+                        "primary-fixed-dim": "#f4bd61",
+                        "primary-fixed": "#ffdead",
+                        "surface-variant": "#353534",
+                        "primary": "#f4bd61",
+                        "secondary": "#e2c375",
+                        "surface-bright": "#3a3939",
+                        "on-secondary-fixed-variant": "#584400",
+                        "tertiary": "#9ecaff",
+                        "surface-container": "#201f1f",
+                        "background": "#131313",
+                        "surface-dim": "#131313",
+                        "surface": "#131313",
+                        "tertiary-fixed": "#d1e4ff",
+                        "outline": "#9c8f7e",
+                        "tertiary-container": "#71a2da",
+                        "on-secondary-fixed": "#241a00",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#353534",
+                        "inverse-primary": "#7e5700",
+                        "surface-container-high": "#2a2a2a",
+                        "on-surface": "#e5e2e1",
+                        "on-surface-variant": "#d3c4b2"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "margin-screen": "32px",
+                        "gutter-frame": "16px",
+                        "section-gap": "48px",
+                        "unit": "8px"
+                    },
+                    fontFamily: {
+                        "headline-italic": ["EB Garamond"],
+                        "metadata-sm": ["Montserrat"],
+                        "body-ui": ["Montserrat"],
+                        "display-title": ["EB Garamond"],
+                        "label-caps": ["Montserrat"]
+                    },
+                    fontSize: {
+                        "headline-italic": ["20px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "metadata-sm": ["13px", { "lineHeight": "18px", "fontWeight": "300" }],
+                        "body-ui": ["16px", { "lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "display-title": ["24px", { "lineHeight": "32px", "letterSpacing": "0.2em", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #0a0a0a; }
+        .spotlight-glow {
+            position: relative;
+        }
+        .spotlight-glow::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(244, 189, 97, 0.15) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .overlay-veil {
+            background: rgba(10, 10, 10, 0.85);
+        }
+        .museum-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #f4bd61, transparent);
+            margin: 0 32px;
+        }
+        .museum-divider-center {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .museum-divider-center::before, .museum-divider-center::after {
+            content: '';
+            height: 1px;
+            flex-grow: 1;
+            background: #f4bd61;
+            opacity: 0.3;
+        }
+        .museum-divider-center::before { margin-right: 16px; }
+        .museum-divider-center::after { margin-left: 16px; }
+        .diamond-marker {
+            color: #f4bd61;
+            font-size: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-background text-primary docked full-width top-0 border-b border-primary/30 flex justify-between items-center w-full px-margin-screen h-20 z-40 sticky">
+<button class="hover:opacity-80 transition-opacity active:scale-95 duration-300">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="text-display-title font-display-title text-primary tracking-widest uppercase">CHROMA JIGSAW</div>
+<div class="hover:opacity-80 transition-opacity active:scale-95 duration-300 w-8 h-8 rounded-full overflow-hidden border border-primary/30">
+<img alt="User profile portrait" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnM5Tphhm9m7PCrOqfE4YIrSL8vtp48W-J4lM_SGcKejESxU_NNqsARV0QB_QR51dxo37fMyE-b2I7MlWhBCyQG9F9fqGxG_a4L4uNjyxo4Q4fZG0JhNnWnQhvZda5o3fpv62lp-oek7KJSoVYdgW0RUQqR0IKxB0-FjxEpYq6eWK9r_BkIK9x-lT6fWEFlQL6B05itY4iFA5tHx0U1STaG4FmAVvaVNY0lof1y0o2e_jgDWSdpfmZsBzcJo_JK7c22wPafKZPqVY"/>
+</div>
+</header>
+<main class="max-w-7xl mx-auto pt-12 pb-24">
+<!-- Header Section -->
+<div class="px-margin-screen mb-section-gap text-center">
+<h1 class="font-display-title text-display-title text-primary mb-4">GALLERY</h1>
+<p class="font-headline-italic text-headline-italic text-on-surface-variant">Your Collections</p>
+</div>
+<div class="museum-divider-center mb-section-gap px-margin-screen">
+<span class="diamond-marker">◇</span>
+</div>
+<!-- Gallery Grid -->
+<div class="px-margin-screen grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1: Completed (Gold Glow) -->
+<article class="relative group cursor-pointer spotlight-glow">
+<div class="border border-primary bg-surface p-4 transition-all duration-500 group-hover:bg-primary/5">
+<div class="aspect-[4/3] w-full mb-6 relative overflow-hidden">
+<img alt="Alpine Heights" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all duration-700" data-alt="A breathtaking view of snow-capped alpine mountains under a dark, starry night sky. The scene is illuminated by moonlight reflecting off the pristine snow, creating deep shadows in the valleys. The aesthetic is extremely minimalist and moody, dominated by deep charcoal blacks and subtle cool grays, with a single, highly refined touch of warm gold light hitting the highest peak. The overall atmosphere is quiet, majestic, and deeply meditative, fitting perfectly into a sophisticated gallery setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCorfcItDxdKsf8d33Fm0zLw_3-lMFpMaOHvNe_TYi-iBOMRrFm_zKTbo0PhOShPGM2UNi1FvAqh5iH3qu1xVTRXW4GweUlQ9RdMP-nknlOQHY0T6GVs7OD7dzFW3S0ASro6U1nMT8RHASe_y9NzAZIhtmJyzILF68x_rqPcMvjIN00O39j7AEhrKoLVZEMBBzJeE9kR6TDUOeiPfvPJ-IqIfwSue7Cr5upzyN8_KSdaISGMITvgG-Dm6HSAl7QzUV7aRxaBFgsoio"/>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-display-title text-display-title text-on-surface mb-2">Alpine Heights</h2>
+<p class="font-label-caps text-label-caps text-primary">COMPLETED</p>
+</div>
+<span class="font-metadata-sm text-metadata-sm text-on-surface-variant">12/12</span>
+</div>
+</div>
+</article>
+<!-- Card 2: In Progress -->
+<article class="relative group cursor-pointer">
+<div class="border border-[#3d2b1a] bg-surface p-4 transition-all duration-500 group-hover:border-primary/50 group-hover:bg-primary/5">
+<div class="aspect-[4/3] w-full mb-6 relative overflow-hidden">
+<img alt="Coastal Whispers" class="w-full h-full object-cover opacity-60" data-alt="A serene, minimalist seascape viewed from a cliff edge at midnight. The ocean waves are rendered as smooth, silky textures, blending into a deep, impenetrable dark horizon. The color palette is restricted to profound blacks, varying shades of slate grey, and a subtle, desaturated navy. A faint, diffuse glow hints at a distant lighthouse, providing the only warmth in the composition. The style is highly atmospheric, emphasizing vast, quiet emptiness and museum-quality breathability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn5WQ9yw4QYFHE4jWGRN36r_NqIgGbviyouI95aSobI3LEDXb5YRE0mgm-o3LUv1ExSYJYQReAY4dLHs9yC99LpX06qy_aCcD0wZjFBokoo8ZbAtAU6IR-MtvffVYHA6t5vQExnm1NZ5dMR9KAvBLGoX3DvJuYhgbksEINck0veg0pzZv5mFjkiRtgfVPETuPQJHT7Wds1cs64fJWlXgwi8gvcS6Tuwg-44I_7pu9ndcTVpmMFJBfhcu72qx7wzXJq9uiCxSW4mKk"/>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-display-title text-display-title text-on-surface mb-2">Coastal Whispers</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant">IN PROGRESS</p>
+</div>
+<span class="font-metadata-sm text-metadata-sm text-on-surface-variant">7/12</span>
+</div>
+</div>
+</article>
+<!-- Card 3: Locked -->
+<article class="relative group cursor-not-allowed">
+<div class="border border-surface-variant bg-surface-container-lowest p-4 relative">
+<div class="aspect-[4/3] w-full mb-6 relative overflow-hidden">
+<div class="absolute inset-0 overlay-veil z-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant/50 text-4xl" data-icon="lock">lock</span>
+</div>
+<img alt="Urban Geometry" class="w-full h-full object-cover opacity-30" data-alt="Abstract architectural photography focusing on the intersection of brutalist concrete forms under stark, high-contrast lighting. Deep, cavernous shadows obscure much of the detail, leaving only precise, razor-sharp edges illuminated. The palette is strictly monochromatic, relying on pure black and varied grey tones. The composition feels grand, imposing, and perfectly still, capturing the essence of a modern, empty space at night." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtF9S-nB2DnyBr4XrNnfxGcyDjpaky3h52HpEgkaGYlUW3vfOVo4HmcWNwXqojCndCQbBz1wVQDN9M__5l4rRrtwtN-JZ4_LdARW-34UiYsVVtKBh7o6UfRLvXrolKeYIuKBQ9XezZ9hqOaHksREuFl3UBzQJskGYrEUixJlQGidoQ64iWO3eXYUI3nfMqmnUo6DBQVeRu0kJdROXbxpVTK_LcY7p4vMOfNZbBGol6MLSHY-g0FwRbHp7oS-TQ7V2ajeauk39y634"/>
+</div>
+<div class="flex justify-between items-end opacity-50">
+<div>
+<h2 class="font-display-title text-display-title text-on-surface mb-2">Urban Geometry</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant">LOCKED</p>
+</div>
+<span class="font-metadata-sm text-metadata-sm text-on-surface-variant">0/12</span>
+</div>
+</div>
+</article>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden bg-surface-container-lowest text-primary docked full-width bottom-0 border-t border-primary/20 fixed left-0 w-full z-50 flex justify-around items-center px-margin-screen bg-background/95 backdrop-blur-md">
+<!-- Gallery (Active) -->
+<a class="flex flex-col items-center justify-center text-primary border-t-2 border-primary pt-2 pb-4 hover:text-primary/80 transition-all duration-500 ease-in-out flex-1" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="frame_inspect">frame_inspect</span>
+<span class="font-label-caps text-label-caps">Gallery</span>
+</a>
+<!-- Puzzles (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 pt-2 pb-4 hover:text-primary/80 transition-all duration-500 ease-in-out flex-1" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="extension">extension</span>
+<span class="font-label-caps text-label-caps">Puzzles</span>
+</a>
+<!-- Ambience (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 pt-2 pb-4 hover:text-primary/80 transition-all duration-500 ease-in-out flex-1" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="filter_vintage">filter_vintage</span>
+<span class="font-label-caps text-label-caps">Ambience</span>
+</a>
+<!-- Sanctuary (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 pt-2 pb-4 hover:text-primary/80 transition-all duration-500 ease-in-out flex-1" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="coffee">coffee</span>
+<span class="font-label-caps text-label-caps">Sanctuary</span>
+</a>
+</nav>
+</body></html>

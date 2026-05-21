@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chroma - Exhibition View</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#690005",
+                        "on-tertiary-container": "#003861",
+                        "secondary-fixed-dim": "#e2c375",
+                        "on-secondary": "#3d2e00",
+                        "on-background": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#05497c",
+                        "inverse-on-surface": "#313030",
+                        "surface-tint": "#f4bd61",
+                        "on-primary-fixed-variant": "#604100",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary-fixed": "#281900",
+                        "on-tertiary-fixed": "#001d36",
+                        "on-primary-container": "#4a3100",
+                        "primary-container": "#c8963e",
+                        "on-tertiary": "#003258",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#5b4601",
+                        "outline-variant": "#4f4537",
+                        "on-primary": "#432c00",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container-low": "#1c1b1b",
+                        "on-secondary-container": "#d3b568",
+                        "secondary-fixed": "#ffdf91",
+                        "primary-fixed-dim": "#f4bd61",
+                        "primary-fixed": "#ffdead",
+                        "surface-variant": "#353534",
+                        "primary": "#f4bd61",
+                        "secondary": "#e2c375",
+                        "surface-bright": "#3a3939",
+                        "on-secondary-fixed-variant": "#584400",
+                        "tertiary": "#9ecaff",
+                        "surface-container": "#201f1f",
+                        "background": "#131313",
+                        "surface-dim": "#131313",
+                        "surface": "#131313",
+                        "tertiary-fixed": "#d1e4ff",
+                        "outline": "#9c8f7e",
+                        "tertiary-container": "#71a2da",
+                        "on-secondary-fixed": "#241a00",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#353534",
+                        "inverse-primary": "#7e5700",
+                        "surface-container-high": "#2a2a2a",
+                        "on-surface": "#e5e2e1",
+                        "on-surface-variant": "#d3c4b2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-screen": "32px",
+                        "gutter-frame": "16px",
+                        "section-gap": "48px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-italic": ["EB Garamond", "serif"],
+                        "metadata-sm": ["Montserrat", "sans-serif"],
+                        "body-ui": ["Montserrat", "sans-serif"],
+                        "display-title": ["EB Garamond", "serif"],
+                        "label-caps": ["Montserrat", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "headline-italic": ["20px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "metadata-sm": ["13px", { "lineHeight": "18px", "fontWeight": "300" }],
+                        "body-ui": ["16px", { "lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "display-title": ["24px", { "lineHeight": "32px", "letterSpacing": "0.2em", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-black text-on-surface min-h-screen relative overflow-hidden font-body-ui selection:bg-primary/30">
+<!-- Ambient Spotlight Halo (Gallery Lighting) -->
+<div class="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+<div class="w-[80vw] h-[80vw] md:w-[50vw] md:h-[50vw] rounded-full bg-primary/10 blur-[120px]"></div>
+</div>
+<!-- Minimal/Transparent Top Header -->
+<header class="absolute top-0 w-full z-30 flex justify-between items-center px-margin-screen h-20 bg-gradient-to-b from-black/80 to-transparent">
+<button aria-label="Close" class="flex items-center justify-center w-12 h-12 rounded-full border border-transparent hover:border-primary/30 hover:bg-primary/5 transition-all duration-300 text-on-surface-variant">
+<span class="material-symbols-outlined text-[28px]">close</span>
+</button>
+<div class="font-display-title text-display-title text-primary tracking-widest uppercase opacity-70">
+            CHROMA
+        </div>
+<div class="w-12"></div> <!-- Spacer for optical centering -->
+</header>
+<!-- Main Exhibition Canvas -->
+<main class="relative z-10 w-full h-screen flex flex-col items-center justify-center px-margin-screen pt-20 pb-32">
+<!-- Artwork Title -->
+<h1 class="font-display-title text-display-title text-on-surface mb-section-gap tracking-widest text-center opacity-90 drop-shadow-md">
+            MISTY FOREST
+        </h1>
+<!-- The Framed Artwork -->
+<div class="relative group cursor-pointer w-full max-w-5xl flex items-center justify-center">
+<!-- Plinth / Outer Frame Layer -->
+<div class="relative z-10 p-4 bg-surface-container-lowest border border-[#3d2b1a] shadow-2xl transition-transform duration-700 ease-out hover:scale-[1.01]">
+<!-- Inner Image Container -->
+<div class="relative border border-surface-variant overflow-hidden bg-black">
+<!-- The Artwork -->
+<img alt="Misty Forest" class="w-full max-h-[530px] object-contain opacity-95" data-alt="A breathtaking, cinematic photographic composition of an ancient pine forest enveloped in thick, luminous morning mist. A dramatic, warm spotlight beam pierces through the dense canopy from above, illuminating the rolling fog and casting deep, mysterious shadows among the dark tree trunks. The aesthetic embodies a private, midnight art gallery viewing: high-contrast, moody, meditative, and undeniably luxurious. The color palette relies on profound charcoal blacks, muted forest greens, and a single, radiant core of warm gold light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW-hxM63a8xh6JkPmIqcHU8oWVm7wYm1hk8JAntnbpAek5bvNojK4GzSoWy6HzW4X8oOdLoQDyBbiMNX4qVBaOhqPiZih6eOLj2qXf2jYmRNm6VdGHAsHk2fapmGnvKpi0kR34eRt-xM-FP1azLWTjR7kT3HhYeFpwfKF_LMPeH8irlTR43b62dxL-b2JkAm_1O9bt4x884IhVO27OWOv9GbQUmBSJENFnQOyL1tA40uz8gb7UiaSPge_dhwT37fE6NbSRV-Qyz6Y"/>
+<!-- Tactile Highlight (Simulating physical gloss/light reflection) -->
+<div class="absolute top-0 left-0 w-1/2 h-1/2 bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none mix-blend-overlay"></div>
+</div>
+</div>
+<!-- Focus Indicator (Subtle bottom line when hovering the frame area, hinting at interaction) -->
+<div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-0 h-px bg-primary opacity-0 group-hover:w-1/4 group-hover:opacity-50 transition-all duration-700"></div>
+</div>
+</main>
+<!-- Bottom Action Menu -->
+<div class="absolute bottom-0 w-full h-32 flex justify-center items-center gap-12 md:gap-24 px-margin-screen z-30 bg-gradient-to-t from-black via-black/80 to-transparent">
+<button class="flex flex-col items-center gap-unit group focus:outline-none">
+<div class="w-12 h-12 rounded-full border border-primary/40 flex items-center justify-center bg-transparent group-hover:bg-primary/10 group-hover:border-primary transition-all duration-300 shadow-[0_0_15px_rgba(244,189,97,0)] group-hover:shadow-[0_0_15px_rgba(244,189,97,0.15)]">
+<span class="material-symbols-outlined text-primary text-[24px]">replay</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant tracking-widest opacity-70 group-hover:opacity-100 transition-opacity">REPLAY</span>
+</button>
+<button class="flex flex-col items-center gap-unit group focus:outline-none">
+<div class="w-12 h-12 rounded-full border border-primary/40 flex items-center justify-center bg-transparent group-hover:bg-primary/10 group-hover:border-primary transition-all duration-300 shadow-[0_0_15px_rgba(244,189,97,0)] group-hover:shadow-[0_0_15px_rgba(244,189,97,0.15)]">
+<span class="material-symbols-outlined text-primary text-[24px]">share</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant tracking-widest opacity-70 group-hover:opacity-100 transition-opacity">SHARE</span>
+</button>
+<button class="flex flex-col items-center gap-unit group focus:outline-none">
+<div class="w-12 h-12 rounded-full border border-primary/40 flex items-center justify-center bg-transparent group-hover:bg-primary/10 group-hover:border-primary transition-all duration-300 shadow-[0_0_15px_rgba(244,189,97,0)] group-hover:shadow-[0_0_15px_rgba(244,189,97,0.15)]">
+<span class="material-symbols-outlined text-primary text-[24px]">wallpaper</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant tracking-widest opacity-70 group-hover:opacity-100 transition-opacity">SET WALLPAPER</span>
+</button>
+</div>
+</body></html>

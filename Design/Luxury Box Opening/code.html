@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chroma Jigsaw - Luxury Box Opening</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Montserrat:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-surface": "#e5e2e1",
+                        "on-secondary-fixed": "#241a00",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#71a2da",
+                        "inverse-surface": "#e5e2e1",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "surface-container-high": "#2a2a2a",
+                        "outline": "#9c8f7e",
+                        "secondary-container": "#5b4601",
+                        "surface-container-low": "#1c1b1b",
+                        "on-tertiary-fixed-variant": "#05497c",
+                        "tertiary": "#9ecaff",
+                        "secondary-fixed": "#ffdf91",
+                        "primary-container": "#c8963e",
+                        "tertiary-fixed": "#d1e4ff",
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#131313",
+                        "secondary": "#e2c375",
+                        "on-secondary-fixed-variant": "#584400",
+                        "primary": "#f4bd61",
+                        "on-tertiary": "#003258",
+                        "surface": "#131313",
+                        "surface-bright": "#3a3939",
+                        "on-surface-variant": "#d3c4b2",
+                        "inverse-primary": "#7e5700",
+                        "on-secondary": "#3d2e00",
+                        "on-primary": "#432c00",
+                        "surface-variant": "#353534",
+                        "primary-fixed-dim": "#f4bd61",
+                        "on-tertiary-container": "#003861",
+                        "background": "#131313",
+                        "surface-tint": "#f4bd61",
+                        "on-primary-fixed-variant": "#604100",
+                        "on-background": "#e5e2e1",
+                        "error": "#ffb4ab",
+                        "secondary-fixed-dim": "#e2c375",
+                        "on-error": "#690005",
+                        "outline-variant": "#4f4537",
+                        "surface-container-highest": "#353534",
+                        "on-secondary-container": "#d3b568",
+                        "inverse-on-surface": "#313030",
+                        "on-primary-container": "#4a3100",
+                        "primary-fixed": "#ffdead",
+                        "on-primary-fixed": "#281900",
+                        "on-tertiary-fixed": "#001d36",
+                        "surface-container": "#201f1f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-screen": "32px",
+                        "section-gap": "48px",
+                        "gutter-frame": "16px"
+                    },
+                    "fontFamily": {
+                        "display-title": [
+                            "EB Garamond"
+                        ],
+                        "body-ui": [
+                            "Montserrat"
+                        ],
+                        "headline-italic": [
+                            "EB Garamond"
+                        ],
+                        "metadata-sm": [
+                            "Montserrat"
+                        ],
+                        "label-caps": [
+                            "Montserrat"
+                        ]
+                    },
+                    "fontSize": {
+                        "display-title": [
+                            "24px",
+                            {
+                                "lineHeight": "32px",
+                                "letterSpacing": "0.2em",
+                                "fontWeight": "600"
+                            }
+                        ],
+                        "body-ui": [
+                            "16px",
+                            {
+                                "lineHeight": "24px",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "400"
+                            }
+                        ],
+                        "headline-italic": [
+                            "20px",
+                            {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                            }
+                        ],
+                        "metadata-sm": [
+                            "13px",
+                            {
+                                "lineHeight": "18px",
+                                "fontWeight": "300"
+                            }
+                        ],
+                        "label-caps": [
+                            "12px",
+                            {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.1em",
+                                "fontWeight": "600"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .spotlight_glow {
+            background: radial-gradient(circle at center, rgba(244, 189, 97, 0.1) 0%, transparent 70%);
+        }
+        .overlay_veil {
+            background: rgba(10, 10, 10, 0.85);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-ui min-h-screen flex flex-col pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface text-primary border-b border-outline-variant/30 flex items-center justify-between px-margin-screen h-16 transition-all duration-500 ease-in-out">
+<button class="text-on-surface-variant hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-display-title text-display-title tracking-[0.2em]">CHROMA JIGSAW</h1>
+<button class="text-on-surface-variant hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 px-margin-screen md:px-margin-screen flex flex-col items-center max-w-7xl mx-auto w-full">
+<!-- Header Section -->
+<div class="w-full text-center mb-12 flex flex-col items-center">
+<h2 class="font-display-title text-[32px] leading-[40px] tracking-[0.2em] text-primary mb-2 uppercase">Forest Pack</h2>
+<div class="flex items-center gap-4 text-outline mb-6">
+<span class="h-[1px] w-12 bg-outline"></span>
+<span class="font-label-caps text-label-caps tracking-[0.1em]">COLLECTION REVEALED</span>
+<span class="h-[1px] w-12 bg-outline"></span>
+</div>
+<p class="font-headline-italic text-headline-italic text-on-surface-variant max-w-2xl italic">
+                A curated selection of serene woodland vistas, waiting to be assembled piece by piece in the quiet of the gallery.
+            </p>
+</div>
+<!-- Luxury Box Presentation Area -->
+<section class="w-full relative border border-outline/30 p-8 md:p-12 bg-surface-container-low spotlight_glow rounded-DEFAULT mb-section-gap">
+<!-- Box Lid Element (Decorative) -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-surface px-4 flex items-center gap-2 text-primary">
+<span class="text-[10px]">◇</span>
+<span class="font-label-caps text-label-caps">UNBOXED</span>
+<span class="text-[10px]">◇</span>
+</div>
+<!-- Bento Grid of Puzzle Thumbnails inside the box -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Completed Puzzle -->
+<div class="flex flex-col group cursor-pointer border border-outline-variant/50 p-4 hover:border-primary/50 transition-colors duration-300 relative bg-surface">
+<div class="aspect-square w-full relative mb-4 overflow-hidden rounded-sm border border-[#3d2b1a]">
+<img alt="Completed puzzle image showing a serene autumn forest scene" class="w-full h-full object-cover" data-alt="A completed jigsaw puzzle image displaying a serene, sunlit autumn forest. The artwork features tall, slender trees with golden-yellow leaves, sunlight filtering through the canopy to illuminate the forest floor. The image is rendered with a painterly, high-end gallery aesthetic, perfectly assembled with no visible puzzle lines, set against a dark, minimalist digital frame." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYhjPtf6UeZPYTgNBBPfeYlobt6I9HlK6alpF7u585DcC_5qD-_9HIoDOALpgdpyh_CeOM2dhkhpz5gDEGbCbVa4mn5ycYovjGymJmi-hhVIf3NXS-IFhA1eLScewEFCq69l9ufq-YwjHkS31lNXYE4coUq7Vs9yz9NbO725lDwueT-w6bzUz9Fy2g42XKmNPY5UcZDPR6IUb0wDQIWJzN2aq4kDQxgX-tDvmNVqEaKYJeMBzDtJ9ZYL8_GjfQVgG0nuJ-r8kcmlU"/>
+</div>
+<div class="flex justify-between items-start w-full">
+<div class="flex flex-col">
+<h3 class="font-label-caps text-label-caps text-on-surface tracking-widest mb-1">AUTUMN CANOPY</h3>
+<span class="font-metadata-sm text-metadata-sm text-on-surface-variant">48 PIECES</span>
+</div>
+<span class="font-metadata-sm text-metadata-sm text-primary">COMPLETED</span>
+</div>
+</div>
+<!-- In-Progress Puzzle -->
+<div class="flex flex-col group cursor-pointer border border-primary p-4 transition-colors duration-300 relative bg-surface shadow-[0_0_15px_rgba(244,189,97,0.1)]">
+<!-- In-progress indicator -->
+<div class="absolute -top-3 -right-3 bg-primary text-on-primary w-8 h-8 flex items-center justify-center rounded-full shadow-lg z-10">
+<span class="material-symbols-outlined text-[16px]" data-icon="extension">extension</span>
+</div>
+<div class="aspect-square w-full relative mb-4 overflow-hidden rounded-sm border border-primary/50">
+<img alt="In-progress puzzle showing a misty pine forest" class="w-full h-full object-cover" data-alt="A partially assembled jigsaw puzzle depicting a dark, moody, misty pine forest. The completed sections show deep greens and ethereal fog, while incomplete areas reveal a dark velvet-like background. The visible puzzle pieces have subtle, realistic 3D highlights on their top-left edges, catching imaginary gallery light, conveying a tactile, luxurious physical puzzle feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFKmZl38L1pMJDQAA_ieeR-tebYemFN1-T7IPiK8cL8l3ajngvRKYMaeKjHVLbcnFG_MvxEQlF1IO0cunSXFjIp6owpE9RS4DL4PtuyNyDf8R17G8gDYW1QBC5JixpupovAgNSYaCIyTUiRrahF0SMeZuBq_-3hX2GVTETcKvS45PFHrtHdlCZQLjxitP9Xua1_7DUat7m-6_JE7-BCp7A_Saan0TxZCPdQSCr13fWd3Nd6qXkoNzTcqPwQaQ8jxZYEGjCHJZSMTo"/>
+<!-- Jigsaw piece overlay texture (subtle grid simulation) -->
+<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMGg0MHY0MEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0wIDB2NDBoNDBWMEgweiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDIwMCwgMTgwLCAxNTAsIDAuMikiIHN0cm9rZS13aWR0aD0iMC41Ii8+PC9zdmc+')] opacity-50 mix-blend-overlay"></div>
+</div>
+<div class="flex justify-between items-start w-full">
+<div class="flex flex-col">
+<h3 class="font-label-caps text-label-caps text-primary tracking-widest mb-1">MISTY PINES</h3>
+<span class="font-metadata-sm text-metadata-sm text-on-surface-variant">72 PIECES</span>
+</div>
+<span class="font-metadata-sm text-metadata-sm text-primary">60%</span>
+</div>
+</div>
+<!-- Not Started Puzzle 1 -->
+<div class="flex flex-col group cursor-pointer border border-outline-variant/30 p-4 relative bg-surface-dim">
+<div class="aspect-square w-full relative mb-4 overflow-hidden rounded-sm border border-[#3d2b1a]">
+<img alt="Hidden puzzle behind a dark veil" class="w-full h-full object-cover filter grayscale blur-sm" data-alt="A jigsaw puzzle thumbnail heavily obscured by a deep, translucent dark veil overlay. Beneath the dark overlay, subtle hints of a lush green forest path can barely be made out, suggesting an unstarted artwork waiting to be revealed. The mood is hushed, mysterious, and characteristic of a dimly lit private art gallery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA50AbGXWTzopYgnck9wKn38kDA8SLVSTd37QvyIgO32MhAEPOZDFTm-smzVePiJhnBtDm_8ACGLYEvEx36MNIgg5tXqNOtCgmmbAfDGYsWWwLk-GMky0gUpVhmmopAK2zCUPpnDKT1UxacuFxPscbrdKyZ6Fetp2d_UnWjbempcAwZBPaAiOsrfiWGBLYdbLXU2_gh8k7XS50lVzflceS2z8bBmY9LoinRZ28i4ozDO_eF4vQeZDybvigfzdSPAfz6WJJNCeraft8"/>
+<div class="absolute inset-0 overlay_veil flex items-center justify-center">
+<span class="material-symbols-outlined text-outline text-4xl" data-icon="lock">lock</span>
+</div>
+</div>
+<div class="flex justify-between items-start w-full opacity-50">
+<div class="flex flex-col">
+<h3 class="font-label-caps text-label-caps text-outline tracking-widest mb-1">FERN GULLY</h3>
+<span class="font-metadata-sm text-metadata-sm text-on-surface-variant">100 PIECES</span>
+</div>
+</div>
+</div>
+<!-- Not Started Puzzle 2 -->
+<div class="flex flex-col group cursor-pointer border border-outline-variant/30 p-4 relative bg-surface-dim">
+<div class="aspect-square w-full relative mb-4 overflow-hidden rounded-sm border border-[#3d2b1a]">
+<img alt="Hidden puzzle behind a dark veil" class="w-full h-full object-cover filter grayscale blur-sm" data-alt="A jigsaw puzzle thumbnail heavily obscured by a deep, translucent dark veil overlay. Beneath the dark overlay, subtle hints of a bioluminescent night forest can barely be made out. The mood is hushed, mysterious, and characteristic of a dimly lit private art gallery at midnight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl6F5wpOTC3KuwQ110tV2gQL0hAUn6N14-jXOEntmyRqbit2cF3-I1kvHW0AAM2Z3E3P8uA4ue0A02Yob6dazxh0zvCN-2poceFAmZaMwvkqUpajAC3Oz3ym5N22nln7SGal91xXBzEDZy4WsYgS8FtSMwtqW_vHC5Dh6SQwFlkmJvAciwHCPEC4qCGldu0IUY0AwVtm8BMUqpH0Jwl7FDRkgV2UDi2Se_QMH2CbBZ0_4UiKPpOudJPdCgiB3n5yVhPRk7BCbChyk"/>
+<div class="absolute inset-0 overlay_veil flex items-center justify-center">
+<span class="material-symbols-outlined text-outline text-4xl" data-icon="lock">lock</span>
+</div>
+</div>
+<div class="flex justify-between items-start w-full opacity-50">
+<div class="flex flex-col">
+<h3 class="font-label-caps text-label-caps text-outline tracking-widest mb-1">NIGHT GLOW</h3>
+<span class="font-metadata-sm text-metadata-sm text-on-surface-variant">150 PIECES</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Box Base Decor -->
+<div class="w-full flex justify-center mt-12">
+<button class="border border-primary px-8 py-3 font-label-caps text-label-caps text-primary hover:bg-primary/10 transition-colors uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="extension">extension</span>
+                    Resume Mist Pines
+                 </button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden bg-surface-container text-primary font-label-caps text-label-caps fixed bottom-0 w-full z-50 h-20 border-t border-primary/20 shadow-md flex justify-around items-center px-gutter-frame scale-95 active:scale-90 transition-transform">
+<a class="flex flex-col items-center justify-center text-outline gap-1 hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span>Gallery</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary gap-1 after:content-['\25c7'] after:text-[10px] after:mt-1 hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="extension">extension</span>
+<span>Puzzles</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline gap-1 hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="filter_vintage">filter_vintage</span>
+<span>Ambience</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline gap-1 hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="spa">spa</span>
+<span>Sanctuary</span>
+</a>
+</nav>
+<!-- Desktop Navigation (Hidden on mobile) -->
+<nav class="hidden md:flex fixed bottom-0 w-full z-50 h-16 bg-surface border-t border-outline/20 justify-center items-center gap-12 font-label-caps text-label-caps text-outline px-margin-screen">
+<a class="hover:text-primary transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="grid_view">grid_view</span>
+            Gallery
+        </a>
+<a class="text-primary flex flex-col items-center justify-center gap-1 relative" href="#">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="extension">extension</span>
+                Puzzles
+             </div>
+<span class="text-[10px] absolute -bottom-4">◇</span>
+</a>
+<a class="hover:text-primary transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="filter_vintage">filter_vintage</span>
+            Ambience
+        </a>
+<a class="hover:text-primary transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="spa">spa</span>
+            Sanctuary
+        </a>
+</nav>
+</body></html>

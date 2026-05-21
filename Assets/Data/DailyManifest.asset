@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2723fe25198ce6e4ba206ec3e7ff6340, type: 3}
+  m_Name: DailyManifest
+  m_EditorClassIdentifier: ChromaJigsaw.Core::ChromaJigsaw.Core.DailyManifest
+  entries:
+  - dailyId: 2026-05-20
+    title: "[Daily title \u2014 Jason] "
+    pieceCount: 24
+    imageSprite: {fileID: 0}
+    photographyMeta: "[Photo meta \u2014 Jason]"
+    overlayScript: Jigsaw Challenge
+  - dailyId: 2026-05-19
+    title: "[Daily title \u2014 Jason] "
+    pieceCount: 24
+    imageSprite: {fileID: 0}
+    photographyMeta: "[Photo meta \u2014 Jason]"
+    overlayScript: Jigsaw Challenge
+  - dailyId: 2026-05-18
+    title: "[Daily title \u2014 Jason] "
+    pieceCount: 12
+    imageSprite: {fileID: 0}
+    photographyMeta: "[Photo meta \u2014 Jason]"
+    overlayScript: Jigsaw Challenge

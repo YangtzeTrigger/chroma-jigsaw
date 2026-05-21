@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CHROMA JIGSAW - Gallery Wall</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&amp;family=Montserrat:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#690005",
+                      "on-tertiary-container": "#003861",
+                      "secondary-fixed-dim": "#e2c375",
+                      "on-secondary": "#3d2e00",
+                      "on-background": "#e5e2e1",
+                      "on-tertiary-fixed-variant": "#05497c",
+                      "inverse-on-surface": "#313030",
+                      "surface-tint": "#f4bd61",
+                      "on-primary-fixed-variant": "#604100",
+                      "inverse-surface": "#e5e2e1",
+                      "on-primary-fixed": "#281900",
+                      "on-tertiary-fixed": "#001d36",
+                      "on-primary-container": "#4a3100",
+                      "primary-container": "#c8963e",
+                      "on-tertiary": "#003258",
+                      "on-error-container": "#ffdad6",
+                      "secondary-container": "#5b4601",
+                      "outline-variant": "#4f4537",
+                      "on-primary": "#432c00",
+                      "surface-container-lowest": "#0e0e0e",
+                      "surface-container-low": "#1c1b1b",
+                      "on-secondary-container": "#d3b568",
+                      "secondary-fixed": "#ffdf91",
+                      "primary-fixed-dim": "#f4bd61",
+                      "primary-fixed": "#ffdead",
+                      "surface-variant": "#353534",
+                      "primary": "#f4bd61",
+                      "secondary": "#e2c375",
+                      "surface-bright": "#3a3939",
+                      "on-secondary-fixed-variant": "#584400",
+                      "tertiary": "#9ecaff",
+                      "surface-container": "#201f1f",
+                      "background": "#131313",
+                      "surface-dim": "#131313",
+                      "surface": "#131313",
+                      "tertiary-fixed": "#d1e4ff",
+                      "outline": "#9c8f7e",
+                      "tertiary-container": "#71a2da",
+                      "on-secondary-fixed": "#241a00",
+                      "tertiary-fixed-dim": "#9ecaff",
+                      "error": "#ffb4ab",
+                      "error-container": "#93000a",
+                      "surface-container-highest": "#353534",
+                      "inverse-primary": "#7e5700",
+                      "surface-container-high": "#2a2a2a",
+                      "on-surface": "#e5e2e1",
+                      "on-surface-variant": "#d3c4b2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-screen": "32px",
+                      "gutter-frame": "16px",
+                      "section-gap": "48px",
+                      "unit": "8px"
+              },
+              "fontFamily": {
+                      "headline-italic": [
+                              "EB Garamond"
+                      ],
+                      "metadata-sm": [
+                              "Montserrat"
+                      ],
+                      "body-ui": [
+                              "Montserrat"
+                      ],
+                      "display-title": [
+                              "EB Garamond"
+                      ],
+                      "label-caps": [
+                              "Montserrat"
+                      ]
+              },
+              "fontSize": {
+                      "headline-italic": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "metadata-sm": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "300"
+                              }
+                      ],
+                      "body-ui": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-title": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "0.2em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .spotlight-glow {
+            background: radial-gradient(circle at top center, rgba(244, 189, 97, 0.15) 0%, transparent 60%);
+        }
+        .veil-overlay {
+            background-color: rgba(10, 10, 10, 0.72);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-ui text-body-ui min-h-screen flex flex-col pt-20 pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-background dark:bg-background border-b border-primary/30 flex justify-between items-center w-full px-margin-screen h-20">
+<button class="text-primary dark:text-primary hover:opacity-80 transition-opacity active:scale-95 duration-300">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="text-center">
+<h1 class="font-display-title text-display-title text-primary tracking-widest uppercase">CHROMA JIGSAW</h1>
+</div>
+<div class="text-primary dark:text-primary hover:opacity-80 transition-opacity active:scale-95 duration-300">
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden">
+<img alt="User profile portrait" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASzjeU1yQPBZbPknd4_NEsOydWqzZt8uWot4i_VUcPOuMaJp5SFA5oSvVtmlnJmBOiilr-4D3BPn841-QcCaqTQMbDwXvowjXeO6WmbhPbabTDv_G8JQ5u6QUOr_LTHl979d0qGK00sU_fMR5OjUco97bgLgj3kpvbKJsgfUHnRRZOqzJiur3qmBVYcaINdB02XX2pDScGo7ickSA55fiWfIdiurw1WBFxg3jib0_Mmn1l8qw2RvxjicwiZHHtvCRAtwokWamox3Y"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow px-margin-screen py-section-gap">
+<!-- Section Header -->
+<div class="mb-section-gap text-center relative max-w-2xl mx-auto">
+<div class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center opacity-30">
+<div class="h-[1px] bg-primary flex-grow max-w-[100px]"></div>
+<span class="mx-2 text-primary">◇</span>
+<div class="h-[1px] bg-primary flex-grow max-w-[100px]"></div>
+</div>
+<h2 class="font-display-title text-display-title text-on-surface relative z-10 bg-background inline-block px-4">ALPINE HEIGHTS</h2>
+<p class="font-headline-italic text-headline-italic text-on-surface-variant mt-2 relative z-10">12 Images</p>
+</div>
+<!-- Gallery Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter-frame md:gap-x-gutter-frame md:gap-y-section-gap">
+<!-- Item 1 (Completed) -->
+<div class="flex flex-col relative group">
+<div class="absolute -top-10 left-0 right-0 h-32 spotlight-glow opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
+<div class="border border-outline-variant p-gutter-frame bg-surface relative z-10">
+<div class="aspect-[4/3] bg-surface-container overflow-hidden relative">
+<img alt="Mountain peak" class="w-full h-full object-cover" data-alt="A breathtaking landscape photograph of a rugged alpine mountain peak catching the golden hour light. The image is framed as a completed jigsaw puzzle in a sophisticated dark midnight art gallery setting. The lighting is focused and soft, illuminating the vivid colors of the mountain against a deep, dark minimalist background. The aesthetic is tactile luxury, emphasizing the physical texture of the puzzle pieces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCscs0AMm1Jm1FYNudXuBYO_SM4wbRfT9TMrUmLZMx7GstPQFKAHFNBXyK2tmaxKY_w7_6VxzmUdbq4WXWeVchzRERQYli0eoooRpAXvghf1nsvvaBrB3QbMBJqQ4Th2zyYR5DnU_YsNuCUVj-BCKzMGbAFUz6nhFn-XrKyFUYBMN3YnQZpQ2ezMIlfncdk_J9Ih0Sybpc7_IqHrCX5juGzgJ7bY-T3nURJH1XGA4jx5e92wWmPVzDor27kDBqCU4dCbswvpxrHSCk"/>
+</div>
+</div>
+<div class="flex justify-between items-end mt-4 border-b border-primary pb-2 relative z-10">
+<h3 class="font-label-caps text-label-caps text-on-surface">MORNING SUMMIT</h3>
+<span class="font-metadata-sm text-metadata-sm text-on-surface-variant">24 PIECES</span>
+</div>
+</div>
+<!-- Item 2 (Incomplete - Veiled) -->
+<div class="flex flex-col relative group">
+<div class="absolute -top-10 left-0 right-0 h-32 spotlight-glow opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
+<div class="border border-outline-variant p-gutter-frame bg-surface relative z-10">
+<div class="aspect-[4/3] bg-surface-container overflow-hidden relative">
+<img alt="Alpine lake" class="w-full h-full object-cover" data-alt="A serene alpine lake reflecting towering snow-capped mountains. The image is presented as an incomplete jigsaw puzzle in a luxurious, hushed midnight art gallery environment. A deep, translucent dark veil overlays the image, suggesting it is locked or unfinished, while soft ambient light hints at the details beneath. The overall mood is calm, minimal, and premium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAu5wWcwAKemJ6hm0yKWMin7D7-LH2a3n-I-YmdZLSDaoSX7IUiYGmhNoJ1Vjf09YnO066nJMuP9Tx2Cg_FNWVT0SnkDcsTvrZn4WLizpYT8Rndpby6ea1rn5zknFuoJ52BotzgezgjxcOaV6la1-CN9Gi17p9DjYsdMCj9ap_l9HqtQR887f8wj5awaRLI3DoceNYBjxcFc6PrCMuNy5vgmvT4YQNEBk_qfuWAHo_6tAIIeFMX3jOGPknAeivyzTFEuk1eAt9pB0M"/>
+<div class="absolute inset-0 veil-overlay"></div>
+</div>
+</div>
+<div class="flex justify-between items-end mt-4 border-b border-primary pb-2 relative z-10">
+<h3 class="font-label-caps text-label-caps text-on-surface">GLACIAL MIRROR</h3>
+<span class="font-metadata-sm text-metadata-sm text-on-surface-variant">48 PIECES</span>
+</div>
+</div>
+<!-- Item 3 (Incomplete - Veiled) -->
+<div class="flex flex-col relative group">
+<div class="absolute -top-10 left-0 right-0 h-32 spotlight-glow opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
+<div class="border border-outline-variant p-gutter-frame bg-surface relative z-10">
+<div class="aspect-[4/3] bg-surface-container overflow-hidden relative">
+<img alt="Alpine valley" class="w-full h-full object-cover" data-alt="A vast, sweeping view of an alpine valley bathed in cool shadow. The scene is depicted as an unfinished jigsaw puzzle displayed in an upscale, minimalist midnight art gallery. A heavy, dark translucent overlay covers the image, creating a sense of mystery and anticipation. The lighting is sparse and directional, highlighting the museum-quality presentation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfRietTYp7-LuaP2Mc_IObpmUgKWa5GygOdaQ6HrMbN1tgUnog_mnx7s8UA6IGllv5DzaNRU3-9DnryQFBB1hBJx0nebCLFA8VI-MUOHJhy5hKvL0d6KwmZU0x3dvF2Cdb94aq4oH_adgT-ljmz3PIUPUnb-m0_Q7HFBj8ow1J2NboQHSmK6iLnRYP-HdIkRLnYIuD-_Q72dTWTWq-RVyT9Q3YgCDNr7EZauVQHb3l7FuQzqKfGFmJFreW0PLELcKzxcM1BsI13lg"/>
+<div class="absolute inset-0 veil-overlay"></div>
+</div>
+</div>
+<div class="flex justify-between items-end mt-4 border-b border-primary pb-2 relative z-10">
+<h3 class="font-label-caps text-label-caps text-on-surface">VALLEY SHADOWS</h3>
+<span class="font-metadata-sm text-metadata-sm text-on-surface-variant">64 PIECES</span>
+</div>
+</div>
+<!-- Item 4 (Completed) -->
+<div class="flex flex-col relative group">
+<div class="absolute -top-10 left-0 right-0 h-32 spotlight-glow opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
+<div class="border border-outline-variant p-gutter-frame bg-surface relative z-10">
+<div class="aspect-[4/3] bg-surface-container overflow-hidden relative">
+<img alt="Starry mountains" class="w-full h-full object-cover" data-alt="A striking starry night sky over jagged mountain peaks. The image is shown as a fully assembled jigsaw puzzle, sitting on a plinth in a sophisticated, dark minimalist art gallery setting. The stars and milky way are highlighted by a soft, warm overhead spotlight, contrasting beautifully with the deep blacks and subtle gold accents of the surrounding UI frame." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeR3qZobd5WQC-GO-Zkg15M7Pd8Ig6ervmrZ4uNuMSgESfw0rYU5lq9CvHhMUFHrBsbI5d_j0epa10jqE_wqquc_IIsR856pzfT8iDrIRC5YO9aowDQiOtJxuzQbGgqkP0biON7y7Or4-E2gVH7GCj_n5on2TSTrXW8oTRpy85q4fOP2f6GLQk9N-SFGpFPyREDR5xMbcMlpvVlFoogPpFCy2XivJ0E21VH7_NX6kGNv9iDodbWfGtpaUcOlke9TXrtcJSE4y7Zsc"/>
+</div>
+</div>
+<div class="flex justify-between items-end mt-4 border-b border-primary pb-2 relative z-10">
+<h3 class="font-label-caps text-label-caps text-on-surface">NIGHTFALL</h3>
+<span class="font-metadata-sm text-metadata-sm text-on-surface-variant">100 PIECES</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-screen bg-background/95 backdrop-blur-md border-t border-primary/20">
+<button class="flex flex-col items-center justify-center text-primary border-t-2 border-primary pt-2 pb-4 hover:opacity-80 transition-all duration-500 ease-in-out">
+<span class="material-symbols-outlined mb-1" data-icon="frame_inspect" data-weight="fill" style="font-variation-settings: 'FILL' 1;">frame_inspect</span>
+<span class="font-label-caps text-label-caps">Gallery</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant/60 pt-2 pb-4 hover:text-primary/80 transition-colors">
+<span class="material-symbols-outlined mb-1" data-icon="extension">extension</span>
+<span class="font-label-caps text-label-caps">Puzzles</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant/60 pt-2 pb-4 hover:text-primary/80 transition-colors">
+<span class="material-symbols-outlined mb-1" data-icon="filter_vintage">filter_vintage</span>
+<span class="font-label-caps text-label-caps">Ambience</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant/60 pt-2 pb-4 hover:text-primary/80 transition-colors">
+<span class="material-symbols-outlined mb-1" data-icon="coffee">coffee</span>
+<span class="font-label-caps text-label-caps">Sanctuary</span>
+</button>
+</nav>
+</body></html>

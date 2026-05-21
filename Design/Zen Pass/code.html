@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Zen Pass - Chroma Jigsaw</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&amp;family=Montserrat:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#241a00",
+                    "outline-variant": "#4f4537",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-fixed": "#d1e4ff",
+                    "surface": "#131313",
+                    "error-container": "#93000a",
+                    "surface-container": "#201f1f",
+                    "on-surface": "#e5e2e1",
+                    "on-primary-fixed-variant": "#604100",
+                    "tertiary": "#9ecaff",
+                    "on-tertiary": "#003258",
+                    "surface-tint": "#f4bd61",
+                    "surface-dim": "#131313",
+                    "secondary-container": "#5b4601",
+                    "surface-container-high": "#2a2a2a",
+                    "primary-fixed": "#ffdead",
+                    "inverse-primary": "#7e5700",
+                    "tertiary-container": "#71a2da",
+                    "secondary-fixed-dim": "#e2c375",
+                    "surface-container-low": "#1c1b1b",
+                    "outline": "#9c8f7e",
+                    "on-tertiary-container": "#003861",
+                    "inverse-surface": "#e5e2e1",
+                    "on-primary-container": "#4a3100",
+                    "on-error": "#690005",
+                    "inverse-on-surface": "#313030",
+                    "surface-variant": "#353534",
+                    "secondary-fixed": "#ffdf91",
+                    "primary-container": "#c8963e",
+                    "surface-bright": "#3a3939",
+                    "on-tertiary-fixed-variant": "#05497c",
+                    "on-tertiary-fixed": "#001d36",
+                    "on-primary": "#432c00",
+                    "on-primary-fixed": "#281900",
+                    "primary": "#f4bd61",
+                    "on-secondary-fixed-variant": "#584400",
+                    "on-surface-variant": "#d3c4b2",
+                    "on-secondary": "#3d2e00",
+                    "surface-container-lowest": "#0e0e0e",
+                    "background": "#131313",
+                    "surface-container-highest": "#353534",
+                    "primary-fixed-dim": "#f4bd61",
+                    "on-secondary-container": "#d3b568",
+                    "on-background": "#e5e2e1",
+                    "error": "#ffb4ab",
+                    "tertiary-fixed-dim": "#9ecaff",
+                    "secondary": "#e2c375"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter-frame": "16px",
+                    "unit": "8px",
+                    "section-gap": "48px",
+                    "margin-screen": "32px"
+            },
+            "fontFamily": {
+                    "headline-italic": [
+                            "EB Garamond"
+                    ],
+                    "label-caps": [
+                            "Montserrat"
+                    ],
+                    "body-ui": [
+                            "Montserrat"
+                    ],
+                    "metadata-sm": [
+                            "Montserrat"
+                    ],
+                    "display-title": [
+                            "EB Garamond"
+                    ]
+            },
+            "fontSize": {
+                    "headline-italic": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-caps": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.1em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-ui": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "letterSpacing": "0.02em",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "metadata-sm": [
+                            "13px",
+                            {
+                                    "lineHeight": "18px",
+                                    "fontWeight": "300"
+                            }
+                    ],
+                    "display-title": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "letterSpacing": "0.2em",
+                                    "fontWeight": "600"
+                            }
+                    ]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        /* Custom styles for gallery lighting and veils */
+        .spotlight-glow {
+            background: radial-gradient(circle at center, rgba(156, 143, 126, 0.15) 0%, transparent 70%);
+        }
+        .text-shadow-sm {
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#0a0a0a] text-on-background min-h-screen flex flex-col items-center justify-center relative overflow-hidden font-body-ui text-body-ui">
+<!-- Ambient Background Texture -->
+<div class="absolute inset-0 z-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1606925405469-8393eab0b73c?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=2000&amp;q=80')] bg-cover bg-center mix-blend-luminosity" data-alt="A dark, textured plaster wall in an art gallery at midnight, subtly illuminated by a faint, warm overhead light. The texture is raw and tactile, creating a deep, moody background for a minimal, luxury interface. The palette is dominated by deep charcoal and soft, muted ochre hints."></div>
+<!-- Spotlight -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] spotlight-glow z-0 pointer-events-none rounded-full"></div>
+<!-- Top Navigation Anchor (Simulated for Transition) -->
+<header class="absolute top-0 w-full flex justify-center items-center px-gutter-frame h-16 z-10">
+<h1 class="font-display-title text-display-title text-primary tracking-[0.2em] uppercase">Chroma Jigsaw</h1>
+</header>
+<!-- Main Content Canvas -->
+<main class="relative z-10 w-full max-w-lg px-margin-screen mx-auto flex flex-col items-center py-section-gap">
+<!-- The Central Card / Plinth -->
+<div class="w-full bg-surface-container-low border border-outline-variant p-8 md:p-12 flex flex-col items-center relative rounded-DEFAULT">
+<!-- Corner Accents -->
+<div class="absolute top-2 left-2 text-primary opacity-50 text-[10px]">◇</div>
+<div class="absolute top-2 right-2 text-primary opacity-50 text-[10px]">◇</div>
+<div class="absolute bottom-2 left-2 text-primary opacity-50 text-[10px]">◇</div>
+<div class="absolute bottom-2 right-2 text-primary opacity-50 text-[10px]">◇</div>
+<!-- Title Section -->
+<div class="text-center mb-8 flex flex-col items-center w-full">
+<span class="material-symbols-outlined text-primary mb-4 text-3xl font-light">spa</span>
+<h2 class="font-display-title text-display-title text-on-surface tracking-[0.2em] uppercase mb-2">The Zen Pass</h2>
+<div class="w-12 h-px bg-primary/40 mb-4"></div>
+<p class="font-headline-italic text-headline-italic text-outline max-w-[280px]">A focused sanctuary for the serious collector.</p>
+</div>
+<!-- Benefits List -->
+<div class="w-full space-y-4 mb-10 flex flex-col">
+<!-- Benefit Item -->
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary text-xl mt-0.5 opacity-80">block</span>
+<div class="flex-1 pb-4 border-b border-outline-variant/30 relative">
+<p class="font-body-ui text-body-ui text-on-surface-variant">No sponsor interruptions during play.</p>
+</div>
+</div>
+<!-- Benefit Item -->
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary text-xl mt-0.5 opacity-80">key</span>
+<div class="flex-1 pb-4 border-b border-outline-variant/30 relative">
+<p class="font-body-ui text-body-ui text-on-surface-variant">Exclusive access to the Masterwork Collection.</p>
+</div>
+</div>
+<!-- Benefit Item -->
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary text-xl mt-0.5 opacity-80">volume_up</span>
+<div class="flex-1 pb-4 border-b border-outline-variant/30 relative">
+<p class="font-body-ui text-body-ui text-on-surface-variant">Permanent 4K Ambience unlocks.</p>
+</div>
+</div>
+<!-- Benefit Item -->
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary text-xl mt-0.5 opacity-80">visibility</span>
+<div class="flex-1 pb-4 border-b border-outline-variant/30 relative border-transparent"> <!-- No border on last -->
+<p class="font-body-ui text-body-ui text-on-surface-variant">Early access to new gallery wings.</p>
+</div>
+</div>
+</div>
+<!-- CTA Section -->
+<div class="w-full flex flex-col items-center">
+<button class="w-full py-4 border border-primary text-primary font-label-caps text-label-caps uppercase tracking-widest hover:bg-primary/10 transition-colors duration-500 rounded-DEFAULT flex items-center justify-center gap-2 group">
+                    Enter the Sanctuary
+                    <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
+</button>
+<p class="font-metadata-sm text-metadata-sm text-outline mt-3 tracking-wide">$4.99 / Month</p>
+</div>
+</div>
+<!-- Secondary Option -->
+<button class="mt-8 font-metadata-sm text-metadata-sm text-outline hover:text-on-surface transition-colors duration-300 border-b border-transparent hover:border-outline/50 pb-1">
+            Continue with sponsor support
+        </button>
+</main>
+</body></html>
