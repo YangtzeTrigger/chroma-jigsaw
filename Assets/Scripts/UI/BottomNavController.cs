@@ -28,8 +28,10 @@ namespace ChromaJigsaw.UI
 
         private int _activeIndex = -1;
 
-        private void Start()
+        private void Awake()
         {
+            // Initialize all panels as active but invisible before Start() runs —
+            // prevents a single-frame flash where all panels are visible.
             _panelGroups = new CanvasGroup[_panels.Length];
             for (int i = 0; i < _panels.Length; i++)
             {
@@ -41,6 +43,10 @@ namespace ChromaJigsaw.UI
                 _panelGroups[i].blocksRaycasts = false;
                 _panelGroups[i].interactable   = false;
             }
+        }
+
+        private void Start()
+        {
             for (int i = 0; i < _tabs.Length; i++)
             {
                 int idx = i;

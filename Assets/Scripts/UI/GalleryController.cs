@@ -89,7 +89,7 @@ namespace ChromaJigsaw.UI
 
         public void OpenPack(string packId)
         {
-            var config = _registry?.packs.Find(p => p.packId == packId);
+            var config = _registry != null ? System.Array.Find(_registry.packs, p => p.packId == packId) : null;
             var result = config != null
                 ? PackUnlockService.Instance.Evaluate(config, out _)
                 : PackUnlockResult.Owned;
