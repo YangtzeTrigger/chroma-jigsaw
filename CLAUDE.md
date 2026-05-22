@@ -22,11 +22,11 @@
 
 ## Current Stage
 
-**B-12a — Visual Polish (Gallery Nocturne)** ✅ Code complete (commit 48e1f91). Awaiting B-12b/remaining polish.
+**B-12b — Layout & Spacing** ✅ Code complete (commit a88fe45).
 
-B-11 ✅ complete (commit 9f2ae43). B-12a ✅ code complete (commit 48e1f91).
+B-11 ✅ | B-12a ✅ (commit 48e1f91) | B-12b ✅ (commit a88fe45)
 
-B-12a completed: Font assignments (EBGaramond Regular SDF → TitleText, Montserrat SemiBold → StatusText, Montserrat Light → CountText/PieceCountText in both prefabs). Animations: XPBarView 0.8s, ZenPassView DOFade+DOScale, DailyCardView DOPunchScale, BottomNavController CanvasGroup DOFade, GalleryController DOAnchorPosY slide, ArtworkSpotlightView DOScale, PackCardView spotlight halo pulse. Dot sprites generated (32×32 RGBA white PNGs in Assets/Art/UI/).
+B-12b completed: SafeAreaHandler.cs (Screen.safeArea → Canvas root RT). Portrait lock (ProjectSettings). Panel_Gallery reparented from scene root into Canvas hierarchy. Anchor fixes: TopBar top-stretch 80px, BottomNav bottom-stretch 80px, TabContent full-stretch −160 SizeDelta, XPBar top-stretch 32px −80 offset, Panel_Puzzle/Ambience/Sanctuary full-stretch. PackGridScrollView (ScrollRect+RectMask2D) wrapping PackGridPanel (VLG spacing 24, padding 32, CSF). FramesViewport (ScrollRect+RectMask2D) wrapping FramesContainer (VLG+CSF).
 
 **Remaining manual Unity Editor steps (still outstanding):**
 
@@ -47,7 +47,7 @@ B-10 (accessibility):
 
 ⚠️ Burst AOT: Edit → Project Settings → Player → Other Settings → Burst AOT Settings → **uncheck Enable Burst AOT Compilation** (Burst 1.8.29 crash bug)
 
-B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 ✅ | B-07 🔲 (Editor) | B-08 ✅ | B-09 ✅ | B-10 ✅ | B-11 ✅ | B-12 🔲 (a: code done)
+B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 ✅ | B-07 🔲 (Editor) | B-08 ✅ | B-09 ✅ | B-10 ✅ | B-11 ✅ | B-12 🔲 (a+b code done)
 
 ---
 
@@ -290,10 +290,10 @@ Claude.ai needs to answer before the next stage brief is written.
 | B-09 | Audio system | ✅ Code done — clip slots + scene wiring pending |
 | B-10 | Accessibility suite | ✅ Done (code + scene wiring complete) |
 | B-11 | Analytics & event tracking | ✅ Done |
-| B-12 | Polish & QA | 🔲 (B-12a code done — Editor + art pending) |
+| B-12 | Polish & QA | 🔲 (B-12a+b code done — Editor + art pending) |
 | B-13 | Launch prep | 🔲 |
 
 ---
 
 *Keep this file current. It is read at the start of every Claude Code session.*
-*Last updated: 2026-05-21 — B-12a Gallery Nocturne visual polish code complete (commit 48e1f91). Font assignments in prefabs, DOTween animations across 7 scripts, dot sprites generated. Blockers: EBGaramond SemiBold SDF (Font Asset Creator), dot sprite Inspector wiring, piece shadow material (Editor). B-12b remaining Polish & QA next — awaiting Claude.ai brief.*
+*Last updated: 2026-05-22 — B-12b Layout & Spacing code complete (commit a88fe45). SafeAreaHandler, portrait lock, Panel_Gallery reparented into Canvas, all anchor fixes (TopBar/BottomNav/TabContent/XPBar/panels), PackGridScrollView + FramesViewport scroll containers with VLG+CSF. Awaiting Claude.ai brief for next stage (B-12c or B-13).*
