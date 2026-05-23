@@ -89,17 +89,17 @@ namespace ChromaJigsaw.Core
         {
             if (_extensions == null) return;
 #if UNITY_IOS
-            _extensions.GetExtension<IAppleExtensions>().RestoreTransactions(result =>
+            _extensions.GetExtension<IAppleExtensions>().RestoreTransactions((result, message) =>
             {
 #if UNITY_EDITOR
-                Debug.Log($"[IAPManager] RestoreTransactions result: {result}");
+                Debug.Log($"[IAPManager] RestoreTransactions result: {result} — {message}");
 #endif
             });
 #elif UNITY_ANDROID
-            _extensions.GetExtension<IGooglePlayStoreExtensions>().RestoreTransactions(result =>
+            _extensions.GetExtension<IGooglePlayStoreExtensions>().RestoreTransactions((result, message) =>
             {
 #if UNITY_EDITOR
-                Debug.Log($"[IAPManager] RestoreTransactions result: {result}");
+                Debug.Log($"[IAPManager] RestoreTransactions result: {result} — {message}");
 #endif
             });
 #endif
