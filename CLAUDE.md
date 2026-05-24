@@ -22,25 +22,27 @@
 
 ## Current Stage
 
-**B-12d — Core Game Loop** ✅ Code + Editor wiring complete. All three puzzle entry paths now functional.
+**B-12d — Core Game Loop** ✅ Code + wiring complete. Puzzle rendering fixed. Pending: device QA + AudioMixer Editor action.
 
-B-11 ✅ | B-12a ✅ (48e1f91) | B-12b ✅ (a88fe45) | B-12c ✅ (a0f77a5) | B-12d ✅ (f1a73e4 + session 2026-05-24 fixes)
+B-11 ✅ | B-12a ✅ (48e1f91) | B-12b ✅ (a88fe45) | B-12c ✅ (a0f77a5) | B-12d ✅ (3792c07)
 
-### B-12d fixes completed this session (2026-05-24):
-- **HootyBridge**: `_puzzlePrefab` → Puzzle.prefab (YAML), `_puzzleParent` → PuzzleCanvas RT (YAML) — commit a3f7828
-- **Game.unity**: PuzzleCanvas GO added (Screen Space Overlay, 1080×1920 reference) as parent for instantiated Puzzle prefab — commit a3f7828
-- **Game.unity**: FocusHUD_Canvas CanvasGroup wired to PuzzleController._hudGroups — commit cf685f6
-- **Gallery.unity**: "BEGIN RITUAL" → "BEGIN" on DailyCardView + DailyMasterpieceView buttons — commit 341e68d
-- **DailyMasterpieceView.HandleBegin()**: implemented TODO — sets all PuzzleController.Session* fields, falls back to solid-colour texture if no image assigned, calls `SceneManager.LoadScene(SceneNames.Game)` — commit 341e68d
-- **Pack_ALP_000.asset**: Alpine Stillness changed to `unlockType: Free` (was XP/500) so both packs are tappable in fresh save — commit 341e68d
-- **GraphicsSettings.asset**: Added `JigsawPuzzle/Default`, `JigsawPuzzle/Blur`, `PuzzlePieceClusterShadowUI` to `m_AlwaysIncludedShaders` — these shaders are used via `Shader.Find()` only and were being stripped from Android builds, causing blank puzzle rendering — commit b147eaa
+### B-12d all fixes (across sessions):
+- **HootyBridge**: `_puzzlePrefab` + `_puzzleParent` wired via YAML — commit a3f7828
+- **Game.unity**: PuzzleCanvas GO added (Screen Space Overlay) — commit a3f7828
+- **Game.unity**: FocusHUD_Canvas wired to PuzzleController._hudGroups — commit cf685f6
+- **Gallery.unity**: "BEGIN RITUAL" → "BEGIN" — commit 341e68d
+- **DailyMasterpieceView.HandleBegin()**: implemented — commit 341e68d
+- **Pack_ALP_000.asset**: Alpine Stillness → Free — commit 341e68d
+- **GraphicsSettings.asset**: Hootybird shaders added to AlwaysIncludedShaders — commit b147eaa
+- **Puzzle.cs**: `material.SetTexture("_MainTex", PuzzleTexture)` — fixes white-square rendering in Unity 6 ([PerRendererData] + custom material doesn't propagate via RawImage.texture) — commit 3792c07
+- **Game.unity**: removed AudioListener from Main Camera (was causing per-frame spam) — commit 3792c07
 
-### Working puzzle entry paths (after above fixes):
+### Working puzzle entry paths:
 1. **Packs tab → Whispering Pines (or Alpine Stillness) → PuzzleSelectView → BEGIN** → Game scene, cat01_2k test image
 2. **Sanctuary tab → DailyCardView BEGIN → DailyMasterpieceView BEGIN** → Game scene, solid-colour fallback image
 
-**⚠️ Still outstanding (not yet tested end-to-end on device since shader fix):**
-Confirm puzzle pieces render correctly after the Hootybird shader inclusion fix (b147eaa). If puzzle still blank after this build, check Unity Console on device for null shader errors.
+**⚠️ AudioMixer — requires manual Editor action (Jason):**
+Open AudioMixer asset → expose three parameters named exactly: `MasterVol`, `SFXVol`, `MusicVol`. Until done, three `Exposed name does not exist` errors fire on every play (non-crashing but noisy).
 
 **Remaining manual Unity Editor steps (still outstanding):**
 
@@ -309,4 +311,4 @@ Claude.ai needs to answer before the next stage brief is written.
 ---
 
 *Keep this file current. It is read at the start of every Claude Code session.*
-*Last updated: 2026-05-24 — B-12d game loop unblocked. All three puzzle entry paths now complete (Packs → PuzzleSelectView, Sanctuary → DailyMasterpieceView). Hootybird shaders added to AlwaysIncluded. Alpine Stillness set to Free. BEGIN label fixed. Pending: device test to confirm puzzle pieces render after shader fix (commit b147eaa).*
+*Last updated: 2026-05-24 — B-12d puzzle rendering fixed (commit 3792c07). Root cause: Unity 6 [PerRendererData] + custom material doesn't propagate _MainTex via RawImage.texture; fixed by explicit SetTexture in Puzzle.cs. AudioListener spam fixed (removed from Game.unity Main Camera). Pending: Jason must expose MasterVol/SFXVol/MusicVol in AudioMixer Editor, then device QA.*
