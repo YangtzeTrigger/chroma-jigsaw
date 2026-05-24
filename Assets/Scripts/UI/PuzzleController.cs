@@ -3,6 +3,7 @@ using ChromaJigsaw.Audio;
 using ChromaJigsaw.Core;
 using ChromaJigsaw.Data;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace ChromaJigsaw.UI
@@ -99,6 +100,7 @@ namespace ChromaJigsaw.UI
                 DailyService.Instance.MarkComplete(SessionPuzzleId);
                 AnalyticsManager.Instance.LogDailyCompleted(SessionPuzzleId, SessionPieceCount, elapsed);
             }
+            SceneManager.LoadScene(SceneNames.Gallery);
         }
 
         public void HandleAbandon()
