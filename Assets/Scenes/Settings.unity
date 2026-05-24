@@ -5068,7 +5068,6 @@ GameObject:
   - component: {fileID: 880004}
   - component: {fileID: 880005}
   - component: {fileID: 880006}
-  - component: {fileID: 880007}
   m_Layer: 5
   m_Name: RestorePurchasesButton
   m_TagString: Untagged
@@ -5305,7 +5304,6 @@ GameObject:
   - component: {fileID: 890004}
   - component: {fileID: 890005}
   - component: {fileID: 890006}
-  - component: {fileID: 890007}
   m_Layer: 5
   m_Name: PrivacyButton
   m_TagString: Untagged
@@ -5542,7 +5540,6 @@ GameObject:
   - component: {fileID: 900004}
   - component: {fileID: 900005}
   - component: {fileID: 900006}
-  - component: {fileID: 900007}
   m_Layer: 5
   m_Name: SupportButton
   m_TagString: Untagged
