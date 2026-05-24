@@ -30,8 +30,9 @@ namespace ChromaJigsaw.Core
             { 96, (0.8f, 1.2f, 0.2f) },
         };
 
-        [SerializeField] private Puzzle _puzzlePrefab;
-        [SerializeField] private float  _puzzlePieceSize = 100f;
+        [SerializeField] private Puzzle       _puzzlePrefab;
+        [SerializeField] private RectTransform _puzzleParent;   // Canvas RT in Game scene; Puzzle must be a Canvas child to render
+        [SerializeField] private float         _puzzlePieceSize = 100f;
 
         private static HootyBridge _instance;
         public static HootyBridge Instance
@@ -106,7 +107,7 @@ namespace ChromaJigsaw.Core
                 ? SaveGameService.LoadSavedGameData(puzzleId)
                 : null;
 
-            _activePuzzle = Instantiate(_puzzlePrefab);
+            _activePuzzle = Instantiate(_puzzlePrefab, _puzzleParent, false);
 
             // Subscribe per-piece as each is created so we capture SaveFile snaps during init
             // (needed for accurate _piecesOnBoard when resuming a saved game).
