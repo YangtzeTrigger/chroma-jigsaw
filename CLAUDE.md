@@ -22,29 +22,29 @@
 
 ## Current Stage
 
-**B-12d — Core Game Loop** ✅ Code complete (this session).
+**B-12d — Core Game Loop** ✅ Code + Editor wiring complete. All three puzzle entry paths now functional.
 
-B-11 ✅ | B-12a ✅ (48e1f91) | B-12b ✅ (a88fe45) | B-12c ✅ (a0f77a5) | B-12d ✅ (this session)
+B-11 ✅ | B-12a ✅ (48e1f91) | B-12b ✅ (a88fe45) | B-12c ✅ (a0f77a5) | B-12d ✅ (f1a73e4 + session 2026-05-24 fixes)
 
-B-12d completed:
-- **Scene rename**: `MainMenu.unity` → `Gallery.unity`. `SceneNames.MainMenu` removed; `SceneNames.Gallery` + `SceneNames.Reward` added.
-- **AppBootstrap**: now loads `SceneNames.Gallery` on boot.
-- **AtelierView**: back button loads `SceneNames.Gallery`.
-- **RewardViewer.unity** created (minimal scene, index 3). `Settings.unity` moves to index 4.
-- **PuzzleSelectView** (new): overlay that appears when a pack card is tapped. Shows pack name, 12/24/48/96 piece count selector, BEGIN button. Generates solid-colour 512×512 test texture. Sets `PuzzleController.Session*` fields then loads Game scene.
-- **PuzzleController**: added `static Texture2D SessionTexture` field; `Start()` calls `HootyBridge.Instance.LoadPuzzle(SessionTexture, SessionPieceCount, SessionPuzzleId)`.
-- **HootyBridge**: null check for `_puzzlePrefab` with clear error message.
-- **PackBrowserController**: `OnPackTapped()` now opens `PuzzleSelectView`.
-- **Gallery.unity**: Panel_PuzzleSelect added (inactive, Canvas child, fileIDs 1000000001–3); PackBrowserController._puzzleSelectView wired to it.
+### B-12d fixes completed this session (2026-05-24):
+- **HootyBridge**: `_puzzlePrefab` → Puzzle.prefab (YAML), `_puzzleParent` → PuzzleCanvas RT (YAML) — commit a3f7828
+- **Game.unity**: PuzzleCanvas GO added (Screen Space Overlay, 1080×1920 reference) as parent for instantiated Puzzle prefab — commit a3f7828
+- **Game.unity**: FocusHUD_Canvas CanvasGroup wired to PuzzleController._hudGroups — commit cf685f6
+- **Gallery.unity**: "BEGIN RITUAL" → "BEGIN" on DailyCardView + DailyMasterpieceView buttons — commit 341e68d
+- **DailyMasterpieceView.HandleBegin()**: implemented TODO — sets all PuzzleController.Session* fields, falls back to solid-colour texture if no image assigned, calls `SceneManager.LoadScene(SceneNames.Game)` — commit 341e68d
+- **Pack_ALP_000.asset**: Alpine Stillness changed to `unlockType: Free` (was XP/500) so both packs are tappable in fresh save — commit 341e68d
+- **GraphicsSettings.asset**: Added `JigsawPuzzle/Default`, `JigsawPuzzle/Blur`, `PuzzlePieceClusterShadowUI` to `m_AlwaysIncludedShaders` — these shaders are used via `Shader.Find()` only and were being stripped from Android builds, causing blank puzzle rendering — commit b147eaa
 
-**⚠️ CRITICAL Editor step (game cannot start without this):**
-- Wire `_puzzlePrefab` in HootyBridge Inspector → `Assets/ThirdParty/Hootybird/JigsawPuzzle/Prefabs/Gameplay/Puzzle.prefab`
-- Without this, `HootyBridge.LoadPuzzle()` logs an error and returns immediately. You will see the Game scene but no pieces.
+### Working puzzle entry paths (after above fixes):
+1. **Packs tab → Whispering Pines (or Alpine Stillness) → PuzzleSelectView → BEGIN** → Game scene, cat01_2k test image
+2. **Sanctuary tab → DailyCardView BEGIN → DailyMasterpieceView BEGIN** → Game scene, solid-colour fallback image
+
+**⚠️ Still outstanding (not yet tested end-to-end on device since shader fix):**
+Confirm puzzle pieces render correctly after the Hootybird shader inclusion fix (b147eaa). If puzzle still blank after this build, check Unity Console on device for null shader errors.
 
 **Remaining manual Unity Editor steps (still outstanding):**
 
 B-07 (cosmetic — not blocking):
-- Assign dot sprites (Assets/Art/UI/dot_*.png) to DailyCardView + DailyMasterpieceView Inspector slots
 - EBGaramond SemiBold SDF: create via Font Asset Creator (Window → TextMeshPro → Font Asset Creator; source: Assets/Art/Fonts/EBGaramond-SemiBold.ttf); then re-assign TitleText in prefabs
 
 B-09 (audio — blocked on art):
@@ -52,7 +52,6 @@ B-09 (audio — blocked on art):
 - Assign Suno .mp3 clips to AudioManager Inspector slots (after Jason generates them)
 
 B-10 (accessibility):
-- Assign HUD CanvasGroups to PuzzleController._hudGroups in Game.unity — Focus Mode silently does nothing without this
 - Refine Panel_ZenPass button positions in Unity Editor (currently approximate absolute offsets)
 - Wire OnGrandInterfaceChanged + OnArtworkBrightnessChanged in scene controllers (Grand Interface + Artwork Brightness are no-ops until subscribers exist)
 
@@ -60,7 +59,7 @@ B-10 (accessibility):
 
 ⚠️ Burst AOT: Edit → Project Settings → Player → Other Settings → Burst AOT Settings → **uncheck Enable Burst AOT Compilation** (Burst 1.8.29 crash bug)
 
-B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 ✅ | B-07 🔲 (Editor) | B-08 ✅ | B-09 ✅ | B-10 ✅ | B-11 ✅ | B-12 🔲 (a–d code done — Editor wiring pending)
+B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 ✅ | B-07 🔲 (Editor) | B-08 ✅ | B-09 ✅ | B-10 ✅ | B-11 ✅ | B-12d ✅ (code+wiring) | B-12 🔲 (full QA pending device test)
 
 ---
 
@@ -304,10 +303,10 @@ Claude.ai needs to answer before the next stage brief is written.
 | B-09 | Audio system | ✅ Code done — clip slots + scene wiring pending |
 | B-10 | Accessibility suite | ✅ Done (code + scene wiring complete) |
 | B-11 | Analytics & event tracking | ✅ Done |
-| B-12 | Polish & QA | 🔲 (B-12a+b+c code done — Editor + art pending) |
+| B-12 | Polish & QA | 🔲 (B-12a–d code+wiring done — device QA pending) |
 | B-13 | Launch prep | 🔲 |
 
 ---
 
 *Keep this file current. It is read at the start of every Claude Code session.*
-*Last updated: 2026-05-23 — B-12c Visual Content code complete (commit a0f77a5). Panel backgrounds + headings wired into hierarchy, tab labels Montserrat SemiBold 10px full opacity, tab icons white, ArtworkSpotlight/DailyMasterpiece/ZenPass color corrections, XPBar fill anchor fix. Awaiting Claude.ai brief for B-12d or B-13.*
+*Last updated: 2026-05-24 — B-12d game loop unblocked. All three puzzle entry paths now complete (Packs → PuzzleSelectView, Sanctuary → DailyMasterpieceView). Hootybird shaders added to AlwaysIncluded. Alpine Stillness set to Free. BEGIN label fixed. Pending: device test to confirm puzzle pieces render after shader fix (commit b147eaa).*
