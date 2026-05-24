@@ -32,6 +32,10 @@ Thumbs.db
 # Android
 *.apk
 *.aab
+*.keystore
+
+# Unity temp
+.utmp/
 
 # Crashlytics
 crashlytics-build.properties
