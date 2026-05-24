@@ -41,8 +41,7 @@ B-11 ✅ | B-12a ✅ (48e1f91) | B-12b ✅ (a88fe45) | B-12c ✅ (a0f77a5) | B-1
 1. **Packs tab → Whispering Pines (or Alpine Stillness) → PuzzleSelectView → BEGIN** → Game scene, cat01_2k test image
 2. **Sanctuary tab → DailyCardView BEGIN → DailyMasterpieceView BEGIN** → Game scene, solid-colour fallback image
 
-**⚠️ AudioMixer — requires manual Editor action (Jason):**
-Open AudioMixer asset → expose three parameters named exactly: `MasterVol`, `SFXVol`, `MusicVol`. Until done, three `Exposed name does not exist` errors fire on every play (non-crashing but noisy).
+**AudioMixer exposed parameters:** ✅ Fixed via YAML (commit 47c7122). Parameters were exposed but left with Unity's default placeholder names — renamed to `MasterVol`, `SFXVol`, `MusicVol` directly in `MainMixer.mixer`.
 
 **Remaining manual Unity Editor steps (still outstanding):**
 
@@ -311,4 +310,4 @@ Claude.ai needs to answer before the next stage brief is written.
 ---
 
 *Keep this file current. It is read at the start of every Claude Code session.*
-*Last updated: 2026-05-24 — B-12d puzzle rendering fixed (commit 3792c07). Root cause: Unity 6 [PerRendererData] + custom material doesn't propagate _MainTex via RawImage.texture; fixed by explicit SetTexture in Puzzle.cs. AudioListener spam fixed (removed from Game.unity Main Camera). Pending: Jason must expose MasterVol/SFXVol/MusicVol in AudioMixer Editor, then device QA.*
+*Last updated: 2026-05-24 — B-12d all console errors resolved. Puzzle rendering fixed (Puzzle.cs SetTexture, commit 3792c07). AudioListener spam fixed (Game.unity, commit 3792c07). AudioMixer param names fixed (MainMixer.mixer, commit 47c7122). Pending: device QA only.*
