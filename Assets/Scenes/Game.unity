@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a76fa18e488db04880f5c20e5c64649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ChromaJigsaw.Core::ChromaJigsaw.Core.HootyBridge
-  _puzzlePrefab: {fileID: 0}
+  _puzzlePrefab: {fileID: 2609179565164442941, guid: 64c58cd22fcd975428142b2803d5f3f8, type: 3}
   _puzzlePieceSize: 100
 --- !u!1 &5200000001
 GameObject:
@@ -517,7 +517,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c11dc6c28d0644e82531f1ca0eaf64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ChromaJigsaw.UI::ChromaJigsaw.UI.PuzzleController
-  _hudGroups: []
+  _hudGroups:
+  - {fileID: 7100006}
   _workspaceTapButton: {fileID: 7110005}
 --- !u!1 &5300000001
 GameObject:
@@ -578,6 +579,7 @@ GameObject:
   - component: {fileID: 7100003}
   - component: {fileID: 7100004}
   - component: {fileID: 7100005}
+  - component: {fileID: 7100006}
   m_Layer: 5
   m_Name: FocusHUD_Canvas
   m_TagString: Untagged
@@ -667,6 +669,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &7100006
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100001}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7110001
 GameObject:
   m_ObjectHideFlags: 0
