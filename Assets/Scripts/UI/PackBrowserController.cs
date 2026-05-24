@@ -7,9 +7,10 @@ namespace ChromaJigsaw.UI
 {
     public class PackBrowserController : MonoBehaviour
     {
-        [SerializeField] private PackRegistry _registry;
-        [SerializeField] private PackCardView _cardPrefab;
-        [SerializeField] private Transform    _container;
+        [SerializeField] private PackRegistry     _registry;
+        [SerializeField] private PackCardView     _cardPrefab;
+        [SerializeField] private Transform        _container;
+        [SerializeField] private PuzzleSelectView _puzzleSelectView;
 
         private readonly List<PackCardView> _cards = new();
 
@@ -48,6 +49,9 @@ namespace ChromaJigsaw.UI
                 { "pack_name",   config?.packName ?? ""      },
                 { "unlock_type", result.ToString().ToLower() }
             });
+
+            if (_puzzleSelectView != null)
+                _puzzleSelectView.Open(packId, config);
         }
 
         private static int GetCompletedCount(string packId)

@@ -67,6 +67,12 @@ namespace ChromaJigsaw.Core
 
         public void LoadPuzzle(Texture2D image, int pieceCount, string puzzleId)
         {
+            if (_puzzlePrefab == null)
+            {
+                Debug.LogError("[HootyBridge] _puzzlePrefab is not assigned — wire Puzzle.prefab in the HootyBridge Inspector.");
+                return;
+            }
+
             if (!_gridByPieceCount.TryGetValue(pieceCount, out var grid))
             {
                 Debug.LogError($"[HootyBridge] Unsupported piece count {pieceCount}. Valid: 12, 24, 48, 96.");

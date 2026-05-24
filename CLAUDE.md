@@ -22,11 +22,24 @@
 
 ## Current Stage
 
-**B-12b — Layout & Spacing** ✅ Code complete (commit a88fe45).
+**B-12d — Core Game Loop** ✅ Code complete (this session).
 
-B-11 ✅ | B-12a ✅ (commit 48e1f91) | B-12b ✅ (commit a88fe45)
+B-11 ✅ | B-12a ✅ (48e1f91) | B-12b ✅ (a88fe45) | B-12c ✅ (a0f77a5) | B-12d ✅ (this session)
 
-B-12b completed: SafeAreaHandler.cs (Screen.safeArea → Canvas root RT). Portrait lock (ProjectSettings). Panel_Gallery reparented from scene root into Canvas hierarchy. Anchor fixes: TopBar top-stretch 80px, BottomNav bottom-stretch 80px, TabContent full-stretch −160 SizeDelta, XPBar top-stretch 32px −80 offset, Panel_Puzzle/Ambience/Sanctuary full-stretch. PackGridScrollView (ScrollRect+RectMask2D) wrapping PackGridPanel (VLG spacing 24, padding 32, CSF). FramesViewport (ScrollRect+RectMask2D) wrapping FramesContainer (VLG+CSF).
+B-12d completed:
+- **Scene rename**: `MainMenu.unity` → `Gallery.unity`. `SceneNames.MainMenu` removed; `SceneNames.Gallery` + `SceneNames.Reward` added.
+- **AppBootstrap**: now loads `SceneNames.Gallery` on boot.
+- **AtelierView**: back button loads `SceneNames.Gallery`.
+- **RewardViewer.unity** created (minimal scene, index 3). `Settings.unity` moves to index 4.
+- **PuzzleSelectView** (new): overlay that appears when a pack card is tapped. Shows pack name, 12/24/48/96 piece count selector, BEGIN button. Generates solid-colour 512×512 test texture. Sets `PuzzleController.Session*` fields then loads Game scene.
+- **PuzzleController**: added `static Texture2D SessionTexture` field; `Start()` calls `HootyBridge.Instance.LoadPuzzle(SessionTexture, SessionPieceCount, SessionPuzzleId)`.
+- **HootyBridge**: null check for `_puzzlePrefab` with clear error message.
+- **PackBrowserController**: `OnPackTapped()` now opens `PuzzleSelectView`.
+- **Gallery.unity**: Panel_PuzzleSelect added (inactive, Canvas child, fileIDs 1000000001–3); PackBrowserController._puzzleSelectView wired to it.
+
+**⚠️ CRITICAL Editor step (game cannot start without this):**
+- Wire `_puzzlePrefab` in HootyBridge Inspector → `Assets/ThirdParty/Hootybird/JigsawPuzzle/Prefabs/Gameplay/Puzzle.prefab`
+- Without this, `HootyBridge.LoadPuzzle()` logs an error and returns immediately. You will see the Game scene but no pieces.
 
 **Remaining manual Unity Editor steps (still outstanding):**
 
@@ -35,7 +48,7 @@ B-07 (cosmetic — not blocking):
 - EBGaramond SemiBold SDF: create via Font Asset Creator (Window → TextMeshPro → Font Asset Creator; source: Assets/Art/Fonts/EBGaramond-SemiBold.ttf); then re-assign TitleText in prefabs
 
 B-09 (audio — blocked on art):
-- Add MusicContextController GO to MainMenu.unity and Game.unity; call SetContext() from scene controllers
+- Add MusicContextController GO to Gallery.unity and Game.unity; call SetContext() from scene controllers
 - Assign Suno .mp3 clips to AudioManager Inspector slots (after Jason generates them)
 
 B-10 (accessibility):
@@ -47,7 +60,7 @@ B-10 (accessibility):
 
 ⚠️ Burst AOT: Edit → Project Settings → Player → Other Settings → Burst AOT Settings → **uncheck Enable Burst AOT Compilation** (Burst 1.8.29 crash bug)
 
-B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 ✅ | B-07 🔲 (Editor) | B-08 ✅ | B-09 ✅ | B-10 ✅ | B-11 ✅ | B-12 🔲 (a+b code done)
+B-01 ✅ | B-02 ✅ | B-03 ✅ | B-04 ✅ | B-05 ✅ | B-06 ✅ | B-07 🔲 (Editor) | B-08 ✅ | B-09 ✅ | B-10 ✅ | B-11 ✅ | B-12 🔲 (a–d code done — Editor wiring pending)
 
 ---
 
@@ -86,9 +99,10 @@ Assets/
 ├── _Bootstrap/
 ├── Scenes/
 │   ├── _Bootstrap.unity        ← scene index 0
-│   ├── MainMenu.unity          ← scene index 1
+│   ├── Gallery.unity           ← scene index 1 (formerly MainMenu.unity)
 │   ├── Game.unity              ← scene index 2
-│   └── Settings.unity          ← scene index 3
+│   ├── RewardViewer.unity      ← scene index 3
+│   └── Settings.unity          ← scene index 4
 ├── Scripts/
 │   ├── Core/                   ← SaveManager.cs, AppBootstrap.cs, HootyBridge.cs
 │   ├── UI/
@@ -290,10 +304,10 @@ Claude.ai needs to answer before the next stage brief is written.
 | B-09 | Audio system | ✅ Code done — clip slots + scene wiring pending |
 | B-10 | Accessibility suite | ✅ Done (code + scene wiring complete) |
 | B-11 | Analytics & event tracking | ✅ Done |
-| B-12 | Polish & QA | 🔲 (B-12a+b code done — Editor + art pending) |
+| B-12 | Polish & QA | 🔲 (B-12a+b+c code done — Editor + art pending) |
 | B-13 | Launch prep | 🔲 |
 
 ---
 
 *Keep this file current. It is read at the start of every Claude Code session.*
-*Last updated: 2026-05-22 — B-12b Layout & Spacing code complete (commit a88fe45). SafeAreaHandler, portrait lock, Panel_Gallery reparented into Canvas, all anchor fixes (TopBar/BottomNav/TabContent/XPBar/panels), PackGridScrollView + FramesViewport scroll containers with VLG+CSF. Awaiting Claude.ai brief for next stage (B-12c or B-13).*
+*Last updated: 2026-05-23 — B-12c Visual Content code complete (commit a0f77a5). Panel backgrounds + headings wired into hierarchy, tab labels Montserrat SemiBold 10px full opacity, tab icons white, ArtworkSpotlight/DailyMasterpiece/ZenPass color corrections, XPBar fill anchor fix. Awaiting Claude.ai brief for B-12d or B-13.*

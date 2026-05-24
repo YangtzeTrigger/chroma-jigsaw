@@ -37,7 +37,7 @@ namespace ChromaJigsaw.Core
             SubscriptionService.Instance.Initialise();
             IAPManager.Instance.InitializeIAP();
             DailyService.Instance.Initialise(_dailyManifest);
-            SceneManager.LoadScene(SceneNames.MainMenu);
+            SceneManager.LoadScene(SceneNames.Gallery);
         }
     }
 }

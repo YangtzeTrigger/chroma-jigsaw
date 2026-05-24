@@ -86,7 +86,7 @@ namespace ChromaJigsaw.UI
 
         // ── Navigation ───────────────────────────────────────────────────────
 
-        private void OnBack() => SceneManager.LoadScene(SceneNames.MainMenu);
+        private void OnBack() => SceneManager.LoadScene(SceneNames.Gallery);
 
         // ── Sensory Ambience ─────────────────────────────────────────────────
 

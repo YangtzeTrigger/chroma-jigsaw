@@ -11,11 +11,12 @@ namespace ChromaJigsaw.UI
     // Routes HootyBridge events to AudioManager SFX and handles Focus Mode HUD visibility.
     public class PuzzleController : MonoBehaviour
     {
-        // Set before LoadScene(Game) to provide context for analytics.
-        public static string SessionPackId    = "";
-        public static string SessionPuzzleId  = "";
-        public static int    SessionPieceCount = 0;
-        public static bool   SessionIsDaily    = false;
+        // Set before LoadScene(Game) to provide context for analytics and puzzle loading.
+        public static string    SessionPackId    = "";
+        public static string    SessionPuzzleId  = "";
+        public static int       SessionPieceCount = 0;
+        public static bool      SessionIsDaily    = false;
+        public static Texture2D SessionTexture    = null;
 
         // Assign all HUD CanvasGroups (TopBar, any overlays) that should hide in Focus Mode.
         [SerializeField] private CanvasGroup[] _hudGroups;
@@ -27,6 +28,12 @@ namespace ChromaJigsaw.UI
         private bool  _hudVisible = true;
         private float _puzzleStartTime;
         private int   _piecesPlaced;
+
+        private void Start()
+        {
+            if (SessionPieceCount > 0 && SessionTexture != null)
+                HootyBridge.Instance.LoadPuzzle(SessionTexture, SessionPieceCount, SessionPuzzleId);
+        }
 
         private void OnEnable()
         {
