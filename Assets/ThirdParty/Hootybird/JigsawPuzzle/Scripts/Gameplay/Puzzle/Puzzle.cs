@@ -715,6 +715,9 @@ namespace HootyBird.JigsawPuzzleEngine.Gameplay
                     Material material = new Material(puzzlePieceShader);
                     // Update texture to renderTexture.
                     material.SetTexture("_MaskTex", mask);
+                    // Unity 6: [PerRendererData] on _MainTex is not reliably set via RawImage.texture
+                    // when a custom material is assigned. Set it explicitly on the material instead.
+                    material.SetTexture("_MainTex", PuzzleTexture);
 
                     Vector2 worldSize = worldPosTo - worldPosFrom;
                     // Update material outline value.
