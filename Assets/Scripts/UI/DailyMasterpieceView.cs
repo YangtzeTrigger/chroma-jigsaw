@@ -22,14 +22,19 @@ namespace ChromaJigsaw.UI
         [SerializeField] private Sprite          _dotInProgress;
         [SerializeField] private Sprite          _dotEmpty;
 
-        private static readonly Color GoldColor = new Color(0.957f, 0.741f, 0.380f);   // #f4bd61
-        private static readonly Color DimColor  = new Color(0.310f, 0.271f, 0.216f, 0.3f); // #4f4537 @ 30%
+        private static readonly Color GoldColor    = new Color(0.957f, 0.741f, 0.380f);   // #f4bd61
+        private static readonly Color DimColor     = new Color(0.310f, 0.271f, 0.216f, 0.3f); // #4f4537 @ 30%
+        private static readonly Color OutlineColor = new Color(0.310f, 0.271f, 0.216f);   // #4f4537
 
         private int _currentIndex;
 
         private void Awake()
         {
-            _beginButton.onClick.AddListener(HandleBeginRitual);
+            if (_dotCompleted  == null) _dotCompleted  = MakeDotSprite(GoldColor, true);
+            if (_dotInProgress == null) _dotInProgress = MakeDotSprite(GoldColor, false);
+            if (_dotEmpty      == null) _dotEmpty      = MakeDotSprite(OutlineColor, false);
+
+            _beginButton.onClick.AddListener(HandleBegin);
             if (_closeButton != null)
                 _closeButton.onClick.AddListener(Close);
 
@@ -64,11 +69,14 @@ namespace ChromaJigsaw.UI
             _currentIndex = Mathf.Clamp(dailyIndex, 0, entries.Length - 1);
             var entry = entries[_currentIndex];
 
-            _titleText.text      = entry.title;
-            _pieceCountText.text = $"{entry.pieceCount} PIECES";
-            if (entry.imageSprite != null)
+            if (_titleText != null)
+                _titleText.text = string.IsNullOrWhiteSpace(entry.title) ? "Today's Puzzle" : entry.title;
+            if (_pieceCountText != null)
+                _pieceCountText.text = $"{entry.pieceCount} PIECES";
+            if (entry.imageSprite != null && _artworkImage != null)
                 _artworkImage.sprite = entry.imageSprite;
-            _editorialText.text  = $"Daily Masterpiece / {entry.overlayScript}";
+            if (_editorialText != null)
+                _editorialText.text = "A quiet ritual for today";
 
             RefreshDots(entries);
 
@@ -131,7 +139,7 @@ namespace ChromaJigsaw.UI
             }
         }
 
-        private void HandleBeginRitual()
+        private void HandleBegin()
         {
             var entries = DailyService.Instance.GetActiveDailies();
             if (_currentIndex >= entries.Length) return;
@@ -145,8 +153,27 @@ namespace ChromaJigsaw.UI
                     { "piece_count", entry.pieceCount }
                 });
 
-            // B-08: HootyBridge.Instance.LoadPuzzle(entry.imageSprite.texture, entry.pieceCount);
-            // SceneManager.LoadScene(SceneNames.Game);
+            // TODO B-13: HootyBridge.Instance.LoadPuzzle(entry.imageSprite.texture, entry.pieceCount);
+            // TODO B-13: SceneManager.LoadScene(SceneNames.Game);
+        }
+
+        private static Sprite MakeDotSprite(Color color, bool filled, int size = 32)
+        {
+            var tex = new Texture2D(size, size, TextureFormat.RGBA32, false);
+            tex.filterMode = FilterMode.Bilinear;
+            float c      = (size - 1) * 0.5f;
+            float outerR = c - 0.5f;
+            float ringW  = 4f;
+            for (int y = 0; y < size; y++)
+            for (int x = 0; x < size; x++)
+            {
+                float d  = Mathf.Sqrt((x - c) * (x - c) + (y - c) * (y - c));
+                Color px = filled ? (d <= outerR ? color : Color.clear)
+                                  : (d <= outerR && d >= outerR - ringW ? color : Color.clear);
+                tex.SetPixel(x, y, px);
+            }
+            tex.Apply();
+            return Sprite.Create(tex, new Rect(0, 0, size, size), Vector2.one * 0.5f, size);
         }
     }
 }

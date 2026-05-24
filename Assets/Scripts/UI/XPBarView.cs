@@ -10,7 +10,15 @@ namespace ChromaJigsaw.UI
     {
         [SerializeField] private Image           _fill;
         [SerializeField] private TextMeshProUGUI _xpLabel;
+        [SerializeField] private TextMeshProUGUI _xpCountLabel;
         [SerializeField] private int             _xpPerLevel = 10000;
+
+        private static readonly Color FillGold = new Color(0.784f, 0.588f, 0.243f); // #c8963e
+
+        private void Awake()
+        {
+            if (_fill != null) _fill.color = FillGold;
+        }
 
         private void OnEnable() => Refresh();
 
@@ -19,9 +27,22 @@ namespace ChromaJigsaw.UI
             int xp      = SaveManager.Instance.Data.totalXP;
             int current = xp % _xpPerLevel;
             float t     = (float)current / _xpPerLevel;
-            _xpLabel.text = $"XP  {current:N0} / {_xpPerLevel:N0}";
-            _fill.DOKill();
-            _fill.DOFillAmount(t, 0.8f).SetEase(Ease.OutCubic);
+
+            if (_xpCountLabel != null)
+            {
+                if (_xpLabel != null) _xpLabel.text = "XP";
+                _xpCountLabel.text = $"{current:N0} / {_xpPerLevel:N0}";
+            }
+            else if (_xpLabel != null)
+            {
+                _xpLabel.text = $"XP  {current:N0} / {_xpPerLevel:N0}";
+            }
+
+            if (_fill != null)
+            {
+                _fill.DOKill();
+                _fill.DOFillAmount(t, 0.8f).SetEase(Ease.OutCubic);
+            }
         }
 
         public void Show()

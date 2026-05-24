@@ -18,20 +18,25 @@ namespace ChromaJigsaw.UI
         [SerializeField] private Sprite   _dotInProgress;   // ring ◎
         [SerializeField] private Sprite   _dotEmpty;        // open circle ◯
 
-        private static readonly Color GoldColor = new Color(0.957f, 0.741f, 0.380f);
-        private static readonly Color DimColor  = new Color(0.498f, 0.498f, 0.498f, 0.6f);
+        private static readonly Color GoldColor    = new Color(0.957f, 0.741f, 0.380f);  // #f4bd61
+        private static readonly Color DimColor     = new Color(0.498f, 0.498f, 0.498f, 0.6f);
+        private static readonly Color OutlineColor = new Color(0.310f, 0.271f, 0.216f);  // #4f4537
 
-        private Action _onBeginRitual;
+        private Action _onBegin;
 
-        private void Awake() =>
-            _beginButton.onClick.AddListener(HandleBeginRitual);
-
-        public void Refresh(Action onBeginRitual)
+        private void Awake()
         {
-            _onBeginRitual = onBeginRitual;
+            if (_dotCompleted  == null) _dotCompleted  = MakeDotSprite(GoldColor, true);
+            if (_dotInProgress == null) _dotInProgress = MakeDotSprite(GoldColor, false);
+            if (_dotEmpty      == null) _dotEmpty      = MakeDotSprite(OutlineColor, false);
+            _beginButton.onClick.AddListener(HandleBegin);
+        }
+
+        public void Refresh(Action onBegin)
+        {
+            _onBegin = onBegin;
             var entries = DailyService.Instance.GetActiveDailies();
 
-            // Show newest daily's artwork in the card preview
             if (entries.Length > 0 && entries[0].imageSprite != null)
                 _artworkPreview.texture = entries[0].imageSprite.texture;
 
@@ -72,7 +77,7 @@ namespace ChromaJigsaw.UI
             }
         }
 
-        private void HandleBeginRitual()
+        private void HandleBegin()
         {
             _beginButton.transform.DOKill();
             _beginButton.transform.DOPunchScale(Vector3.one * 0.12f, 0.35f, 6, 0.5f);
@@ -81,7 +86,26 @@ namespace ChromaJigsaw.UI
             string dailyId = entries.Length > 0 ? entries[0].dailyId : "";
             AnalyticsManager.Instance.LogEvent("daily_opened",
                 new Dictionary<string, object> { { "daily_id", dailyId } });
-            _onBeginRitual?.Invoke();
+            _onBegin?.Invoke();
+        }
+
+        private static Sprite MakeDotSprite(Color color, bool filled, int size = 32)
+        {
+            var tex = new Texture2D(size, size, TextureFormat.RGBA32, false);
+            tex.filterMode = FilterMode.Bilinear;
+            float c      = (size - 1) * 0.5f;
+            float outerR = c - 0.5f;
+            float ringW  = 4f;
+            for (int y = 0; y < size; y++)
+            for (int x = 0; x < size; x++)
+            {
+                float d  = Mathf.Sqrt((x - c) * (x - c) + (y - c) * (y - c));
+                Color px = filled ? (d <= outerR ? color : Color.clear)
+                                  : (d <= outerR && d >= outerR - ringW ? color : Color.clear);
+                tex.SetPixel(x, y, px);
+            }
+            tex.Apply();
+            return Sprite.Create(tex, new Rect(0, 0, size, size), Vector2.one * 0.5f, size);
         }
     }
 }

@@ -16,8 +16,6 @@ namespace ChromaJigsaw.UI
         [SerializeField] private PackRegistry         _registry;
         [SerializeField] private PackCardView         _cardPrefab;
         [SerializeField] private Transform            _gridContainer;
-        [SerializeField] private DailyCardView        _dailyCardView;
-        [SerializeField] private DailyMasterpieceView _masterpieceView;
 
         private RectTransform _gridRT;
         private RectTransform _wallRT;
@@ -74,17 +72,7 @@ namespace ChromaJigsaw.UI
             _panelPackGrid.SetActive(true);
             if (_galleryWallView != null)
                 _galleryWallView.gameObject.SetActive(false);
-            if (_dailyCardView != null)
-                _dailyCardView.Refresh(() => OpenDailyMasterpiece(0));
             AnalyticsManager.Instance.LogScreenView("gallery_landing");
-        }
-
-        public void OpenDailyMasterpiece(int dailyIndex = 0)
-        {
-            if (_masterpieceView == null) return;
-            _masterpieceView.Open(dailyIndex);
-            _backStack.Push(_masterpieceView.Close);
-            AnalyticsManager.Instance.LogScreenView("daily_masterpiece");
         }
 
         public void OpenPack(string packId)

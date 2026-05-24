@@ -287,8 +287,8 @@ Camera:
   m_GameObject: {fileID: 392626248}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.039215688, g: 0.039215688, b: 0.039215688, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -484,8 +484,8 @@ Camera:
   m_GameObject: {fileID: 666518328}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.039215688, g: 0.039215688, b: 0.039215688, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1221,6 +1221,8 @@ GameObject:
   - component: {fileID: 1089866099}
   - component: {fileID: 1089866100}
   - component: {fileID: 1089866101}
+  - component: {fileID: 2107809194}
+  - component: {fileID: 1089866105}
   m_Layer: 0
   m_Name: Panel_Sanctuary
   m_TagString: Untagged
@@ -1242,6 +1244,11 @@ RectTransform:
   m_Children:
   - {fileID: 8500000002}
   - {fileID: 8500000012}
+  - {fileID: 4700000002}
+  - {fileID: 4800000002}
+  - {fileID: 4900000002}
+  - {fileID: 4910000002}
+  - {fileID: 4920000002}
   m_Father: {fileID: 225425145}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1725,7 +1732,6 @@ GameObject:
   - component: {fileID: 2107809195}
   - component: {fileID: 2107809196}
   - component: {fileID: 2107809193}
-  - component: {fileID: 2107809194}
   m_Layer: 0
   m_Name: Panel_Gallery
   m_TagString: Untagged
@@ -1749,11 +1755,6 @@ RectTransform:
   - {fileID: 8200000012}
   - {fileID: 5000000002}
   - {fileID: 2300000002}
-  - {fileID: 4700000002}
-  - {fileID: 4800000002}
-  - {fileID: 4900000002}
-  - {fileID: 4910000002}
-  - {fileID: 4920000002}
   m_Father: {fileID: 901564207}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1779,19 +1780,17 @@ MonoBehaviour:
   _registry: {fileID: 11400000, guid: e7c75185ad3487848aeef5cce53bbc89, type: 2}
   _cardPrefab: {fileID: 3387831465720635399, guid: cb7d099272cafa144b4f4d84c5011e43, type: 3}
   _gridContainer: {fileID: 2200000002}
-  _dailyCardView: {fileID: 2107809194}
-  _masterpieceView: {fileID: 1311672513}
 --- !u!114 &2107809194
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2107809191}
+  m_GameObject: {fileID: 1089866098}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8a8496cc9a22fe45a2793b1a3f92ff3, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: ChromaJigsaw.UI::ChromaJigsaw.UI.DailyCardView
   _artworkPreview: {fileID: 4700000004}
   _beginButton: {fileID: 4800000005}
@@ -5191,7 +5190,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2107809192}
+  m_Father: {fileID: 1089866099}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5265,7 +5264,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4850000002}
-  m_Father: {fileID: 2107809192}
+  m_Father: {fileID: 1089866099}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5521,7 +5520,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2107809192}
+  m_Father: {fileID: 1089866099}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5596,7 +5595,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2107809192}
+  m_Father: {fileID: 1089866099}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5671,7 +5670,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2107809192}
+  m_Father: {fileID: 1089866099}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11770,6 +11769,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1089866105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089866098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: ChromaJigsaw.UI::ChromaJigsaw.UI.SanctuaryController
+  _dailyCardView: {fileID: 2107809194}
+  _masterpieceView: {fileID: 1311672513}
 --- !u!1 &8500000001
 GameObject:
   m_ObjectHideFlags: 0
