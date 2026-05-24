@@ -161,6 +161,7 @@ namespace ChromaJigsaw.UI
             PuzzleController.SessionPuzzleId   = entry.dailyId;
             PuzzleController.SessionPackId     = "daily";
             PuzzleController.SessionIsDaily    = true;
+            DOTween.KillAll();
             SceneManager.LoadScene(SceneNames.Game);
         }
 

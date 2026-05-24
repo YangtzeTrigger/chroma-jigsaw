@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -95,6 +96,7 @@ namespace ChromaJigsaw.UI
                 { "piece_count", _selectedPieceCount }
             });
 
+            DOTween.KillAll();
             SceneManager.LoadScene(SceneNames.Game);
         }
 

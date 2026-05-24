@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using HootyBird.JigsawPuzzleEngine.Gameplay;
@@ -118,8 +119,18 @@ namespace ChromaJigsaw.Core
                 piece.OnSnappedToPuzzleBoard += HandlePieceSnapped;
 
             _activePuzzle.OnPuzzleInitialized += OnPuzzleInitialized;
-            _activePuzzle.Initialize(puzzleData, image, savedGame, _puzzlePieceSize);
+
+            // Wait one frame so the Screen Space - Camera canvas completes its layout pass
+            // before Initialize() calls GetWorldCorners() to position pieces.
+            StartCoroutine(DelayedInitialize(puzzleData, image, savedGame));
+        }
+
+        private IEnumerator DelayedInitialize(PuzzleData puzzleData, Texture2D image, SavedGameData savedGame)
+        {
+            yield return null;
+            if (_activePuzzle == null) yield break;
             Debug.Log($"[HootyBridge] Initialize called — waiting for job to complete...");
+            _activePuzzle.Initialize(puzzleData, image, savedGame, _puzzlePieceSize);
         }
 
         private void OnPuzzleInitialized(bool fromSave)
