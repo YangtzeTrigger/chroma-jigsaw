@@ -10,6 +10,10 @@ namespace ChromaJigsaw.UI
 {
     public class PuzzleSelectView : MonoBehaviour
     {
+        // Assign any test Texture2D in the Inspector (e.g. a Hootybird sample image).
+        // Falls back to a solid-colour swatch if left empty.
+        [SerializeField] private Texture2D _testTexture;
+
         private bool         _isBuilt;
         private string       _packId;
         private PackConfigSO _config;
@@ -59,7 +63,7 @@ namespace ChromaJigsaw.UI
             }
         }
 
-        private void Begin()
+        private static Texture2D MakeSolidTexture()
         {
             var tex    = new Texture2D(512, 512, TextureFormat.RGBA32, false);
             var fill   = new Color(0.22f, 0.47f, 0.65f);
@@ -67,6 +71,12 @@ namespace ChromaJigsaw.UI
             for (int i = 0; i < pixels.Length; i++) pixels[i] = fill;
             tex.SetPixels(pixels);
             tex.Apply();
+            return tex;
+        }
+
+        private void Begin()
+        {
+            var tex = _testTexture != null ? _testTexture : MakeSolidTexture();
 
             string puzzleId = _config?.imageIds != null && _config.imageIds.Length > 0
                 ? _config.imageIds[0]
