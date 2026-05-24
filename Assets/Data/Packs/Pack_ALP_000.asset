@@ -19,6 +19,6 @@ MonoBehaviour:
   thumbnailSprite: {fileID: 0}
   imageIds: []
   pieceCount: 24
-  unlockType: 1
-  xpRequired: 500
+  unlockType: 0
+  xpRequired: 0
   iapProductId: 

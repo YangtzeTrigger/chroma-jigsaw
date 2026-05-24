@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using ChromaJigsaw.Core;
@@ -153,8 +154,25 @@ namespace ChromaJigsaw.UI
                     { "piece_count", entry.pieceCount }
                 });
 
-            // TODO B-13: HootyBridge.Instance.LoadPuzzle(entry.imageSprite.texture, entry.pieceCount);
-            // TODO B-13: SceneManager.LoadScene(SceneNames.Game);
+            PuzzleController.SessionTexture    = entry.imageSprite != null
+                ? entry.imageSprite.texture
+                : MakeFallbackTexture();
+            PuzzleController.SessionPieceCount = entry.pieceCount > 0 ? entry.pieceCount : 24;
+            PuzzleController.SessionPuzzleId   = entry.dailyId;
+            PuzzleController.SessionPackId     = "daily";
+            PuzzleController.SessionIsDaily    = true;
+            SceneManager.LoadScene(SceneNames.Game);
+        }
+
+        private static Texture2D MakeFallbackTexture()
+        {
+            var tex = new Texture2D(512, 512, TextureFormat.RGB24, false);
+            var fill = new Color(0.20f, 0.35f, 0.50f);
+            var pixels = new Color[512 * 512];
+            for (int i = 0; i < pixels.Length; i++) pixels[i] = fill;
+            tex.SetPixels(pixels);
+            tex.Apply();
+            return tex;
         }
 
         private static Sprite MakeDotSprite(Color color, bool filled, int size = 32)
