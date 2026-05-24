@@ -2,7 +2,7 @@ Shader "JigsawPuzzle/Default"
 {
     Properties
     {
-        [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
+        _MainTex ("Sprite Texture", 2D) = "white" {}
         _MaskTex ("Mask Texture", 2D) = "white" {}
         _Color ("Tint", Color) = (1,1,1,1)
         _EffectSize ("Effect Size", Vector) = (.01, .01, .01, .01)
