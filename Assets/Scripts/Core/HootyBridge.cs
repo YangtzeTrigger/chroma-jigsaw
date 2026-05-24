@@ -68,6 +68,8 @@ namespace ChromaJigsaw.Core
 
         public void LoadPuzzle(Texture2D image, int pieceCount, string puzzleId)
         {
+            Debug.Log($"[HootyBridge] LoadPuzzle — pieceCount={pieceCount} puzzleId={puzzleId} image={(image == null ? "NULL" : image.name)} parent={((_puzzleParent == null) ? "NULL" : _puzzleParent.name)} prefab={((_puzzlePrefab == null) ? "NULL" : "OK")}");
+
             if (_puzzlePrefab == null)
             {
                 Debug.LogError("[HootyBridge] _puzzlePrefab is not assigned — wire Puzzle.prefab in the HootyBridge Inspector.");
@@ -108,6 +110,7 @@ namespace ChromaJigsaw.Core
                 : null;
 
             _activePuzzle = Instantiate(_puzzlePrefab, _puzzleParent, false);
+            Debug.Log($"[HootyBridge] Puzzle instantiated under '{_puzzleParent?.name}'. Active={_activePuzzle.gameObject.activeSelf}");
 
             // Subscribe per-piece as each is created so we capture SaveFile snaps during init
             // (needed for accurate _piecesOnBoard when resuming a saved game).
@@ -116,10 +119,12 @@ namespace ChromaJigsaw.Core
 
             _activePuzzle.OnPuzzleInitialized += OnPuzzleInitialized;
             _activePuzzle.Initialize(puzzleData, image, savedGame, _puzzlePieceSize);
+            Debug.Log($"[HootyBridge] Initialize called — waiting for job to complete...");
         }
 
         private void OnPuzzleInitialized(bool fromSave)
         {
+            Debug.Log($"[HootyBridge] OnPuzzleInitialized — fromSave={fromSave} pieces={_activePuzzle?.PuzzlePieces?.Count}");
             _activePuzzle.OnPuzzleInitialized -= OnPuzzleInitialized;
 
             foreach (var piece in _activePuzzle.PuzzlePieces)

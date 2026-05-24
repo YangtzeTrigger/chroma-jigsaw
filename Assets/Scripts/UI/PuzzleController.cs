@@ -31,8 +31,11 @@ namespace ChromaJigsaw.UI
 
         private void Start()
         {
+            Debug.Log($"[PuzzleController] Start — SessionPieceCount={SessionPieceCount} SessionTexture={(SessionTexture == null ? "NULL" : SessionTexture.name)} SessionPuzzleId={SessionPuzzleId}");
             if (SessionPieceCount > 0 && SessionTexture != null)
                 HootyBridge.Instance.LoadPuzzle(SessionTexture, SessionPieceCount, SessionPuzzleId);
+            else
+                Debug.LogWarning("[PuzzleController] SessionPieceCount=0 or SessionTexture=null — puzzle will NOT load. Did you navigate here correctly from Gallery?");
         }
 
         private void OnEnable()
