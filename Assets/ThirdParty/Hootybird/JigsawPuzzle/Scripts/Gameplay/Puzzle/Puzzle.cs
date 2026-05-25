@@ -52,6 +52,17 @@ namespace HootyBird.JigsawPuzzleEngine.Gameplay
         private JobHandle jobHandle;
         private List<PuzzlePiece> allPuzzlePieces = new List<PuzzlePiece>();
 
+        // Deferred mask rendering: DrawMeshNow only works inside OnRenderObject, not coroutines.
+        private struct MaskJob
+        {
+            public RenderTexture target;
+            public Matrix4x4     proj;
+            public float         blurX, blurY;
+        }
+        private List<MaskJob> _pendingMaskJobs;
+        private Mesh          _pendingMaskMesh;
+        private Material      _blurMat;
+
         public RectTransform RectTransform { get; private set; }
         public Texture PuzzleTexture { get; private set; }
         public List<PuzzlePiece> PuzzlePieces { get; private set; } = new List<PuzzlePiece>();
@@ -454,6 +465,11 @@ namespace HootyBird.JigsawPuzzleEngine.Gameplay
 
             StopAllCoroutines();
 
+            // Cancel any deferred mask renders that haven't fired yet.
+            if (_pendingMaskJobs != null) { _pendingMaskJobs.Clear(); _pendingMaskJobs = null; }
+            if (_pendingMaskMesh != null) { Destroy(_pendingMaskMesh); _pendingMaskMesh = null; }
+            if (_blurMat         != null) { Destroy(_blurMat);         _blurMat         = null; }
+
             isActive = false;
             OnPuzzleClearedValues?.Invoke();
         }
@@ -634,7 +650,6 @@ namespace HootyBird.JigsawPuzzleEngine.Gameplay
                 PuzzleData.columns * Settings.PuzzleSettings.PuzzlePiecePixelResolution,
                 PuzzleData.rows * Settings.PuzzleSettings.PuzzlePiecePixelResolution);
 
-            RenderTexture prev = RenderTexture.active;
             Vector4 highlightStrength = new Vector4(
                 puzzlePiecePrefab.HighlightStrength.x / 100f,
                 puzzlePiecePrefab.HighlightStrength.y / 100f,
@@ -642,8 +657,11 @@ namespace HootyBird.JigsawPuzzleEngine.Gameplay
                 puzzlePiecePrefab.HighlightStrength.w / 100f
             );
             float highlightSize = puzzlePiecePrefab.HighlightEffectSize / 100f;
-            Mesh mesh = textureToPuzzleJob.GetMesh();
-            Material blur = new Material(Shader.Find("JigsawPuzzle/Blur"));
+
+            _pendingMaskMesh = textureToPuzzleJob.GetMesh();
+            _blurMat         = new Material(Shader.Find("JigsawPuzzle/Blur"));
+            _pendingMaskJobs  = new List<MaskJob>();
+
             for (int yIndex = 0; yIndex < maskMaterialHelper.maxTextures.y; yIndex++)
             {
                 for (int xIndex = 0; xIndex < maskMaterialHelper.maxTextures.x; xIndex++)
@@ -678,52 +696,23 @@ namespace HootyBird.JigsawPuzzleEngine.Gameplay
                         RenderTextureFormat.ARGB32);
                     mask.Create();
 
-                    // CommandBuffer.ExecuteCommandBuffer is unreliable in Unity 6 URP for off-screen RTs.
-                    // Use GL immediately-mode approach instead — bypasses URP pipeline entirely.
-                    RenderTexture.active = mask;
-                    GL.Clear(true, true, Color.clear);
-                    GL.PushMatrix();
-                    GL.LoadProjectionMatrix(Matrix4x4.Ortho(
-                        worldPosFrom.x,
-                        worldPosTo.x,
-                        worldPosFrom.y,
-                        worldPosTo.y,
-                        .1f,
-                        2f));
-                    GL.modelview = Matrix4x4.TRS(new Vector3(0f, 0f, -1f), Quaternion.identity, Vector3.one);
-                    puzzleMeshMaterial.SetPass(0);
-#pragma warning disable CS0618
-                    Graphics.DrawMeshNow(mesh, Matrix4x4.identity);
-#pragma warning restore CS0618
-                    GL.PopMatrix();
-
-#if UNITY_EDITOR
-                    // Diagnose mask RT content: center pixel should be non-zero if a jigsaw shape was drawn.
-                    {
-                        var dbg = new Texture2D(1, 1, TextureFormat.RGBA32, false);
-                        RenderTexture.active = mask;
-                        dbg.ReadPixels(new Rect(mask.width / 2, mask.height / 2, 1, 1), 0, 0);
-                        dbg.Apply();
-                        Color p = dbg.GetPixel(0, 0);
-                        Debug.Log($"[Puzzle] mask[{xIndex},{yIndex}] center px r={p.r:F3} a={p.a:F3}  size={mask.width}x{mask.height}  IsCreated={mask.IsCreated()}");
-                        Destroy(dbg);
-                    }
-#endif
-
-                    // Blur mask?
+                    // Compute blur params now (before mask list grows); rendering is deferred to OnRenderObject.
+                    float blurX = 0f, blurY = 0f;
                     if (Settings.PuzzleSettings.BlurMaskSize > 0f)
                     {
                         int piecesX = Mathf.CeilToInt((worldPosTo.x - worldPosFrom.x) / pieceSize.x);
                         int piecesY = Mathf.CeilToInt((worldPosTo.y - worldPosFrom.y) / pieceSize.y);
-
-                        blur.SetFloat("_BlurX", Settings.PuzzleSettings.BlurMaskSize / piecesX);
-                        blur.SetFloat("_BlurY", Settings.PuzzleSettings.BlurMaskSize / piecesY);
-                        RenderTexture temp = RenderTexture.GetTemporary(mask.descriptor);
-                        Graphics.Blit(mask, temp, blur);
-                        Graphics.Blit(temp, mask);
-                        RenderTexture.ReleaseTemporary(temp);
+                        blurX = Settings.PuzzleSettings.BlurMaskSize / piecesX;
+                        blurY = Settings.PuzzleSettings.BlurMaskSize / piecesY;
                     }
 
+                    _pendingMaskJobs.Add(new MaskJob
+                    {
+                        target = mask,
+                        proj   = Matrix4x4.Ortho(worldPosFrom.x, worldPosTo.x, worldPosFrom.y, worldPosTo.y, .1f, 2f),
+                        blurX  = blurX,
+                        blurY  = blurY,
+                    });
                     masks.Add(mask);
 
                     // Create new material for each mask texture.
@@ -742,10 +731,47 @@ namespace HootyBird.JigsawPuzzleEngine.Gameplay
                     puzzlePieceMaterials.Add(material);
                 }
             }
-            Destroy(mesh);
-            Destroy(blur);
+            // mesh and blur material are kept alive; OnRenderObject will destroy them after rendering.
+        }
 
-            RenderTexture.active = prev;
+        // Called by Unity after each camera renders. DrawMeshNow is only valid in this (and similar) callbacks.
+        private void OnRenderObject()
+        {
+            if (_pendingMaskJobs == null || _pendingMaskJobs.Count == 0) return;
+
+            var savedRT  = RenderTexture.active;
+            var viewMat  = Matrix4x4.TRS(new Vector3(0f, 0f, -1f), Quaternion.identity, Vector3.one);
+
+            foreach (var job in _pendingMaskJobs)
+            {
+                RenderTexture.active = job.target;
+                GL.Clear(true, true, Color.clear);
+                GL.PushMatrix();
+                GL.LoadProjectionMatrix(job.proj);
+                GL.modelview = viewMat;
+                puzzleMeshMaterial.SetPass(0);
+#pragma warning disable CS0618
+                Graphics.DrawMeshNow(_pendingMaskMesh, Matrix4x4.identity);
+#pragma warning restore CS0618
+                GL.PopMatrix();
+
+                if (job.blurX > 0f || job.blurY > 0f)
+                {
+                    _blurMat.SetFloat("_BlurX", job.blurX);
+                    _blurMat.SetFloat("_BlurY", job.blurY);
+                    var temp = RenderTexture.GetTemporary(job.target.descriptor);
+                    Graphics.Blit(job.target, temp, _blurMat);
+                    Graphics.Blit(temp, job.target);
+                    RenderTexture.ReleaseTemporary(temp);
+                }
+            }
+
+            RenderTexture.active = savedRT;
+
+            _pendingMaskJobs.Clear();
+            _pendingMaskJobs = null;
+            Destroy(_pendingMaskMesh); _pendingMaskMesh = null;
+            Destroy(_blurMat);         _blurMat         = null;
         }
 
         private void ViewRectUpdated()
@@ -778,6 +804,9 @@ namespace HootyBird.JigsawPuzzleEngine.Gameplay
             jobHandle.Complete();
 
             GenerateMaskFromMesh();
+
+            // Wait for OnRenderObject to draw the mask shapes (DrawMeshNow only works there).
+            yield return new WaitUntil(() => _pendingMaskJobs == null);
 
             // Generate and enable correct amount of puzzle pieces.
             GeneratePuzzlePieces();
