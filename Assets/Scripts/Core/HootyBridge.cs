@@ -138,6 +138,19 @@ namespace ChromaJigsaw.Core
             Debug.Log($"[HootyBridge] OnPuzzleInitialized — fromSave={fromSave} pieces={_activePuzzle?.PuzzlePieces?.Count}");
             _activePuzzle.OnPuzzleInitialized -= OnPuzzleInitialized;
 
+            // SetRestrictionWorldRect is normally called by Hootybird's PuzzleOverlay,
+            // which we bypass. Without it, positionRestrictionWorldRect defaults to
+            // Rect(0,0,0,0) and all piece movement is clamped to zero.
+            var playfieldCorners = new Vector3[4];
+            _puzzleParent.GetWorldCorners(playfieldCorners);
+            Rect playfieldWorldRect = new Rect(
+                playfieldCorners[0].x,
+                playfieldCorners[0].y,
+                playfieldCorners[2].x - playfieldCorners[0].x,
+                playfieldCorners[2].y - playfieldCorners[0].y);
+            foreach (var piece in _activePuzzle.PuzzlePieces)
+                piece.SetRestrictionWorldRect(playfieldWorldRect);
+
             foreach (var piece in _activePuzzle.PuzzlePieces)
             {
                 var interaction = piece.GetComponent<PuzzlePieceInteraction>();

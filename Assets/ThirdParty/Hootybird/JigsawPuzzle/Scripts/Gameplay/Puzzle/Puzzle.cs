@@ -9,7 +9,6 @@ using Unity.Collections;
 using Unity.Jobs;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.Windows;
 
 namespace HootyBird.JigsawPuzzleEngine.Gameplay
@@ -656,17 +655,6 @@ namespace HootyBird.JigsawPuzzleEngine.Gameplay
                         Mathf.Min((xIndex + 1) * maskMaterialHelper.maxPiecesPerTexture.x * pieceSize.x, textureToPuzzleJob.meshSize.Value.x),
                         Mathf.Min((yIndex + 1) * maskMaterialHelper.maxPiecesPerTexture.y * pieceSize.y, textureToPuzzleJob.meshSize.Value.y));
 
-                    CommandBuffer commandBuffer = new CommandBuffer();
-                    commandBuffer.SetViewMatrix(Matrix4x4.TRS(new Vector3(0f, 0f, -1f), Quaternion.identity, Vector3.one));
-                    Matrix4x4 meshMatrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.one);
-                    commandBuffer.SetProjectionMatrix(Matrix4x4.Ortho(
-                        worldPosFrom.x,
-                        worldPosTo.x,
-                        worldPosFrom.y,
-                        worldPosTo.y,
-                        .1f,
-                        2f));
-
                     Vector2Int textureFrom = new Vector2Int(
                         Mathf.Min(
                             xIndex * maskMaterialHelper.maxPiecesPerTexture.x * Settings.PuzzleSettings.PuzzlePiecePixelResolution,
@@ -690,11 +678,24 @@ namespace HootyBird.JigsawPuzzleEngine.Gameplay
                         RenderTextureFormat.ARGB32);
                     mask.Create();
 
-                    commandBuffer.SetRenderTarget(mask);
-                    commandBuffer.ClearRenderTarget(RTClearFlags.Color, Color.clear, 0f, 0u);
-
-                    commandBuffer.DrawMesh(mesh, meshMatrix, puzzleMeshMaterial, 0);
-                    Graphics.ExecuteCommandBuffer(commandBuffer);
+                    // CommandBuffer.ExecuteCommandBuffer is unreliable in Unity 6 URP for off-screen RTs.
+                    // Use GL immediately-mode approach instead — bypasses URP pipeline entirely.
+                    RenderTexture.active = mask;
+                    GL.Clear(true, true, Color.clear);
+                    GL.PushMatrix();
+                    GL.LoadProjectionMatrix(Matrix4x4.Ortho(
+                        worldPosFrom.x,
+                        worldPosTo.x,
+                        worldPosFrom.y,
+                        worldPosTo.y,
+                        .1f,
+                        2f));
+                    GL.modelview = Matrix4x4.TRS(new Vector3(0f, 0f, -1f), Quaternion.identity, Vector3.one);
+                    puzzleMeshMaterial.SetPass(0);
+#pragma warning disable CS0618
+                    Graphics.DrawMeshNow(mesh, Matrix4x4.identity);
+#pragma warning restore CS0618
+                    GL.PopMatrix();
 
                     // Blur mask?
                     if (Settings.PuzzleSettings.BlurMaskSize > 0f)
