@@ -22,9 +22,9 @@
 
 ## Current Stage
 
-**B-12d — Core Game Loop** ✅ Code + wiring complete. Puzzle rendering fixed. Pending: device QA + AudioMixer Editor action.
+**B-12d — Core Game Loop** ✅ Jigsaw shapes confirmed in Editor. Pending: piece drag test + device QA.
 
-B-11 ✅ | B-12a ✅ (48e1f91) | B-12b ✅ (a88fe45) | B-12c ✅ (a0f77a5) | B-12d ✅ (3792c07)
+B-11 ✅ | B-12a ✅ (48e1f91) | B-12b ✅ (a88fe45) | B-12c ✅ (a0f77a5) | B-12d ✅ (da2827c)
 
 ### B-12d all fixes (across sessions):
 - **HootyBridge**: `_puzzlePrefab` + `_puzzleParent` wired via YAML — commit a3f7828
@@ -36,6 +36,9 @@ B-11 ✅ | B-12a ✅ (48e1f91) | B-12b ✅ (a88fe45) | B-12c ✅ (a0f77a5) | B-1
 - **GraphicsSettings.asset**: Hootybird shaders added to AlwaysIncludedShaders — commit b147eaa
 - **Puzzle.cs**: `material.SetTexture("_MainTex", PuzzleTexture)` — fixes white-square rendering in Unity 6 ([PerRendererData] + custom material doesn't propagate via RawImage.texture) — commit 3792c07
 - **Game.unity**: removed AudioListener from Main Camera (was causing per-frame spam) — commit 3792c07
+- **Puzzle.cs**: `Graphics.DrawMeshNow` deferred to `OnRenderObject()` via MaskJob queue — fixes Unity 6 URP rendering context issue — commit 1ef456e
+- **HootyBridge**: `piece.SetRestrictionWorldRect(playfieldWorldRect)` called for all pieces in `OnPuzzleInitialized()` — fixes piece drag clamped to zero — commit 1ef456e
+- **HootyBridge**: `[SerializeField] EdgeObject[] _edgeOptions` added — root cause of ALL square tile sessions: `PuzzleSettings.edgeOptions` was null so `PuzzleFactory` fell back to `FlatEdge()`. Wire PuzzleHook assets in Inspector. Jigsaw shapes confirmed ✅ — commit da2827c
 
 ### Working puzzle entry paths:
 1. **Packs tab → Whispering Pines (or Alpine Stillness) → PuzzleSelectView → BEGIN** → Game scene, cat01_2k test image
@@ -310,4 +313,4 @@ Claude.ai needs to answer before the next stage brief is written.
 ---
 
 *Keep this file current. It is read at the start of every Claude Code session.*
-*Last updated: 2026-05-24 — B-12d all console errors resolved. Puzzle rendering fixed (Puzzle.cs SetTexture, commit 3792c07). AudioListener spam fixed (Game.unity, commit 3792c07). AudioMixer param names fixed (MainMixer.mixer, commit 47c7122). Pending: device QA only.*
+*Last updated: 2026-05-25 — Jigsaw shapes confirmed ✅ (commit da2827c). Root cause: PuzzleSettings.edgeOptions was null → PuzzleFactory fell back to FlatEdge(). Fix: EdgeObject[] field on HootyBridge, wire PuzzleHook assets in Inspector. Pending: piece drag test + device QA.*
