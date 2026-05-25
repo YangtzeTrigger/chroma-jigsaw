@@ -154,8 +154,33 @@ namespace ChromaJigsaw.Core
                 };
             }
 
+            if (!fromSave)
+                ScatterPieces();
+
             var panelInteraction = _activePuzzle.GetComponent<PuzzlePanelInteraction>();
             OnPuzzleLoaded?.Invoke(_activePuzzle, panelInteraction);
+        }
+
+        private void ScatterPieces()
+        {
+            if (_puzzleParent == null || _activePuzzle?.PuzzlePieces == null) return;
+            Rect bounds = _puzzleParent.rect;
+            float margin = _puzzlePieceSize * 0.6f;
+            float xMin = bounds.xMin + margin;
+            float xMax = bounds.xMax - margin;
+            float yMin = bounds.yMin + margin;
+            float yMax = bounds.yMax - margin;
+            if (xMin >= xMax || yMin >= yMax) return;
+
+            foreach (var piece in _activePuzzle.PuzzlePieces)
+            {
+                var rt = piece.GetComponent<RectTransform>();
+                if (rt == null) continue;
+                rt.anchoredPosition = new Vector2(
+                    UnityEngine.Random.Range(xMin, xMax),
+                    UnityEngine.Random.Range(yMin, yMax)
+                );
+            }
         }
 
         private void HandlePieceSnapped(PuzzlePiece piece, PuzzlePieceEventOrigin origin)
