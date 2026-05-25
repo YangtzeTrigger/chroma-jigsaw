@@ -18,7 +18,7 @@ namespace ChromaJigsaw.Core
             { 12, 10 }, { 24, 25 }, { 48, 60 }, { 96, 150 }
         };
 
-        // rows × cols that yield the target piece count
+        // rows × cols — landscape orientation; portrait swaps these automatically
         private static readonly Dictionary<int, (int rows, int cols)> _gridByPieceCount = new()
         {
             { 12, (3, 4) }, { 24, (4, 6) }, { 48, (6, 8) }, { 96, (8, 12) }
@@ -36,7 +36,6 @@ namespace ChromaJigsaw.Core
         [SerializeField] private Puzzle        _puzzlePrefab;
         [SerializeField] private RectTransform _puzzleParent;    // Canvas RT in Game scene; Puzzle must be a Canvas child to render
         [SerializeField] private EdgeObject[]  _edgeOptions;     // Wire PuzzleHook assets here; empty = flat (square) pieces
-        [SerializeField] private float         _puzzlePieceSize = 100f;
 
         private static HootyBridge _instance;
         public static HootyBridge Instance
@@ -84,6 +83,14 @@ namespace ChromaJigsaw.Core
             {
                 Debug.LogError($"[HootyBridge] Unsupported piece count {pieceCount}. Valid: 12, 24, 48, 96.");
                 return;
+            }
+
+            // Portrait canvas: swap rows/cols so the grid fills height rather than width
+            if (_puzzleParent != null)
+            {
+                Rect cr = _puzzleParent.rect;
+                if (cr.height > cr.width && grid.rows < grid.cols)
+                    grid = (grid.cols, grid.rows);
             }
 
             ClearActivePuzzle();
@@ -135,8 +142,17 @@ namespace ChromaJigsaw.Core
         {
             yield return null;
             if (_activePuzzle == null) yield break;
-            Debug.Log($"[HootyBridge] Initialize called — waiting for job to complete...");
-            _activePuzzle.Initialize(puzzleData, image, savedGame, _puzzlePieceSize);
+            float pieceSize = CalculatePieceSize(puzzleData.columns, puzzleData.rows);
+            Debug.Log($"[HootyBridge] Initialize — pieceSize={pieceSize} cols={puzzleData.columns} rows={puzzleData.rows}");
+            _activePuzzle.Initialize(puzzleData, image, savedGame, pieceSize);
+        }
+
+        // Fills 95 % of the canvas short-edge so the board always fills the screen.
+        private float CalculatePieceSize(int cols, int rows)
+        {
+            if (_puzzleParent == null) return 100f;
+            Rect r = _puzzleParent.rect;
+            return Mathf.Min(r.width / cols, r.height / rows) * 0.95f;
         }
 
         private void OnPuzzleInitialized(bool fromSave)
@@ -182,9 +198,10 @@ namespace ChromaJigsaw.Core
 
         private void ScatterPieces()
         {
-            if (_puzzleParent == null || _activePuzzle?.PuzzlePieces == null) return;
-            Rect bounds = _puzzleParent.rect;
-            float margin = _puzzlePieceSize * 0.6f;
+            if (_activePuzzle?.PuzzlePieces == null) return;
+            // Use the Puzzle GO's own rect — piece anchoredPositions are relative to it, not the canvas.
+            Rect bounds = _activePuzzle.RectTransform.rect;
+            float margin = _activePuzzle.PuzzlePieceRectSize * 0.5f;
             float xMin = bounds.xMin + margin;
             float xMax = bounds.xMax - margin;
             float yMin = bounds.yMin + margin;

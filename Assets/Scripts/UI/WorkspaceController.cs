@@ -73,29 +73,8 @@ namespace ChromaJigsaw.UI
 
         private void Update()
         {
-            if (_workspaceRect == null || _isZooming) return;
-            if (HootyBridge.Instance == null || HootyBridge.Instance.IsAnyPieceDragging) return;
-
-            var touchscreen = Touchscreen.current;
-            if (touchscreen == null) return;
-
-            var primary = touchscreen.primaryTouch;
-
-            if (primary.press.wasPressedThisFrame)
-            {
-                _isPanning             = true;
-                _panStartScreenPos      = primary.position.ReadValue();
-                _workspaceAnchoredOrigin = _workspaceRect.anchoredPosition;
-            }
-            else if (primary.press.wasReleasedThisFrame)
-            {
-                _isPanning = false;
-            }
-            else if (_isPanning && primary.press.isPressed)
-            {
-                Vector2 delta = primary.position.ReadValue() - _panStartScreenPos;
-                _workspaceRect.anchoredPosition = _workspaceAnchoredOrigin + delta;
-            }
+            // Single-finger pan disabled — single touch is owned by Hootybird piece interaction.
+            // Two-finger zoom is handled via PuzzlePanelInteraction events (HandleZoom).
         }
     }
 }
