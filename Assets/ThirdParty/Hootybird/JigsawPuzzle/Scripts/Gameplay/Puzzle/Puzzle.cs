@@ -697,6 +697,19 @@ namespace HootyBird.JigsawPuzzleEngine.Gameplay
 #pragma warning restore CS0618
                     GL.PopMatrix();
 
+#if UNITY_EDITOR
+                    // Diagnose mask RT content: center pixel should be non-zero if a jigsaw shape was drawn.
+                    {
+                        var dbg = new Texture2D(1, 1, TextureFormat.RGBA32, false);
+                        RenderTexture.active = mask;
+                        dbg.ReadPixels(new Rect(mask.width / 2, mask.height / 2, 1, 1), 0, 0);
+                        dbg.Apply();
+                        Color p = dbg.GetPixel(0, 0);
+                        Debug.Log($"[Puzzle] mask[{xIndex},{yIndex}] center px r={p.r:F3} a={p.a:F3}  size={mask.width}x{mask.height}  IsCreated={mask.IsCreated()}");
+                        Destroy(dbg);
+                    }
+#endif
+
                     // Blur mask?
                     if (Settings.PuzzleSettings.BlurMaskSize > 0f)
                     {
