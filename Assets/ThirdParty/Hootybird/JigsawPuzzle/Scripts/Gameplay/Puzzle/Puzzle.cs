@@ -682,11 +682,12 @@ namespace HootyBird.JigsawPuzzleEngine.Gameplay
                             (yIndex + 1) * maskMaterialHelper.maxPiecesPerTexture.y * Settings.PuzzleSettings.PuzzlePiecePixelResolution, 
                             maskMaterialHelper.totalTextureSize.y));
 
+                    // R8 fails silently in Unity 6 URP (shader falls back to white default = square tiles).
                     RenderTexture mask = new RenderTexture(
                         textureTo.x - textureFrom.x,
                         textureTo.y - textureFrom.y,
                         0,
-                        RenderTextureFormat.R8);
+                        RenderTextureFormat.ARGB32);
                     mask.Create();
 
                     commandBuffer.SetRenderTarget(mask);

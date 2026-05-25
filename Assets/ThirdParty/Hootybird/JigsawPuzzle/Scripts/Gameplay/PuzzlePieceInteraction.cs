@@ -38,6 +38,16 @@ namespace HootyBird.JigsawPuzzleEngine.Gameplay
         /// </summary>
         private Vector2 puzzlePieceScreenPosOffset;
 
+        // ScreenToWorldPoint(Vector2) uses z=0 = camera position, giving wrong XY for SS-Camera canvas.
+        // Use the piece's actual depth along the camera's forward axis instead.
+        private Vector3 ScreenToWorldAtPieceDepth(Vector2 screenPos)
+        {
+            float depth = Vector3.Dot(
+                piece.transform.position - Camera.main.transform.position,
+                Camera.main.transform.forward);
+            return Camera.main.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, depth));
+        }
+
         private void Awake()
         {
             InitEventTrigger();
@@ -132,7 +142,7 @@ namespace HootyBird.JigsawPuzzleEngine.Gameplay
                     break;
             }
 
-            puzzlePieceScreenPosOffset = Camera.main.ScreenToWorldPoint(pointerEventData.position) - piece.transform.position;
+            puzzlePieceScreenPosOffset = ScreenToWorldAtPieceDepth(pointerEventData.position) - piece.transform.position;
             OnPiecePointerDown?.Invoke(pointerEventData, piece);
         }
 
@@ -154,7 +164,7 @@ namespace HootyBird.JigsawPuzzleEngine.Gameplay
                 return;
             }
 
-            Vector2 newPos = Camera.main.ScreenToWorldPoint(pointerEventData.position);
+            Vector2 newPos = ScreenToWorldAtPieceDepth(pointerEventData.position);
             piece.MoveTo(newPos - puzzlePieceScreenPosOffset);
 
             OnPieceDrag?.Invoke(pointerEventData, piece);
