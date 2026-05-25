@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using HootyBird.JigsawPuzzleEngine.Gameplay;
 using HootyBird.JigsawPuzzleEngine.Model;
+using HootyBird.JigsawPuzzleEngine.ScriptableObjects;
 using HootyBird.JigsawPuzzleEngine.Services;
 using HootyBird.JigsawPuzzleEngine.Tools;
+using System.Linq;
 
 namespace ChromaJigsaw.Core
 {
@@ -31,8 +33,9 @@ namespace ChromaJigsaw.Core
             { 96, (0.8f, 1.2f, 0.2f) },
         };
 
-        [SerializeField] private Puzzle       _puzzlePrefab;
-        [SerializeField] private RectTransform _puzzleParent;   // Canvas RT in Game scene; Puzzle must be a Canvas child to render
+        [SerializeField] private Puzzle        _puzzlePrefab;
+        [SerializeField] private RectTransform _puzzleParent;    // Canvas RT in Game scene; Puzzle must be a Canvas child to render
+        [SerializeField] private EdgeObject[]  _edgeOptions;     // Wire PuzzleHook assets here; empty = flat (square) pieces
         [SerializeField] private float         _puzzlePieceSize = 100f;
 
         private static HootyBridge _instance;
@@ -98,9 +101,12 @@ namespace ChromaJigsaw.Core
 
             var settings = new PuzzleSettings
             {
-                id      = puzzleId,
-                rows    = grid.rows,
-                columns = grid.cols,
+                id          = puzzleId,
+                rows        = grid.rows,
+                columns     = grid.cols,
+                edgeOptions = (_edgeOptions != null && _edgeOptions.Length > 0)
+                    ? _edgeOptions.Where(e => e != null).Select(e => e.edge).ToArray()
+                    : null,
             };
 
             int seed = Math.Abs(puzzleId.GetHashCode());
