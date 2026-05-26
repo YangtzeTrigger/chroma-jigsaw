@@ -22,9 +22,9 @@
 
 ## Current Stage
 
-**B-12d — Core Game Loop** ✅ Jigsaw shapes confirmed in Editor. Pending: piece drag test + device QA.
+**B-12d — Core Game Loop** ✅ Pieces now load on real Android device (17f0769). Pending: piece drag + snap test on device, full QA pass.
 
-B-11 ✅ | B-12a ✅ (48e1f91) | B-12b ✅ (a88fe45) | B-12c ✅ (a0f77a5) | B-12d ✅ (da2827c)
+B-11 ✅ | B-12a ✅ (48e1f91) | B-12b ✅ (a88fe45) | B-12c ✅ (a0f77a5) | B-12d ✅ (17f0769)
 
 ### B-12d all fixes (across sessions):
 - **HootyBridge**: `_puzzlePrefab` + `_puzzleParent` wired via YAML — commit a3f7828
@@ -34,11 +34,13 @@ B-11 ✅ | B-12a ✅ (48e1f91) | B-12b ✅ (a88fe45) | B-12c ✅ (a0f77a5) | B-1
 - **DailyMasterpieceView.HandleBegin()**: implemented — commit 341e68d
 - **Pack_ALP_000.asset**: Alpine Stillness → Free — commit 341e68d
 - **GraphicsSettings.asset**: Hootybird shaders added to AlwaysIncludedShaders — commit b147eaa
-- **Puzzle.cs**: `material.SetTexture("_MainTex", PuzzleTexture)` — fixes white-square rendering in Unity 6 ([PerRendererData] + custom material doesn't propagate via RawImage.texture) — commit 3792c07
-- **Game.unity**: removed AudioListener from Main Camera (was causing per-frame spam) — commit 3792c07
-- **Puzzle.cs**: `Graphics.DrawMeshNow` deferred to `OnRenderObject()` via MaskJob queue — fixes Unity 6 URP rendering context issue — commit 1ef456e
-- **HootyBridge**: `piece.SetRestrictionWorldRect(playfieldWorldRect)` called for all pieces in `OnPuzzleInitialized()` — fixes piece drag clamped to zero — commit 1ef456e
-- **HootyBridge**: `[SerializeField] EdgeObject[] _edgeOptions` added — root cause of ALL square tile sessions: `PuzzleSettings.edgeOptions` was null so `PuzzleFactory` fell back to `FlatEdge()`. Wire PuzzleHook assets in Inspector. Jigsaw shapes confirmed ✅ — commit da2827c
+- **Puzzle.cs**: `material.SetTexture("_MainTex", PuzzleTexture)` — fixes white-square rendering in Unity 6 — commit 3792c07
+- **Game.unity**: removed AudioListener from Main Camera — commit 3792c07
+- **HootyBridge**: `piece.SetRestrictionWorldRect(playfieldWorldRect)` — fixes piece drag clamped to zero — commit 1ef456e
+- **HootyBridge**: `[SerializeField] EdgeObject[] _edgeOptions` — root cause of square tiles fixed. Jigsaw shapes confirmed ✅ — commit da2827c
+- **HootyBridge**: dynamic piece size + portrait orientation swap + scatter coordinate fix — commits across session 2026-05-25/26
+- **WorkspaceController**: disabled single-finger pan (was eating piece drag input) — commit f7aa2c5
+- **Puzzle.cs**: replaced `OnRenderObject` + `GL.DrawMeshNow` + `WaitUntil` with `CommandBuffer` + `Graphics.ExecuteCommandBuffer` — `OnRenderObject` is not guaranteed to fire in URP on Android; this caused `GeneratePuzzlePieces()` to never be called (pieces never appeared on device) — commit 17f0769
 
 ### Working puzzle entry paths:
 1. **Packs tab → Whispering Pines (or Alpine Stillness) → PuzzleSelectView → BEGIN** → Game scene, cat01_2k test image
@@ -313,4 +315,4 @@ Claude.ai needs to answer before the next stage brief is written.
 ---
 
 *Keep this file current. It is read at the start of every Claude Code session.*
-*Last updated: 2026-05-25 — Jigsaw shapes confirmed ✅ (commit da2827c). Root cause: PuzzleSettings.edgeOptions was null → PuzzleFactory fell back to FlatEdge(). Fix: EdgeObject[] field on HootyBridge, wire PuzzleHook assets in Inspector. Pending: piece drag test + device QA.*
+*Last updated: 2026-05-26 — Pieces now appear on real Android device (commit 17f0769). Root cause: OnRenderObject() not guaranteed to fire in URP on Android → WaitUntil blocked forever → GeneratePuzzlePieces() never called. Fix: CommandBuffer + Graphics.ExecuteCommandBuffer (synchronous, works everywhere). Pending: drag + snap test on device, full QA pass.*
